@@ -3,36 +3,25 @@ import { Checkbox, Grid, Header, Icon, Menu, Segment, Sidebar } from 'semantic-u
 
 const LarmSidebar = (props: any) => {
     const [visible, setVisible] = React.useState(true);
-
+    const onToggle = () => {
+        setVisible(!visible);
+    };
     return (
         <div>
             <Sidebar.Pushable as={Segment}>
-                <Sidebar
-                    as={Menu}
-                    animation="overlay"
-                    icon="labeled"
-                    inverted
-                    onHide={() => setVisible(false)}
-                    vertical
-                    visible={visible}
-                    width="thin"
-                >
+                <Sidebar as={Menu} animation="push" icon="labeled" inverted vertical visible={visible} width="thin">
                     <Menu.Item as="a">
-                        <Icon name="home" />
-                        Home
+                        <Icon name="circle outline" />
+                        Configure Outputs
                     </Menu.Item>
                     <Menu.Item as="a">
-                        <Icon name="gamepad" />
-                        Games
-                    </Menu.Item>
-                    <Menu.Item as="a">
-                        <Icon name="camera" />
-                        Channels
+                        <Icon name="circle outline" />
+                        Toggle Layers
                     </Menu.Item>
                 </Sidebar>
 
                 <Sidebar.Pusher>
-                    <Segment basic>{props.children}</Segment>
+                    <div>{props.children}</div>
                 </Sidebar.Pusher>
             </Sidebar.Pushable>
         </div>

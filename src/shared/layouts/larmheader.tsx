@@ -1,7 +1,8 @@
 // Stick header code from: https://github.com/Semantic-Org/Semantic-UI-React/blob/master/docs/src/layouts/StickyLayout.js
 
-import { Menu, Container, Visibility, Icon } from 'semantic-ui-react';
+import { Menu, Container, Visibility, Icon, Button } from 'semantic-ui-react';
 import React from 'react';
+import { AuthContext } from '../../AuthProvider';
 
 const menuStyle = {
     border: 'none',
@@ -23,16 +24,16 @@ const LarmHeader = () => {
 
     const unStickTopMenu = () => setMenuFixed(false);
 
+    const { logout } = React.useContext(AuthContext);
+
     return (
         <div>
             <Visibility onBottomPassed={stickTopMenu} onBottomVisible={unStickTopMenu} once={false}>
                 <Menu borderless fixed={menuFixed ? 'top' : undefined} style={menuFixed ? fixedMenuStyle : menuStyle}>
-                    <Container text>
-                        <Menu.Item header>Untitled Project</Menu.Item>
-                        <Menu.Item>
-                            <Icon name="user" />
-                        </Menu.Item>
-                    </Container>
+                    <Menu.Item header>Untitled Project</Menu.Item>
+                    <Menu.Item position="right">
+                        <Button icon="log out" onClick={logout} />
+                    </Menu.Item>
                 </Menu>
             </Visibility>
         </div>

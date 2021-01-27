@@ -1,24 +1,20 @@
-import { useContext, useEffect, useRef } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from '../../../firebase';
-import { AuthContext } from '../../../AuthProvider';
 import WebMap from '@arcgis/core/WebMap';
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import { LarmSidebar, LarmHeader } from '../../../shared/layouts';
+import { OptionView } from '../../../shared/components';
+import { Grid } from 'semantic-ui-react';
 
 import 'firebase/firestore';
 
 const Dashboard = () => {
-    const arcViewRef = useRef<HTMLDivElement>(null);
-    const { logout } = useContext(AuthContext);
-    const handleClick = (event: any) => {
-        event.preventDefault();
-        logout();
-    };
+    const arcViewRef = React.useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (arcViewRef.current) {
             const map = new Map({
                 basemap: 'topo-vector',
@@ -46,9 +42,15 @@ const Dashboard = () => {
     return (
         <div style={{ textAlign: 'center' }}>
             <LarmHeader></LarmHeader>
-            {/* <button onClick={handleClick}>Logout</button> */}
             <LarmSidebar>
-                <div ref={arcViewRef} className="arcViewDiv" style={{ width: '100vw', height: '100vh' }}></div>
+                <Grid columns={2}>
+                    <Grid.Column width={2} textAlign={'right'}>
+                        <OptionView></OptionView>
+                    </Grid.Column>
+                    <Grid.Column width={14}>
+                        <div ref={arcViewRef} className="arcViewDiv" style={{ width: '100vw', height: '100vh' }}></div>
+                    </Grid.Column>
+                </Grid>
             </LarmSidebar>
         </div>
     );
