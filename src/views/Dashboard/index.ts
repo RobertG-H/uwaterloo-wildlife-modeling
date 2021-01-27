@@ -1,2 +1,1 @@
-
-export { DashboardRoutes } from "../Dashboard/config/DashboardRoutes";
+export { DashboardRoutes } from '../Dashboard/config/DashboardRoutes';
