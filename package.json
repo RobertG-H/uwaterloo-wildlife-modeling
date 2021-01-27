@@ -30,6 +30,7 @@
     "copy": "ncp ./node_modules/@arcgis/core/assets ./public/assets"
   },
   "eslintConfig": {
+    "root": true,
     "extends": [
       "react-app",
       "react-app/jest"

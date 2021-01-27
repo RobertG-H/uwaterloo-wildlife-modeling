@@ -5,7 +5,7 @@ module.exports = function(app) {
         '/api',
         createProxyMiddleware({
             target:
-            'http://localhost:5001/firebase-jan-13/us-central1/server',
+            'http://localhost:5001/uwaterloo-wildlife-modeling/us-central1/server',
             changeOrigin: false,
         })
     );
