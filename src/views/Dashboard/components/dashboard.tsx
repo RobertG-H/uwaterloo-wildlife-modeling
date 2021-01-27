@@ -6,6 +6,7 @@ import WebMap from "@arcgis/core/WebMap";
 import MapView from "@arcgis/core/views/MapView";
 import Map from "@arcgis/core/Map";
 import TileLayer from "@arcgis/core/layers/TileLayer";
+import { LarmSidebar, LarmHeader} from "../../../shared/layouts";
 
 import "firebase/firestore";
 
@@ -44,11 +45,12 @@ const Dashboard = () => {
 
     return (
         <div style={{textAlign: 'center'}}>
-            <h1>Dashboard</h1>
-            <h2>Welcome to Dashboard!</h2>
-            <button onClick={handleClick}>Logout</button>
-            <div ref={arcViewRef} className="arcViewDiv" style={{ width: '100vw', height: '100vh' }}>
-            </div>
+            <LarmHeader></LarmHeader>
+            {/* <button onClick={handleClick}>Logout</button> */}
+            <LarmSidebar>
+                <div ref={arcViewRef} className="arcViewDiv" style={{ width: '100vw', height: '100vh' }}>
+                </div>
+            </LarmSidebar>
         </div>
     );
 }
