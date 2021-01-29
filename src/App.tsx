@@ -1,10 +1,11 @@
-import "./App.css";
-import ApplicationRoutes from "./config/ApplicationRoutes";
-import { AuthProvider } from "./AuthProvider";
+import React from 'react';
+import './App.css';
+import ApplicationRoutes from './config/ApplicationRoutes';
+import { AuthProvider } from './AuthProvider';
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <AuthProvider>
         <ApplicationRoutes />
       </AuthProvider>

@@ -6,15 +6,15 @@ import { DashboardRoutes } from '../views/Dashboard';
 // import { Dashboard } from "../views/Dashboard/components";
 
 const ApplicationRoutes = () => {
-    return (
-        <Router>
-            <Switch>
-                <PrivateRoute exact path="/dashboard" component={DashboardRoutes} />
-                <Route path="/auth" component={AuthRoutes} />
-                <Redirect to="/auth" from="/" />
-            </Switch>
-        </Router>
-    );
+  return (
+    <Router>
+      <Switch>
+        <PrivateRoute exact path='/dashboard' component={DashboardRoutes} />
+        <Route path='/auth' component={AuthRoutes} />
+        <Redirect to='/auth' from='/' />
+      </Switch>
+    </Router>
+  );
 };
 
 export default ApplicationRoutes;
