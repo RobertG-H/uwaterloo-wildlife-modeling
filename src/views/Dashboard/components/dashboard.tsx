@@ -37,17 +37,26 @@ const Dashboard = () => {
       });
       map.add(larmCosts);
     }
-  });
+  }, [arcViewRef.current]);
+
+  const [currentTab, setCurrentTab] = React.useState(0);
 
   return (
     <div style={{ textAlign: 'center' }}>
+      <style>
+        {`
+      .no-padding {
+        padding-right: 0 !important;
+      }
+    `}
+      </style>
       <LarmHeader></LarmHeader>
-      <LarmSidebar>
-        <Grid columns={2}>
-          <Grid.Column width={2} textAlign={'right'}>
-            <OptionView></OptionView>
+      <LarmSidebar currentTab={currentTab} setCurrentTab={setCurrentTab}>
+        <Grid columns={2} padded={false}>
+          <Grid.Column width={2} textAlign={'center'} className={'no-padding'}>
+            <OptionView currentTab={currentTab} setCurrentTab={setCurrentTab}></OptionView>
           </Grid.Column>
-          <Grid.Column width={14}>
+          <Grid.Column width={14} className={'no-padding'}>
             <div ref={arcViewRef} className='arcViewDiv' style={{ width: '100vw', height: '100vh' }}></div>
           </Grid.Column>
         </Grid>
