@@ -50,11 +50,11 @@ const LarmSidebar = (props: any) => {
       <Sidebar.Pushable as={Segment}>
         <Sidebar as={Menu} animation='push' icon='labeled' inverted vertical visible={visible} width='thin'>
           <Menu.Item as='a' active={tabList[0]} onClick={onConfigureOutputs}>
-            <Icon name='circle outline' />
+            {/* <Icon name='circle outline' /> */}
             Configure Outputs
           </Menu.Item>
           <Menu.Item as='a' active={tabList[1]} onClick={onToggleLayers}>
-            <Icon name='circle outline' />
+            {/* <Icon name='circle outline' /> */}
             Toggle Layers
           </Menu.Item>
         </Sidebar>

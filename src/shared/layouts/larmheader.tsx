@@ -20,15 +20,11 @@ const fixedMenuStyle = {
 const LarmHeader = () => {
   const [menuFixed, setMenuFixed] = React.useState(false);
 
-  const stickTopMenu = () => setMenuFixed(true);
-
-  const unStickTopMenu = () => setMenuFixed(false);
-
   const { logout } = React.useContext(AuthContext);
 
   return (
     <div>
-      <Visibility onBottomPassed={stickTopMenu} onBottomVisible={unStickTopMenu} once={false}>
+      <Visibility onBottomPassed={() => setMenuFixed(true)} onBottomVisible={() => setMenuFixed(false)} once={false}>
         <Menu borderless fixed={menuFixed ? 'top' : undefined} style={menuFixed ? fixedMenuStyle : menuStyle}>
           <Menu.Item header>Untitled Project</Menu.Item>
           <Menu.Item position='right'>
