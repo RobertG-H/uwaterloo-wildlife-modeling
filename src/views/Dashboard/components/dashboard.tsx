@@ -6,7 +6,7 @@ import TileLayer from '@arcgis/core/layers/TileLayer';
 import ScaleBar from '@arcgis/core/widgets/ScaleBar';
 import { LarmSidebar, LarmHeader } from '../../../shared/layouts';
 import { OptionView } from '../../../shared/components';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Menu, Segment } from 'semantic-ui-react';
 
 import 'firebase/firestore';
 
@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [arcMap, setArcMap] = React.useState<Map>(new Map());
   const [arcView, setArcView] = React.useState<MapView>(new MapView());
   const [allLayers, setAllLayers] = React.useState<{ [key: string]: TileLayer }>({});
+  const [currentTab, setCurrentTab] = React.useState(0);
 
   const toggleLayerVisibility = (layerName: string) => {
     if (allLayers[layerName].opacity === 1) allLayers[layerName].opacity = 0;
@@ -66,7 +67,24 @@ const Dashboard = () => {
     }
   }, []);
 
-  const [currentTab, setCurrentTab] = React.useState(0);
+  // const OptionViewToRender = () => <div></div>;
+
+  // React.useEffect(() => {
+  //   if (currentTab != -1) {
+  //     OptionViewToRender = (
+  //       <div style={{ position: 'fixed', height: '100%', zIndex: 1, marginTop: 48, marginLeft: 146.75, backgroundColor: 'white' }}>
+  //         <Segment padded raised={false}>
+  //           <OptionView
+  //             currentTab={currentTab}
+  //             setCurrentTab={setCurrentTab}
+  //             arcView={arcView}
+  //             toggleLayerVisibility={toggleLayerVisibility}
+  //           ></OptionView>
+  //         </Segment>
+  //       </div>
+  //     );
+  //   }
+  // });
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -83,22 +101,22 @@ const Dashboard = () => {
       }
     `}
       </style>
-      <LarmHeader></LarmHeader>
-      <LarmSidebar currentTab={currentTab} setCurrentTab={setCurrentTab}>
-        <Grid columns={2} padded={false}>
-          <Grid.Column width={2} textAlign={'center'} className={'no-padding'}>
+      <LarmSidebar currentTab={currentTab} setCurrentTab={setCurrentTab}></LarmSidebar>
+      {currentTab >= 0 && (
+        <div style={{ position: 'fixed', height: '100%', zIndex: 1, marginTop: 48, marginLeft: 146.75, backgroundColor: 'white' }}>
+          <Segment padded raised={false}>
             <OptionView
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
               arcView={arcView}
               toggleLayerVisibility={toggleLayerVisibility}
             ></OptionView>
-          </Grid.Column>
-          <Grid.Column width={14} className={'no-padding'}>
-            <div ref={arcViewRef} className={'arcViewDiv'} style={{ width: '100vw', height: '100vw' }}></div>
-          </Grid.Column>
-        </Grid>
-      </LarmSidebar>
+          </Segment>
+        </div>
+      )}
+
+      <LarmHeader></LarmHeader>
+      <div ref={arcViewRef} className={'arcViewDiv'} style={{ width: '100vw', height: '100vh', zIndex: -1 }}></div>
     </div>
   );
 };

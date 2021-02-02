@@ -46,24 +46,16 @@ const LarmSidebar = (props: any) => {
   }, [props.currentTab]);
 
   return (
-    <div>
-      <Sidebar.Pushable as={Segment}>
-        <Sidebar as={Menu} animation='push' icon='labeled' inverted vertical visible={visible} width='thin'>
-          <Menu.Item as='a' active={tabList[0]} onClick={onConfigureOutputs}>
-            {/* <Icon name='circle outline' /> */}
-            Configure Outputs
-          </Menu.Item>
-          <Menu.Item as='a' active={tabList[1]} onClick={onToggleLayers}>
-            {/* <Icon name='circle outline' /> */}
-            Toggle Layers
-          </Menu.Item>
-        </Sidebar>
-
-        <Sidebar.Pusher>
-          <div>{props.children}</div>
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
-    </div>
+    <Menu icon='labeled' inverted vertical width='thin' borderless fixed={'left'} style={{ marginTop: 48 }}>
+      <Menu.Item as='a' active={tabList[0]} onClick={onConfigureOutputs}>
+        {/* <Icon name='circle outline' /> */}
+        Configure Outputs
+      </Menu.Item>
+      <Menu.Item as='a' active={tabList[1]} onClick={onToggleLayers}>
+        {/* <Icon name='circle outline' /> */}
+        Toggle Layers
+      </Menu.Item>
+    </Menu>
   );
 };
 export default LarmSidebar;

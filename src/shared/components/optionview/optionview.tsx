@@ -9,15 +9,22 @@ const OptionView = (props: any) => {
   const [title, setTitle] = React.useState('---');
   const [isVisible, setIsVisible] = React.useState(true);
 
+  const hide = () => {
+    setIsVisible(false);
+    props.setCurrentTab(-1);
+  };
+
   React.useEffect(() => {
     if (props.currentTab == 0) {
       setTitle(configureOutputsTitle);
+      setIsVisible(true);
     } else if (props.currentTab == 1) {
       setTitle(toggleLayersTitle);
+      setIsVisible(true);
     } else {
       setIsVisible(false);
     }
-  });
+  }, [props.currentTab]);
 
   if (!isVisible) {
     return null;
@@ -26,8 +33,8 @@ const OptionView = (props: any) => {
   if (title === configureOutputsTitle) {
     return (
       <div>
+        <Button onClick={() => hide()}>Close</Button>
         <h3 style={{ paddingTop: 10 }}>{title}</h3>
-        <Button onClick={() => setIsVisible(false)}>Close</Button>
         <ConfigureOutputsView></ConfigureOutputsView>
       </div>
     );

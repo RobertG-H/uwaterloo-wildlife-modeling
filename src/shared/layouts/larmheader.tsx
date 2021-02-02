@@ -4,17 +4,17 @@ import { Menu, Container, Visibility, Icon, Button } from 'semantic-ui-react';
 import React from 'react';
 import { AuthContext } from '../../AuthProvider';
 
-const menuStyle = {
-  border: 'none',
-  borderRadius: 0,
-  boxShadow: 'none',
-  transition: 'box-shadow 0.5s ease, padding 0.5s ease',
-};
+// const menuStyle = {
+//   border: 'none',
+//   borderRadius: 0,
+//   boxShadow: 'none',
+//   transition: 'box-shadow 0.5s ease, padding 0.5s ease',
+// };
 
 const fixedMenuStyle = {
   backgroundColor: '#fff',
   border: '1px solid #ddd',
-  boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
+  // boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
 };
 
 const LarmHeader = () => {
@@ -25,7 +25,7 @@ const LarmHeader = () => {
   return (
     <div>
       <Visibility onBottomPassed={() => setMenuFixed(true)} onBottomVisible={() => setMenuFixed(false)} once={false}>
-        <Menu borderless fixed={menuFixed ? 'top' : undefined} style={menuFixed ? fixedMenuStyle : menuStyle}>
+        <Menu borderless fixed={'top'} style={fixedMenuStyle}>
           <Menu.Item header>Untitled Project</Menu.Item>
           <Menu.Item position='right'>
             <Button icon='log out' onClick={logout} />
