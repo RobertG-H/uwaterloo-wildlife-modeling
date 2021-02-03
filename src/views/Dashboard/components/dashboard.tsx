@@ -7,6 +7,7 @@ import ScaleBar from '@arcgis/core/widgets/ScaleBar';
 import { LarmSidebar, LarmHeader } from '../../../shared/layouts';
 import { OptionView } from '../../../shared/components';
 import { Grid, Menu, Segment } from 'semantic-ui-react';
+import { OutputProvider } from '../../../OutputProvider';
 
 import 'firebase/firestore';
 
@@ -67,57 +68,74 @@ const Dashboard = () => {
     }
   }, []);
 
-  // const OptionViewToRender = () => <div></div>;
-
-  // React.useEffect(() => {
-  //   if (currentTab != -1) {
-  //     OptionViewToRender = (
-  //       <div style={{ position: 'fixed', height: '100%', zIndex: 1, marginTop: 48, marginLeft: 146.75, backgroundColor: 'white' }}>
-  //         <Segment padded raised={false}>
-  //           <OptionView
-  //             currentTab={currentTab}
-  //             setCurrentTab={setCurrentTab}
-  //             arcView={arcView}
-  //             toggleLayerVisibility={toggleLayerVisibility}
-  //           ></OptionView>
-  //         </Segment>
-  //       </div>
-  //     );
-  //   }
-  // });
+  // height and width calcs
+  const headerHeight = 48;
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <OutputProvider>
       <style>
         {`
-      .no-padding {
-        padding-right: 0 !important;
-      }
       .esri-scale-bar__label-container--ruler{
         background-color: rgba(55, 55, 55, 0.50) !important;
         padding-left:5px !important;
         padding-right:5px !important;
-
       }
     `}
       </style>
-      <LarmSidebar currentTab={currentTab} setCurrentTab={setCurrentTab}></LarmSidebar>
-      {currentTab >= 0 && (
-        <div style={{ position: 'fixed', height: '100%', zIndex: 1, marginTop: 48, marginLeft: 146.75, backgroundColor: 'white' }}>
-          <Segment padded raised={false}>
+      {/* Header */}
+      <LarmHeader></LarmHeader>
+      {/* END Header */}
+
+      {/* Dashboard Elements - Flexbox container*/}
+
+      <div style={{ display: 'flex', flexDirection: 'row', height: '100vh' }}>
+        {/* Sidebar */}
+        <div
+          style={{
+            zIndex: 1,
+            marginTop: headerHeight,
+            backgroundColor: 'rgb(90,97,117)',
+          }}
+        >
+          <LarmSidebar currentTab={currentTab} setCurrentTab={setCurrentTab}></LarmSidebar>
+        </div>
+        {/* END Sidebar */}
+
+        {/* Optionview */}
+
+        {currentTab >= 0 && (
+          <div
+            style={{
+              zIndex: 1,
+              marginTop: headerHeight,
+              backgroundColor: 'white',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'stretch',
+            }}
+          >
+            {/* <Segment raised={false} style={{ padding: 0 }}> */}
             <OptionView
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
               arcView={arcView}
               toggleLayerVisibility={toggleLayerVisibility}
             ></OptionView>
-          </Segment>
-        </div>
-      )}
+            {/* </Segment> */}
+          </div>
+        )}
+        {/* END Optionview */}
+      </div>
+      {/* END Dashboard Elements - Flexbox container*/}
 
-      <LarmHeader></LarmHeader>
-      <div ref={arcViewRef} className={'arcViewDiv'} style={{ width: '100vw', height: '100vh', zIndex: -1 }}></div>
-    </div>
+      {/* ArcGIS Canvas */}
+      <div
+        ref={arcViewRef}
+        className={'arcViewDiv'}
+        style={{ width: '100vw', height: '100vh', position: 'fixed', zIndex: 0, top: 0, left: 0 }}
+      ></div>
+      {/* END ArcGIS Canvas */}
+    </OutputProvider>
   );
 };
 

@@ -1,4 +1,4 @@
-import LarmSidebar from './larmsidebar';
-import LarmHeader from './larmheader';
+import LarmSidebar from './LarmSiderbar';
+import LarmHeader from './LarmHeader';
 
 export { LarmSidebar, LarmHeader };

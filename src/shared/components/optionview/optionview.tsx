@@ -1,5 +1,5 @@
-import { Button } from 'semantic-ui-react';
-import { ConfigureOutputsView } from '../../components/';
+import { Button, Menu, Divider, Segment } from 'semantic-ui-react';
+import { ConfigureOutputsView } from '..';
 import React from 'react';
 
 const OptionView = (props: any) => {
@@ -7,6 +7,7 @@ const OptionView = (props: any) => {
   const toggleLayersTitle = 'Toggle Layers';
 
   const [title, setTitle] = React.useState('---');
+  const [isEditingOutput, setIsEditingOutput] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(true);
 
   const hide = () => {
@@ -21,8 +22,10 @@ const OptionView = (props: any) => {
     } else if (props.currentTab == 1) {
       setTitle(toggleLayersTitle);
       setIsVisible(true);
+      setIsEditingOutput(false);
     } else {
       setIsVisible(false);
+      setIsEditingOutput(false);
     }
   }, [props.currentTab]);
 
@@ -30,27 +33,39 @@ const OptionView = (props: any) => {
     return null;
   }
 
-  if (title === configureOutputsTitle) {
-    return (
-      <div>
-        <Button onClick={() => hide()}>Close</Button>
-        <h3 style={{ paddingTop: 10 }}>{title}</h3>
-        <ConfigureOutputsView></ConfigureOutputsView>
-      </div>
-    );
-  } else if (title === toggleLayersTitle) {
-    return (
-      <div>
-        <h3 style={{ paddingTop: 10 }}>{title}</h3>
-        <Button onClick={() => props.toggleLayerVisibility('LandCover')}>LandCover</Button>
-        <Button onClick={() => props.toggleLayerVisibility('Costs1')}>Costs</Button>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <h3>Error loading data...</h3>
+    <div style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
+      {/* Header */}
+      <Menu borderless style={{ boxShadow: 'none', border: 'none', borderRadius: 0 }}>
+        <Menu.Item header>{title}</Menu.Item>
+        <Menu.Item position='right'>
+          <Button icon='close' onClick={() => hide()} />
+        </Menu.Item>
+      </Menu>
+      <Divider style={{ marginTop: 0 }}></Divider>
+      {/* END Header */}
+
+      {/* <Segment raised={false} style={{ boxShadow: 'none', border: 'none', borderRadius: 0 }}> */}
+      {/* Configure Outputs */}
+
+      {title === configureOutputsTitle && (
+        <ConfigureOutputsView
+          isEditingOutput={isEditingOutput}
+          setIsEditingOutput={setIsEditingOutput}
+          arcView={props.arcView}
+        ></ConfigureOutputsView>
+      )}
+      {/* END Configure Outputs */}
+      {/* Toggle Layers */}
+
+      {title === toggleLayersTitle && (
+        <div>
+          <Button onClick={() => props.toggleLayerVisibility('LandCover')}>LandCover</Button>
+          <Button onClick={() => props.toggleLayerVisibility('Costs1')}>Costs</Button>
+        </div>
+      )}
+      {/* END Toggle Layers */}
+      {/* </Segment> */}
     </div>
   );
 };

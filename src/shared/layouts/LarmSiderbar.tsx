@@ -2,14 +2,6 @@ import React from 'react';
 import { Checkbox, Grid, Header, Icon, Menu, Segment, Sidebar } from 'semantic-ui-react';
 
 const LarmSidebar = (props: any) => {
-  const [visible, setVisible] = React.useState(true);
-  const onToggle = () => {
-    setVisible(!visible);
-  };
-
-  const [configureOutputsActive, setConfigureOutputsActive] = React.useState(true);
-  const [toggleLayersActive, setToggleLayersActive] = React.useState(false);
-
   const initialTablList = [false, false];
 
   const [tabList, setTabList] = React.useState(initialTablList);
@@ -46,7 +38,20 @@ const LarmSidebar = (props: any) => {
   }, [props.currentTab]);
 
   return (
-    <Menu icon='labeled' inverted vertical width='thin' borderless fixed={'left'} style={{ marginTop: 48 }}>
+    <Menu icon='labeled' inverted vertical width='thin' borderless>
+      <style>
+        {`
+      .ui.inverted.menu{
+        background-color: rgb(90,97,117) !important;
+      }
+      .ui.inverted.icon.menu .item{
+        color: rgb(214,219,232) !important;
+      }
+      .ui.icon.menu .item {
+        text-align: left !important;
+      }
+    `}
+      </style>
       <Menu.Item as='a' active={tabList[0]} onClick={onConfigureOutputs}>
         {/* <Icon name='circle outline' /> */}
         Configure Outputs

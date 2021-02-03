@@ -1,4 +1,5 @@
-import OptionView from './optionview/optionview';
-import ConfigureOutputsView from './optionview/configureoutputsview';
+import OptionView from './optionview/OptionView';
+import ConfigureOutputsView from './optionview/ConfigureOutputsView';
+import ToggleLayersView from './optionview/ToggleLayersView';
 
-export { OptionView, ConfigureOutputsView };
+export { OptionView, ConfigureOutputsView, ToggleLayersView };
