@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox, Grid, Header, Icon, Menu, Segment, Sidebar } from 'semantic-ui-react';
 
 const LarmSidebar = (props: any) => {
-  const initialTablList = [false, false];
+  const initialTablList = [false, false, false];
 
   const [tabList, setTabList] = React.useState(initialTablList);
 
@@ -33,6 +33,11 @@ const LarmSidebar = (props: any) => {
     props.setCurrentTab(1);
   };
 
+  const onLegend = () => {
+    setTab(2);
+    props.setCurrentTab(2);
+  };
+
   React.useEffect(() => {
     setTab(props.currentTab);
   }, [props.currentTab]);
@@ -59,6 +64,10 @@ const LarmSidebar = (props: any) => {
       <Menu.Item as='a' active={tabList[1]} onClick={onToggleLayers}>
         {/* <Icon name='circle outline' /> */}
         Toggle Layers
+      </Menu.Item>
+      <Menu.Item as='a' active={tabList[2]} onClick={onLegend}>
+        {/* <Icon name='circle outline' /> */}
+        Legend
       </Menu.Item>
     </Menu>
   );

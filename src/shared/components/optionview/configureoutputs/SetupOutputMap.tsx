@@ -105,6 +105,7 @@ const SetupOutputMap = (props: any) => {
 
   const onGenerateMap = () => {
     console.log('generating map');
+    props.onSetupOutputComplete(props.editingMapId, outputName);
   };
 
   const setHabitatQualityValue = (landCover: string, newValue: number) => {

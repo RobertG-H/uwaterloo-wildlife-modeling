@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { AuthContext } from './AuthProvider';
 import PropTypes from 'prop-types';
+import { OutputProvider } from './OutputProvider';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const { authenticated, loadingAuthState } = useContext(AuthContext);
@@ -19,7 +20,13 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
     <Route
       {...rest}
       render={routeProps =>
-        authenticated ? <RouteComponent {...routeProps} /> : <Redirect to={{ pathname: '/auth', state: { prevPath: rest.path } }} />
+        authenticated ? (
+          <OutputProvider>
+            <RouteComponent {...routeProps} />
+          </OutputProvider>
+        ) : (
+          <Redirect to={{ pathname: '/auth', state: { prevPath: rest.path } }} />
+        )
       }
     />
   );

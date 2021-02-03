@@ -1,14 +1,22 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-type ArcRes = {
-  arcId: string;
-  selectedRegionLandCover: string | null;
-  selectedRegionShape: string | null;
-  costMap: string | null;
-  connectMap: string | null;
-  hotspotMap: string | null;
-};
+class ArcRes {
+  public arcId: string | null | undefined;
+  public selectedRegionLandCover: string | null;
+  public selectedRegionShape: string | null;
+  public costMap: string | null | undefined;
+  public connectMap: string | null | undefined;
+  public hotspotMap: string | null | undefined;
+  constructor(arcId: string, costMap: string, connectMap: string, hotspotMap: string) {
+    this.arcId = arcId;
+    this.selectedRegionLandCover = null;
+    this.selectedRegionShape = null;
+    this.costMap = costMap;
+    this.connectMap = connectMap;
+    this.hotspotMap = hotspotMap;
+  }
+}
 
 // TODO update this to some database read when habitat quality values are automated.
 const initHabitatQualityValues = () => {
@@ -55,17 +63,10 @@ export class OutputMap {
   public habitatQualityValues: { [landCover: string]: number };
   public speciesName: string;
   public outputTypes: { [outputType: string]: boolean };
-  constructor(madId: string) {
-    this.mapId = madId;
+  constructor(mapId: string) {
+    this.mapId = mapId;
     this.outputName = '';
-    this.arcRes = {
-      arcId: '',
-      selectedRegionLandCover: null,
-      selectedRegionShape: null,
-      costMap: null,
-      connectMap: null,
-      hotspotMap: null,
-    };
+    this.arcRes = new ArcRes('null', '', '', '');
     this.habitatQualityValues = initHabitatQualityValues();
     this.speciesName = '';
     this.outputTypes = {
@@ -80,6 +81,7 @@ type ProjectContextProps = {
   projectId: string | null;
   outputMapDict: { [outputMapId: string]: OutputMap };
   SetOutputMapDict: any;
+  staticArcRes: { [arcResId: string]: ArcRes };
 };
 
 export const OutputContext = React.createContext<Partial<ProjectContextProps>>({});
@@ -90,6 +92,16 @@ export const OutputProvider = ({ children }: any) => {
   const [projectId, setProjectId] = React.useState(uuidv4());
   const [outputMapDict, SetOutputMapDict] = React.useState<{ [outputMapId: string]: OutputMap }>({});
 
+  // TODO update this Static Arc Res to a DB fetch
+  const [staticArcRes, setStaticArcRes] = React.useState<{ [arcResId: string]: ArcRes }>({
+    1: new ArcRes(
+      '1',
+      process.env.REACT_APP_ARC_1_COST!,
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map/MapServer',
+      process.env.REACT_APP_ARC_1_HOTSPOT!,
+    ),
+  });
+
   return (
     <OutputContext.Provider
       value={{
@@ -97,6 +109,7 @@ export const OutputProvider = ({ children }: any) => {
         projectId,
         outputMapDict,
         SetOutputMapDict,
+        staticArcRes,
       }}
     >
       {children}

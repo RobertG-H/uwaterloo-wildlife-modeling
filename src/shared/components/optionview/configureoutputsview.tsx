@@ -34,7 +34,12 @@ const ConfigureOutputsView = (props: any) => {
   // Editing the output
   if (props.isEditingOutput) {
     return (
-      <SetupOutputMap setIsEditingOutput={props.setIsEditingOutput} editingMapId={editingMapId} arcView={props.arcView}></SetupOutputMap>
+      <SetupOutputMap
+        setIsEditingOutput={props.setIsEditingOutput}
+        editingMapId={editingMapId}
+        arcView={props.arcView}
+        onSetupOutputComplete={props.onSetupOutputComplete}
+      ></SetupOutputMap>
     );
   }
   // END Editing the output

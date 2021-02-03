@@ -18,7 +18,7 @@ type ContextProps = {
 export const AuthContext = React.createContext<Partial<ContextProps>>({});
 
 export const AuthProvider = ({ children }: any) => {
-  const adminAccount = 'RobertGH'; // TODO update to better check
+  const adminAccount = 'rgrahamh_uwaterloo'; // TODO update to better check
   const [user, setUser] = useState(null as string | null);
 
   // Used to track when making auth requests and frontend should wait
