@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: any) => {
   // Checks signin
   IdentityManager.checkSignInStatus(info.portalUrl + '/sharing')
     .then((cred: Credential) => {
-      console.log('Checking signin status');
+      //console.log('Checking signin status');
       if (cred.userId !== adminAccount) {
         console.log('Auth failed, incorrect account');
         logout();
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: any) => {
       portal.load().then(function () {
         setUser(cred.userId);
         setLoadingAuthState(false);
-        console.log(user);
+        //console.log(user);
       });
     })
     .catch(() => {

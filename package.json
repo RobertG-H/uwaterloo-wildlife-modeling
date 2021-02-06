@@ -14,6 +14,7 @@
     "esri-loader": "^3.0.0",
     "firebase": "^8.2.4",
     "http-proxy-middleware": "^1.0.6",
+    "rc-slider": "^9.7.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",

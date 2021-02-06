@@ -44,8 +44,14 @@ const SetupOutputMap = (props: any) => {
     }
   });
 
+  React.useEffect(() => {
+    setSpeciesName(outputMapDict![props.editingMapId].speciesName);
+    setOutputName(outputMapDict![props.editingMapId].outputName);
+    setDisableGenerateMap(outputMapDict![props.editingMapId].outputName.length === 0);
+  }, []);
   const onCancel = () => {
     props.setIsEditingOutput(false);
+    props.setIsEditingExistingOutput(false);
   };
 
   const onBack = () => {
@@ -265,7 +271,7 @@ const SetupOutputMap = (props: any) => {
           <Input value={outputName} fluid size={'large'} placeholder='Enter a name for the output' onChange={onOutputNameChange} />
           <div style={{ textAlign: 'center', marginTop: 20 }}>
             <Button size={'big'} onClick={onGenerateMap} disabled={disableGenerateMap}>
-              GENERATE MAP
+              {props.isEditingExistingOutput ? 'RE-GENERATE MAP' : 'GENERATE MAP'}
             </Button>
           </div>
         </div>

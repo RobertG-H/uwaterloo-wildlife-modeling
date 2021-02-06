@@ -2,6 +2,8 @@ import React from 'react';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider';
+import { Button, Container } from 'semantic-ui-react';
+
 import IdentityManager from '@arcgis/core/identity/IdentityManager';
 import Credential from '@arcgis/core/identity/Credential';
 import OAuthInfo from '@arcgis/core/identity/OAuthInfo';
@@ -29,10 +31,10 @@ const Login = () => {
   // }
 
   return (
-    <div>
-      <h1>Wildlife Movement Modeling</h1>
-      <button onClick={tryToSignIn}>Click to Sign in with ArcGIS</button>
-    </div>
+    <Container>
+      <h1>Wildlife Hotspots</h1>
+      <Button onClick={tryToSignIn}>Click to Sign in with ArcGIS</Button>
+    </Container>
   );
 };
 

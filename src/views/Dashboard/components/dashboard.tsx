@@ -4,11 +4,9 @@ import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import ScaleBar from '@arcgis/core/widgets/ScaleBar';
-import LayerList from '@arcgis/core/widgets/LayerList';
 import { LarmSidebar, LarmHeader } from '../../../shared/layouts';
 import { OptionView } from '../../../shared/components';
 import { Grid, Menu, Segment } from 'semantic-ui-react';
-import { OutputProvider } from '../../../OutputProvider';
 import { OutputContext } from '../../../OutputProvider';
 
 import 'firebase/firestore';
@@ -21,19 +19,29 @@ const Dashboard = () => {
   const [allLayers, setAllLayers] = React.useState<{ [key: string]: TileLayer }>({});
   const [currentTab, setCurrentTab] = React.useState(0);
 
-  const toggleLayerVisibility = (layerName: string) => {
-    if (allLayers[layerName].opacity === 1) allLayers[layerName].opacity = 0;
-    else allLayers[layerName].opacity = 1;
+  const onSetupOutputComplete = (outputId: string, outputName: string) => {
+    if (parseInt(outputName.charAt(0)) === 1) {
+      // TODO update hardcoded map loading
+      addNewOutputMap(outputId, outputName.charAt(0));
+    } else if (parseInt(outputName.charAt(0)) === 2) {
+      addNewOutputMap(outputId, outputName.charAt(0));
+    } else {
+      console.log("output name invalid, can't generate map");
+    }
+    setCurrentTab(1);
   };
 
-  const onSetupOutputComplete = (outputId: string, outputName: string) => {
-    setCurrentTab(1);
-    outputMapDict![outputId].arcRes = staticArcRes!['1'];
-    console.log(staticArcRes!['1'].connectMap!);
+  const addNewOutputMap = (outputId: string, arcResId: string) => {
+    outputMapDict![outputId].arcRes = staticArcRes![arcResId];
+    console.log(staticArcRes![arcResId].connectMap!);
     const connect = new TileLayer({
-      url: staticArcRes!['1'].connectMap!,
+      url: staticArcRes![arcResId].connectMap!,
     });
     arcMap.add(connect);
+    setAllLayers({
+      ...allLayers,
+      Connectivity: connect,
+    });
     console.log('added new output map');
   };
 
@@ -64,14 +72,6 @@ const Dashboard = () => {
         position: 'bottom-right',
       });
 
-      // const layerList = new LayerList({
-      //   view: newMapView,
-      // });
-      // // Adds widget below other elements in the top left corner of the view
-      // newMapView.ui.add(layerList, {
-      //   position: 'bottom-right',
-      // });
-
       const landCover = new TileLayer({
         url: 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Southern_Ontario_Land_Cover/MapServer',
       });
@@ -80,8 +80,7 @@ const Dashboard = () => {
       setArcMap(newArcMap);
       setArcView(newMapView);
       setAllLayers({
-        LandCover: landCover,
-        // Costs1: costs1,
+        'Land Cover': landCover,
       });
     }
   }, []);
@@ -137,7 +136,6 @@ const Dashboard = () => {
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
               arcView={arcView}
-              toggleLayerVisibility={toggleLayerVisibility}
               allLayers={allLayers}
               onSetupOutputComplete={onSetupOutputComplete}
             ></OptionView>

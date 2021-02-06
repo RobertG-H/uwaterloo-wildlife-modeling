@@ -1,6 +1,7 @@
 import { Button, Menu, Divider, Segment } from 'semantic-ui-react';
 import { ConfigureOutputsView } from '..';
 import { LegendView } from '..';
+import { ToggleLayersView } from '..';
 import React from 'react';
 import Legend from '@arcgis/core/widgets/Legend';
 
@@ -11,6 +12,7 @@ const OptionView = (props: any) => {
 
   const [title, setTitle] = React.useState('---');
   const [isEditingOutput, setIsEditingOutput] = React.useState(false);
+  const [isEditingExistingOutput, setIsEditingExistingOutput] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(true);
 
   const hide = () => {
@@ -20,6 +22,7 @@ const OptionView = (props: any) => {
 
   const onSetupOutputComplete = (outputId: string, outputName: string) => {
     setIsEditingOutput(false);
+    setIsEditingExistingOutput(false);
     props.onSetupOutputComplete(outputId, outputName);
   };
 
@@ -46,7 +49,7 @@ const OptionView = (props: any) => {
   }
 
   return (
-    <div style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ flex: '1', display: 'flex', flexDirection: 'column', overflowY: 'scroll' }}>
       {/* Header */}
       <Menu borderless style={{ boxShadow: 'none', border: 'none', borderRadius: 0 }}>
         <Menu.Item header>{title}</Menu.Item>
@@ -63,6 +66,8 @@ const OptionView = (props: any) => {
         <ConfigureOutputsView
           isEditingOutput={isEditingOutput}
           setIsEditingOutput={setIsEditingOutput}
+          isEditingExistingOutput={isEditingExistingOutput}
+          setIsEditingExistingOutput={setIsEditingExistingOutput}
           arcView={props.arcView}
           onSetupOutputComplete={onSetupOutputComplete}
         ></ConfigureOutputsView>
@@ -72,8 +77,7 @@ const OptionView = (props: any) => {
 
       {props.currentTab === 1 && (
         <div>
-          <Button onClick={() => props.toggleLayerVisibility('LandCover')}>LandCover</Button>
-          <Button onClick={() => props.toggleLayerVisibility('Costs1')}>Costs</Button>
+          <ToggleLayersView allLayers={props.allLayers}></ToggleLayersView>
         </div>
       )}
       {/* END Toggle Layers */}
