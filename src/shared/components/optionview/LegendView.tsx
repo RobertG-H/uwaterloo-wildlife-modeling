@@ -14,23 +14,14 @@ const LegendView = (props: any) => {
         {
           hideLayers: [0],
           layer: props.allLayers['Land Cover'],
-          title: 'Test',
+          title: 'Land Cover',
         },
         {
           hideLayers: [0],
           layer: props.allLayers['Connectivity'],
-          title: 'Test2',
+          title: 'Connectivity',
         },
       ],
-    });
-
-    watchUtils.when(arcLegend, 'container', function () {
-      console.log('Manually updating legend');
-      const list = document.getElementsByClassName('esri-legend__layer-caption');
-      console.log(list);
-      for (const item of list) {
-        console.log(item);
-      }
     });
   }, []);
 
