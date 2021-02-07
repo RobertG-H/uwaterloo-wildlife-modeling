@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import TileLayer from '@arcgis/core/layers/TileLayer';
 
 class ArcRes {
   public arcId: string | null | undefined;
@@ -63,6 +64,7 @@ export class OutputMap {
   public habitatQualityValues: { [landCover: string]: number };
   public speciesName: string;
   public outputTypes: { [outputType: string]: boolean };
+  public tileLayers: { [key: string]: TileLayer };
   constructor(mapId: string) {
     this.mapId = mapId;
     this.outputName = '';
@@ -73,6 +75,7 @@ export class OutputMap {
       hotspots: false,
       connectivity: false,
     };
+    this.tileLayers = {};
   }
 }
 
@@ -88,13 +91,19 @@ export const OutputContext = React.createContext<Partial<ProjectContextProps>>({
 
 export const OutputProvider = ({ children }: any) => {
   // On app load initialize the current project
-  const [projectName, setProjectName] = React.useState('New Project');
+  const [projectName, setProjectName] = React.useState('Prototype Build');
   const [projectId, setProjectId] = React.useState(uuidv4());
   const [outputMapDict, SetOutputMapDict] = React.useState<{ [outputMapId: string]: OutputMap }>({});
 
   // TODO update this Static Arc Res to a DB fetch
   const [staticArcRes, setStaticArcRes] = React.useState<{ [arcResId: string]: ArcRes }>({
     1: new ArcRes(
+      '1',
+      process.env.REACT_APP_ARC_1_COST!,
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map/MapServer',
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map/MapServer',
+    ),
+    2: new ArcRes(
       '1',
       process.env.REACT_APP_ARC_1_COST!,
       'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map/MapServer',

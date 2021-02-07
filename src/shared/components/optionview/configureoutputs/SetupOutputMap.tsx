@@ -47,7 +47,7 @@ const SetupOutputMap = (props: any) => {
   React.useEffect(() => {
     setSpeciesName(outputMapDict![props.editingMapId].speciesName);
     setOutputName(outputMapDict![props.editingMapId].outputName);
-    setDisableGenerateMap(outputMapDict![props.editingMapId].outputName.length === 0);
+    checkDisableGenerateMapButton(outputMapDict![props.editingMapId].outputName);
   }, []);
   const onCancel = () => {
     props.setIsEditingOutput(false);
@@ -94,7 +94,7 @@ const SetupOutputMap = (props: any) => {
     if (Object.keys(outputMapDict!).length > 0) {
       outputMapDict![props.editingMapId].outputName = data.value;
     }
-    setDisableGenerateMap(data.value.length === 0);
+    checkDisableGenerateMapButton(data.value);
   };
 
   const onCheckboxHotspot = (event: any, data: any) => {
@@ -116,6 +116,12 @@ const SetupOutputMap = (props: any) => {
 
   const setHabitatQualityValue = (landCover: string, newValue: number) => {
     outputMapDict![props.editingMapId].habitatQualityValues[landCover] = newValue;
+  };
+
+  const checkDisableGenerateMapButton = (name: string) => {
+    if (name.length === 0) setDisableGenerateMap(true);
+    if (name.charAt(0) === '1' || name.charAt(0) === '2') setDisableGenerateMap(false);
+    else setDisableGenerateMap(true);
   };
 
   const generateHabitatQualityRows = () => {
@@ -185,7 +191,7 @@ const SetupOutputMap = (props: any) => {
             <Header style={{ display: 'inline-block', marginRight: 10, marginBottom: 10 }} as='h3'>
               Identify the Focal Species
             </Header>
-            <Popup trigger={<Icon name='info' size='small' circular />} content='Tooltip text' position='right center'></Popup>
+            {/* <Popup trigger={<Icon name='info' size='small' circular />} content={speciesToolTip} position='right center'></Popup> */}
           </div>
           <div className='wordwrap' style={{ marginBottom: 14 }}>
             Please enter the species name or species group you wish to analyze.
@@ -243,12 +249,12 @@ const SetupOutputMap = (props: any) => {
             <Header style={{ display: 'inline-block', marginRight: 10, marginBottom: 10 }} as='h3'>
               Choose Output Maps
             </Header>
-            <Popup trigger={<Icon name='info' size='small' circular />} content='Tooltip text' position='right center'></Popup>
+            {/* <Popup trigger={<Icon name='info' size='small' circular />} content='Tooltip text' position='right center'></Popup> */}
           </div>
           <div className='wordwrap' style={{ marginBottom: 14 }}>
             Select which output maps you would like generated.
           </div>
-          <div>
+          <div style={{ paddingBottom: 10 }}>
             <Checkbox
               as={'h5'}
               label='Road Mortality Hotspot Map'
@@ -278,12 +284,18 @@ const SetupOutputMap = (props: any) => {
       )}
       {/* END Step FINAL - Species  */}
       {/* Footer */}
-      <Menu borderless style={{ boxShadow: 'none', border: 'none', borderRadius: 0, marginTop: 'auto' }}>
-        <Menu.Item position='left'>
+      <Menu borderless style={{ boxShadow: 'none', border: 'none', borderRadius: 0, marginTop: 'auto', paddingBottom: 10 }}>
+        <Menu.Item position='left' style={{ paddingLeft: 0, paddingRight: 0 }}>
           {currentStep === 0 && <Button onClick={onCancel}> Cancel</Button>}
           {currentStep > 0 && <Button onClick={onBack}> Back</Button>}
         </Menu.Item>
-        <Menu.Item position='right'>{currentStep < finalStepIndex && <Button onClick={onNext}> Next</Button>}</Menu.Item>
+        <Menu.Item position='right' style={{ paddingLeft: 0, paddingRight: 0 }}>
+          {currentStep < finalStepIndex && (
+            <Button onClick={onNext} disabled={speciesName === ''}>
+              Next
+            </Button>
+          )}
+        </Menu.Item>
       </Menu>
       {/* END Footer */}
     </div>

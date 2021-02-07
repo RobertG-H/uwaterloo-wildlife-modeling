@@ -4,16 +4,18 @@ import { LegendView } from '..';
 import { ToggleLayersView } from '..';
 import React from 'react';
 import Legend from '@arcgis/core/widgets/Legend';
+import useWindowDimensions from '../../../windowDimensions';
 
 const OptionView = (props: any) => {
-  const configureOutputsTitle = 'Configure Outputs';
-  const toggleLayersTitle = 'Toggle Layers';
+  const configureOutputsTitle = 'Output Maps';
+  const toggleLayersTitle = 'Layer View';
   const legendTitle = 'Legend';
 
   const [title, setTitle] = React.useState('---');
   const [isEditingOutput, setIsEditingOutput] = React.useState(false);
   const [isEditingExistingOutput, setIsEditingExistingOutput] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(true);
+  const { height, width } = useWindowDimensions();
 
   const hide = () => {
     setIsVisible(false);
@@ -48,13 +50,16 @@ const OptionView = (props: any) => {
     return null;
   }
 
+  console.log(height);
+  const optionViewHeight = height - props.headerHeight;
+
   return (
-    <div style={{ flex: '1', display: 'flex', flexDirection: 'column', overflowY: 'scroll' }}>
+    <div style={{ flex: '1', display: 'flex', flexDirection: 'column', maxHeight: optionViewHeight }}>
       {/* Header */}
       <Menu borderless style={{ boxShadow: 'none', border: 'none', borderRadius: 0 }}>
         <Menu.Item header>{title}</Menu.Item>
-        <Menu.Item position='right'>
-          <Button icon='close' onClick={() => hide()} />
+        <Menu.Item style={{ paddingRight: 10 }} position='right'>
+          <Button icon='close' className='noBG' onClick={() => hide()} />
         </Menu.Item>
       </Menu>
       <Divider style={{ marginTop: 0 }}></Divider>
@@ -75,15 +80,11 @@ const OptionView = (props: any) => {
       {/* END Configure Outputs */}
       {/* Toggle Layers */}
 
-      {props.currentTab === 1 && (
-        <div>
-          <ToggleLayersView allLayers={props.allLayers}></ToggleLayersView>
-        </div>
-      )}
+      {props.currentTab === 1 && <ToggleLayersView defaultLayers={props.defaultLayers} arcView={props.arcView}></ToggleLayersView>}
       {/* END Toggle Layers */}
 
       {/* Legend */}
-      {props.currentTab === 2 && <LegendView allLayers={props.allLayers} arcView={props.arcView} />}
+      {props.currentTab === 2 && <LegendView defaultLayers={props.defaultLayers} arcView={props.arcView} />}
       {/* End Legend */}
     </div>
   );

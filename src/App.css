@@ -64,3 +64,31 @@ input[type='number']::-webkit-outer-spin-button {
 .esri-legend__layer-caption {
   display: none !important;
 }
+
+.ui.button {
+  background-color: #eff1f7 !important;
+  color: #788198 !important;
+}
+
+.ui.button.noBG {
+  background-color: transparent !important;
+  padding-right: 0px !important;
+}
+
+.esri-legend,
+.esri-legend__service-label {
+  color: rgba(0, 0, 0, 0.87) !important;
+  background-color: white !important;
+}
+
+.esri-legend__layer-body {
+  text-align: left;
+}
+
+.esri-legend__symbol {
+  border: 2px solid #a4a4a4;
+}
+
+.ui.steps .step.active .title {
+  color: #242425 !important;
+}

@@ -1,18 +1,33 @@
 import React from 'react';
-import { Step } from 'semantic-ui-react';
-import ToggleLayerRow from './ToggleLayerRow';
+import { Divider, Header, Accordion, Icon } from 'semantic-ui-react';
+import ToggleLayerAccordian from './ToggleLayerAccordian';
+import { OutputContext } from '../../../OutputProvider';
+
 const ToggleLayersView = (props: any) => {
+  const { outputMapDict } = React.useContext(OutputContext);
+
   const generateToggleLayerRows = () => {
     const rows = [];
-    for (const layerName in props.allLayers) {
-      //console.log(layerName);
-      //console.log(props.allLayers[layerName]);
-      rows.push(<ToggleLayerRow layerName={layerName} allLayers={props.allLayers} />);
+    // First do default layers and base
+    rows.push(<ToggleLayerAccordian isBasemap={true} arcView={props.arcView} defaultLayers={props.defaultLayers}></ToggleLayerAccordian>);
+    // Second do output map layers
+    for (const outputMap in outputMapDict!) {
+      // Only show maps that have names
+      if (outputMapDict[outputMap].outputName !== '') {
+        rows.push(
+          <ToggleLayerAccordian
+            outputMapName={outputMapDict[outputMap].outputName}
+            outputMapId={outputMap}
+            isBasemap={false}
+            arcView={props.arcView}
+          ></ToggleLayerAccordian>,
+        );
+      }
     }
     return rows;
   };
 
-  return <div>{generateToggleLayerRows()}</div>;
+  return <>{generateToggleLayerRows()}</>;
 };
 
 export default ToggleLayersView;

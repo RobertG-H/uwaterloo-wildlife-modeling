@@ -13,22 +13,20 @@ const marks = {
 
 const ToggleLayerRow = (props: any) => {
   const { outputMapDict } = React.useContext(OutputContext);
-  const [opacity, setOpacity] = React.useState(100);
+  const [opacity, setOpacity] = React.useState(80);
   const [visible, setVisible] = React.useState(true);
 
   const onLayerVisibility = (event: any, data: any) => {
     setVisible(data.checked);
-    props.allLayers[props.layerName].visible = data.checked;
+    props.layer.visible = data.checked;
+    if (props.layer2) props.layer2.visible = data.checked;
   };
 
   const setLayerOpacity = (newOpacity: number) => {
     setOpacity(newOpacity);
-    props.allLayers[props.layerName].opacity = opacity;
+    props.layer.opacity = opacity;
+    if (props.layer2) props.layer2.opacity = opacity;
   };
-
-  //   React.useEffect(() => {
-  //     setValue(outputMapDict![props.editingMapId].habitatQualityValues[props.landCover]);
-  //   }, []);
 
   const handleSlider = (sliderProps: any) => {
     const { value, dragging, index, ...restProps } = sliderProps;
@@ -43,18 +41,12 @@ const ToggleLayerRow = (props: any) => {
 
   return (
     <>
-      <div style={{ textAlign: 'left', paddingLeft: 10 }}>
-        <Checkbox
-          as={'h5'}
-          label={props.layerName}
-          onChange={onLayerVisibility}
-          defaultChecked={props.allLayers[props.layerName].visible}
-        />
-        <div style={{ padding: '0px 20px 20px 10px' }}>
-          <Slider defaultValue={props.allLayers[props.layerName].opacity * 100} marks={marks} min={0} max={100} handle={handleSlider} />
+      <div style={{ textAlign: 'left', paddingLeft: 10, marginBottom: 15 }}>
+        <Checkbox label={props.layerName} onChange={onLayerVisibility} defaultChecked={props.layer.visible} />
+        <div style={{ padding: '10px 20px 20px 10px' }}>
+          <Slider defaultValue={props.layer.opacity * 100} marks={marks} min={0} max={100} handle={handleSlider} />
         </div>
       </div>
-      <Divider></Divider>
     </>
   );
 };

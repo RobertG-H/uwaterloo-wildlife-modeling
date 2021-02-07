@@ -4,6 +4,7 @@ import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import ScaleBar from '@arcgis/core/widgets/ScaleBar';
+import Extent from '@arcgis/core/geometry/Extent';
 import { LarmSidebar, LarmHeader } from '../../../shared/layouts';
 import { OptionView } from '../../../shared/components';
 import { Grid, Menu, Segment } from 'semantic-ui-react';
@@ -16,12 +17,12 @@ const Dashboard = () => {
   const arcViewRef = React.useRef<HTMLDivElement>(null);
   const [arcMap, setArcMap] = React.useState<Map>(new Map());
   const [arcView, setArcView] = React.useState<MapView>(new MapView());
-  const [allLayers, setAllLayers] = React.useState<{ [key: string]: TileLayer }>({});
+  const [defaultLayers, setDeafultLayers] = React.useState<{ [key: string]: TileLayer }>({});
   const [currentTab, setCurrentTab] = React.useState(0);
 
   const onSetupOutputComplete = (outputId: string, outputName: string) => {
     if (parseInt(outputName.charAt(0)) === 1) {
-      // TODO update hardcoded map loading
+      // TODO update hardcoded map loading based on outputName
       addNewOutputMap(outputId, outputName.charAt(0));
     } else if (parseInt(outputName.charAt(0)) === 2) {
       addNewOutputMap(outputId, outputName.charAt(0));
@@ -32,17 +33,23 @@ const Dashboard = () => {
   };
 
   const addNewOutputMap = (outputId: string, arcResId: string) => {
-    outputMapDict![outputId].arcRes = staticArcRes![arcResId];
-    console.log(staticArcRes![arcResId].connectMap!);
-    const connect = new TileLayer({
-      url: staticArcRes![arcResId].connectMap!,
-    });
-    arcMap.add(connect);
-    setAllLayers({
-      ...allLayers,
-      Connectivity: connect,
-    });
-    console.log('added new output map');
+    if (outputMapDict![outputId].arcRes.arcId !== arcResId) {
+      outputMapDict![outputId].arcRes = staticArcRes![arcResId];
+      const connect = new TileLayer({
+        url: staticArcRes![arcResId].connectMap!,
+      });
+      connect.opacity = 0.8;
+      const hotspots = new TileLayer({
+        url: staticArcRes![arcResId].hotspotMap!,
+      });
+      hotspots.opacity = 0.8;
+      // TODO add more maps here
+      arcMap.add(connect);
+      arcMap.add(hotspots);
+      outputMapDict![outputId].tileLayers['Connectivity'] = connect;
+      outputMapDict![outputId].tileLayers['Road Mortality Hotspots'] = hotspots;
+      console.log('added new output map');
+    }
   };
 
   React.useEffect(() => {
@@ -51,6 +58,12 @@ const Dashboard = () => {
         basemap: 'topo-vector',
       });
 
+      const extent = new Extent();
+      extent.xmin = -80.5;
+      extent.xmax = -79.5;
+      extent.ymin = 43.1;
+      extent.ymax = 43.9;
+
       const newMapView = new MapView({
         container: arcViewRef.current,
         map: newArcMap,
@@ -58,10 +71,12 @@ const Dashboard = () => {
         center: [-80.58, 43.48],
         constraints: {
           minZoom: 10,
-          maxZoom: 16,
+          maxZoom: 15,
           rotationEnabled: false,
+          geometry: extent,
         },
       });
+
       const scaleBar = new ScaleBar({
         view: newMapView,
         unit: 'metric',
@@ -79,7 +94,8 @@ const Dashboard = () => {
 
       setArcMap(newArcMap);
       setArcView(newMapView);
-      setAllLayers({
+
+      setDeafultLayers({
         'Land Cover': landCover,
       });
     }
@@ -131,15 +147,14 @@ const Dashboard = () => {
               alignItems: 'stretch',
             }}
           >
-            {/* <Segment raised={false} style={{ padding: 0 }}> */}
             <OptionView
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
               arcView={arcView}
-              allLayers={allLayers}
+              defaultLayers={defaultLayers}
               onSetupOutputComplete={onSetupOutputComplete}
+              headerHeight={headerHeight}
             ></OptionView>
-            {/* </Segment> */}
           </div>
         )}
         {/* END Optionview */}

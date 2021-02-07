@@ -59,11 +59,11 @@ const LarmSidebar = (props: any) => {
       </style>
       <Menu.Item as='a' active={tabList[0]} onClick={onConfigureOutputs}>
         {/* <Icon name='circle outline' /> */}
-        Configure Outputs
+        Output Maps
       </Menu.Item>
       <Menu.Item as='a' active={tabList[1]} onClick={onToggleLayers}>
         {/* <Icon name='circle outline' /> */}
-        Toggle Layers
+        Layer View
       </Menu.Item>
       <Menu.Item as='a' active={tabList[2]} onClick={onLegend}>
         {/* <Icon name='circle outline' /> */}
