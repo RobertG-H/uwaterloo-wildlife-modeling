@@ -27,13 +27,15 @@
   },
   "scripts": {
     "start": "npm run copy && react-scripts start",
-    "build": "npm run copy && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "emulate": "firebase emulators:start --only functions,hosting",
     "copy": "ncp ./node_modules/@arcgis/core/assets ./public/assets",
+    "copy-build": "ncp ./node_modules/@arcgis/core/assets ./build/assets",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet",
-    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "postinstall": "npm run copy-build"
   },
   "eslintConfig": {
     "root": true,
@@ -44,9 +46,9 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ],
     "development": [
       "last 1 chrome version",

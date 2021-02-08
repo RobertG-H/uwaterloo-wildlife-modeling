@@ -3,11 +3,9 @@ import { Step, Button, Menu, Input, Header, Checkbox, Image, Segment, Modal } fr
 import { OutputContext, OutputMap } from '../../../../OutputProvider';
 import Sketch from '@arcgis/core/widgets/Sketch';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
-import Graphic from '@arcgis/core/Graphic';
-import Point from '@arcgis/core/geometry/Point';
 import HabitatQualityRow from './HabitatQualityRow';
 import regionImage from '../../../../cycle3-selected-region.png';
-import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+// import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 import { v4 as uuidv4 } from 'uuid';
 
 const SetupOutputMap = (props: any) => {
@@ -27,13 +25,13 @@ const SetupOutputMap = (props: any) => {
   const regionSelectedRef = React.useRef<boolean | null>(null);
   regionSelectedRef.current = regionSelected;
 
-  const [regionPreSelect, setRegionPreSelect] = React.useState<FeatureLayer | null>(null);
-  const regionPreSelectRef = React.useRef<FeatureLayer | null>(null);
-  regionPreSelectRef.current = regionPreSelect;
+  // const [regionPreSelect, setRegionPreSelect] = React.useState<FeatureLayer | null>(null);
+  // const regionPreSelectRef = React.useRef<FeatureLayer | null>(null);
+  // regionPreSelectRef.current = regionPreSelect;
 
-  const [regionPostSelect, setRegionPostSelect] = React.useState<FeatureLayer | null>(null);
-  const regionPostSelectRef = React.useRef<FeatureLayer | null>(null);
-  regionPostSelectRef.current = regionPostSelect;
+  // const [regionPostSelect, setRegionPostSelect] = React.useState<FeatureLayer | null>(null);
+  // const regionPostSelectRef = React.useRef<FeatureLayer | null>(null);
+  // regionPostSelectRef.current = regionPostSelect;
 
   const [outputName, setOutputName] = React.useState('');
   const [saveAsId, setSaveAsId] = React.useState('');
@@ -127,13 +125,12 @@ const SetupOutputMap = (props: any) => {
     if (currentStep === 0 && !regionSelected) {
       //Add the highlight region feature layer
 
-      const featureLayer = new FeatureLayer({
-        url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_PreSelect/FeatureServer',
-      });
-      // url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
+      // const featureLayer = new FeatureLayer({
+      //   url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_PreSelect/FeatureServer',
+      // });
+      // props.arcMap.add(featureLayer);
+      // setRegionPreSelect(featureLayer);
 
-      props.arcMap.add(featureLayer);
-      setRegionPreSelect(featureLayer);
       console.log('Select a region!');
     } else {
       tryToRemovePreSelect();
@@ -159,17 +156,17 @@ const SetupOutputMap = (props: any) => {
   };
 
   const tryToRemovePreSelect = () => {
-    if (regionPreSelectRef.current) {
-      props.arcMap.remove(regionPreSelectRef.current);
-      setRegionPreSelect(null);
-    }
+    // if (regionPreSelectRef.current) {
+    //   props.arcMap.remove(regionPreSelectRef.current);
+    //   setRegionPreSelect(null);
+    // }
   };
 
   const tryToRemovePostSelect = () => {
-    if (regionPostSelectRef.current) {
-      props.arcMap.remove(regionPostSelectRef.current);
-      setRegionPostSelect(null);
-    }
+    // if (regionPostSelectRef.current) {
+    //   props.arcMap.remove(regionPostSelectRef.current);
+    //   setRegionPostSelect(null);
+    // }
   };
 
   const onSelectRegionCreate = () => {
@@ -178,12 +175,14 @@ const SetupOutputMap = (props: any) => {
       arcSketchRef.current.cancel();
     }
     if (regionSelected) return;
-    if (regionPostSelect) return;
-    const newFeatureLayer = new FeatureLayer({
-      url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
-    });
-    props.arcMap.add(newFeatureLayer);
-    setRegionPostSelect(newFeatureLayer);
+
+    // if (regionPostSelect) return;
+    // const newFeatureLayer = new FeatureLayer({
+    //   url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
+    // });
+    // props.arcMap.add(newFeatureLayer);
+    // setRegionPostSelect(newFeatureLayer);
+
     setRegionSelected(true);
     const newExtent = [11895207.411419, 1282809.161558, 1338609.161558, 11858247.411419];
     outputMapDict![props.editingMapId].extent = newExtent;
