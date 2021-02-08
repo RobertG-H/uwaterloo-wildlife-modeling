@@ -14,7 +14,7 @@ import { OutputContext } from '../../../OutputProvider';
 import 'firebase/firestore';
 
 const Dashboard = () => {
-  const { outputMapDict, staticArcRes } = React.useContext(OutputContext);
+  const { outputMapDict, staticArcRes, staticLandCoverValues } = React.useContext(OutputContext);
   const arcViewRef = React.useRef<HTMLDivElement>(null);
   const [arcMap, setArcMap] = React.useState<Map | null>(null);
   const [arcView, setArcView] = React.useState<MapView | null>(null);
@@ -37,6 +37,7 @@ const Dashboard = () => {
   const addNewOutputMap = (outputId: string, arcResId: string) => {
     if (outputMapDict![outputId].arcRes.arcId !== arcResId) {
       outputMapDict![outputId].arcRes = staticArcRes![arcResId];
+      outputMapDict![outputId].habitatQualityValues = staticLandCoverValues!;
       const costs = new TileLayer({
         url: staticArcRes![arcResId].costMap!,
       });

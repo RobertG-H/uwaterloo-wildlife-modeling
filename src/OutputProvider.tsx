@@ -87,6 +87,7 @@ type ProjectContextProps = {
   outputMapDict: { [outputMapId: string]: OutputMap };
   SetOutputMapDict: any;
   staticArcRes: { [arcResId: string]: ArcRes };
+  staticLandCoverValues: { [landCover: string]: number };
 };
 
 export const OutputContext = React.createContext<Partial<ProjectContextProps>>({});
@@ -113,6 +114,41 @@ export const OutputProvider = ({ children }: any) => {
     ),
   });
 
+  const [staticLandCoverValues, setStaticLandCoverValues] = React.useState<{ [landCover: string]: number }>({
+    'Alvar - Open': 150,
+    'Alvar - Shrub': 300,
+    'Alvar - Treed': 600,
+    'Beach/Bar - Open': 50,
+    'Bedrock - Open': 50,
+    Bog: 950,
+    'Built -Up Area – Impervious': 50,
+    'Built -Up Area – Pervious': 200,
+    'Cliff and Talus - Open': 50,
+    'Cliff and Talus - Treed': 300,
+    'Extraction – Aggregate': 25,
+    'Extraction – Peat/Topsoil': 50,
+    Fen: 950,
+    Forest: 900,
+    'Forest - Coniferous': 900,
+    'Forest - Deciduous': 900,
+    'Forest - Mixed': 900,
+    'Hedge Rows': 700,
+    Marsh: 950,
+    'Open Water': 50,
+    'Plantations – Tree Cultivated': 700,
+    'Sand Dune - Open': 50,
+    'Sand Dune - Treed': 250,
+    'Swamp - Thicket ': 950,
+    'Swamp - Treed': 950,
+    'Tallgrass Prairie - Open': 150,
+    'Tallgrass Savannah': 300,
+    'Tallgrass Woodland': 700,
+    Tilled: 100,
+    Transportation: 50,
+    'Treed - Sparse': 300,
+    Undifferentiated: 125,
+  });
+
   return (
     <OutputContext.Provider
       value={{
@@ -121,6 +157,7 @@ export const OutputProvider = ({ children }: any) => {
         outputMapDict,
         SetOutputMapDict,
         staticArcRes,
+        staticLandCoverValues,
       }}
     >
       {children}
