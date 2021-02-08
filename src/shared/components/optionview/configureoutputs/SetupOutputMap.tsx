@@ -15,13 +15,29 @@ const SetupOutputMap = (props: any) => {
 
   const [currentStep, setCurrentStep] = React.useState(0);
   const [loadedSketch, SetLoadedSketch] = React.useState(false);
+  const [arcSketch, setArcSketch] = React.useState<Sketch | null>(null);
+  const arcSketchRef = React.useRef<Sketch | null>(null);
+  arcSketchRef.current = arcSketch;
+
   const [disableGenerateMap, setDisableGenerateMap] = React.useState(true);
   const [speciesName, setSpeciesName] = React.useState('');
   const [outputExtent, setOutputExtent] = React.useState([0, 0, 0, 0]);
+
   const [regionSelected, setRegionSelected] = React.useState(false);
+  const regionSelectedRef = React.useRef<boolean | null>(null);
+  regionSelectedRef.current = regionSelected;
+
   const [regionPreSelect, setRegionPreSelect] = React.useState<FeatureLayer | null>(null);
+  const regionPreSelectRef = React.useRef<FeatureLayer | null>(null);
+  regionPreSelectRef.current = regionPreSelect;
+
   const [regionPostSelect, setRegionPostSelect] = React.useState<FeatureLayer | null>(null);
+  const regionPostSelectRef = React.useRef<FeatureLayer | null>(null);
+  regionPostSelectRef.current = regionPostSelect;
+
   const [outputName, setOutputName] = React.useState('');
+  const [saveAsId, setSaveAsId] = React.useState('');
+
   const [modalOpen, setModalOpen] = React.useState(false);
   const finalStepIndex = 3;
   const graphicsLayer = new GraphicsLayer({});
@@ -50,19 +66,17 @@ const SetupOutputMap = (props: any) => {
         },
       });
 
+      setArcSketch(sketch);
+
       sketch.on('create', function (event) {
-        if (event && !regionSelected) {
-          const eventInfo = event.toolEventInfo;
-          if (eventInfo && eventInfo.type === 'vertex-add' && event.state === 'active') {
-            onSelectRegionCreate();
-          }
+        if (event.state === 'complete' && !regionSelectedRef.current && event.graphic) {
+          onSelectRegionCreate();
         }
       });
     }
   });
 
   // Cleanup: https://stackoverflow.com/questions/55139386/componentwillunmount-with-react-useeffect-hook
-  //TODO fix not working
   const val = React.useRef();
   React.useEffect(() => {
     val.current = props;
@@ -70,11 +84,14 @@ const SetupOutputMap = (props: any) => {
   React.useEffect(() => {
     return () => {
       console.log('cleanup');
+      if (arcSketchRef.current) {
+        arcSketchRef.current.cancel();
+      }
       tryToRemovePostSelect();
       tryToRemovePreSelect();
     };
   }, []);
-
+  //arcSketch, regionSelected, regionPostSelect
   React.useEffect(() => {
     setSpeciesName(outputMapDict![props.editingMapId].speciesName);
     setOutputName(outputMapDict![props.editingMapId].outputName);
@@ -85,11 +102,17 @@ const SetupOutputMap = (props: any) => {
     }
   }, []);
   const onCancel = () => {
+    if (arcSketchRef.current) {
+      arcSketchRef.current.cancel();
+    }
     props.setIsEditingOutput(false);
     props.setIsEditingExistingOutput(false);
   };
 
   const onBack = () => {
+    if (arcSketchRef.current) {
+      arcSketchRef.current.cancel();
+    }
     if (currentStep === 0) return;
     tryToRemovePreSelect();
     setCurrentStep(currentStep - 1);
@@ -97,6 +120,9 @@ const SetupOutputMap = (props: any) => {
   };
 
   const onNext = () => {
+    if (arcSketchRef.current) {
+      arcSketchRef.current.cancel();
+    }
     if (currentStep === finalStepIndex) return;
     if (currentStep === 0 && !regionSelected) {
       //Add the highlight region feature layer
@@ -130,38 +156,38 @@ const SetupOutputMap = (props: any) => {
 
   const onSpeciesInputChange = (event: ChangeEvent, data: any) => {
     setSpeciesName(data.value);
-    if (Object.keys(outputMapDict!).length > 0) {
-      outputMapDict![props.editingMapId].speciesName = data.value;
-    }
   };
 
   const tryToRemovePreSelect = () => {
-    if (regionPreSelect) {
-      props.arcMap.remove(regionPreSelect);
+    if (regionPreSelectRef.current) {
+      props.arcMap.remove(regionPreSelectRef.current);
       setRegionPreSelect(null);
     }
   };
 
   const tryToRemovePostSelect = () => {
-    if (regionPostSelect) {
-      props.arcMap.remove(regionPostSelect);
+    if (regionPostSelectRef.current) {
+      props.arcMap.remove(regionPostSelectRef.current);
       setRegionPostSelect(null);
     }
   };
 
   const onSelectRegionCreate = () => {
     tryToRemovePreSelect();
+    if (arcSketchRef.current) {
+      arcSketchRef.current.cancel();
+    }
     if (regionSelected) return;
-    const featureLayer = new FeatureLayer({
+    if (regionPostSelect) return;
+    const newFeatureLayer = new FeatureLayer({
       url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
     });
-    props.arcMap.add(featureLayer);
-    setRegionPostSelect(featureLayer);
+    props.arcMap.add(newFeatureLayer);
+    setRegionPostSelect(newFeatureLayer);
     setRegionSelected(true);
     const newExtent = [11895207.411419, 1282809.161558, 1338609.161558, 11858247.411419];
     outputMapDict![props.editingMapId].extent = newExtent;
     setOutputExtent(newExtent);
-    return;
   };
 
   const onExtentInputChange = (event: ChangeEvent, data: any) => {
@@ -177,9 +203,6 @@ const SetupOutputMap = (props: any) => {
 
   const onOutputNameChange = (event: ChangeEvent, data: any) => {
     setOutputName(data.value);
-    if (Object.keys(outputMapDict!).length > 0) {
-      outputMapDict![props.editingMapId].outputName = data.value;
-    }
     checkDisableGenerateMapButton(data.value);
   };
 
@@ -196,8 +219,7 @@ const SetupOutputMap = (props: any) => {
   };
 
   const onGenerateNewMap = () => {
-    props.onSetupOutputComplete(props.editingMapId, outputName);
-    tryToRemovePostSelect();
+    generateMap(props.editingMapId, outputName);
   };
 
   const onGenerateEditMapModal = () => {
@@ -206,18 +228,39 @@ const SetupOutputMap = (props: any) => {
 
   const onGenerateEditMap = (overwrite = false) => {
     if (overwrite) {
-      props.onSetupOutputComplete(props.editingMapId, outputName);
+      generateMap(props.editingMapId, outputName);
     } else {
       const newOutput: { [outputMapId: string]: OutputMap } = {};
       const newId = uuidv4();
+
       newOutput[newId] = JSON.parse(JSON.stringify(outputMapDict![props.editingMapId]));
+      newOutput[newId].speciesName = speciesName;
       newOutput[newId].outputName = outputName;
+      setSaveAsId(newId);
       SetOutputMapDict({
         ...outputMapDict,
         ...newOutput,
       });
-      props.onSetupOutputComplete(newId, outputName);
+      tryToRemovePreSelect();
+      tryToRemovePostSelect();
     }
+  };
+
+  const didMountRef = React.useRef(false);
+  React.useEffect(() => {
+    if (didMountRef.current) {
+      props.onSetupOutputComplete(saveAsId, outputName);
+    } else {
+      didMountRef.current = true;
+    }
+  }, [outputMapDict]);
+
+  const generateMap = (mapId: string, newOutputName: string) => {
+    outputMapDict![props.editingMapId].speciesName = speciesName;
+    outputMapDict![props.editingMapId].outputName = outputName;
+
+    props.onSetupOutputComplete(mapId, newOutputName);
+    tryToRemovePreSelect();
     tryToRemovePostSelect();
   };
 
@@ -403,7 +446,7 @@ const SetupOutputMap = (props: any) => {
       {/* Step 3 - Land Cover */}
       {currentStep === 2 && (
         <div className='wordwrap' style={{ textAlign: 'left' }}>
-          <Header as='h3'>Assign land cover values</Header>
+          <Header as='h3'>Assign habitat suitability values</Header>
           <div style={{ marginBottom: 14 }}>
             The following land cover factors were found in the layer data for this study
             <div>region. Input habitat suitability values for the focal species on a scale</div>
