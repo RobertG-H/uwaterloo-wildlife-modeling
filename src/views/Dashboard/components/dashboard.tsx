@@ -41,14 +41,15 @@ const Dashboard = () => {
         url: staticArcRes![arcResId].costMap!,
       });
       costs.opacity = 0.8;
+      costs.visible = false;
       const connect = new TileLayer({
         url: staticArcRes![arcResId].connectMap!,
       });
-      connect.opacity = 0.8;
+      connect.opacity = 0.5;
       const hotspots = new TileLayer({
         url: staticArcRes![arcResId].hotspotMap!,
       });
-      hotspots.opacity = 0.8;
+      hotspots.opacity = 1.0;
 
       if (arcMap) {
         arcMap.add(costs);
@@ -102,14 +103,8 @@ const Dashboard = () => {
       const landCover = new TileLayer({
         url: 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Southern_Ontario_Land_Cover/MapServer',
       });
+      landCover.visible = false;
       newArcMap.add(landCover);
-
-      // const featureLayer = new FeatureLayer({
-      //   url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
-      // });
-      // url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_PreSelect/FeatureServer',
-
-      // newArcMap.add(featureLayer);
 
       setArcMap(newArcMap);
       setArcView(newMapView);
