@@ -69,6 +69,10 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: #eff1f7 !important;
   color: #788198 !important;
 }
+.ui.label {
+  background-color: #eff1f7 !important;
+  color: #788198 !important;
+}
 
 .ui.button.noBG {
   background-color: transparent !important;

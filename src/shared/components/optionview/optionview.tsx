@@ -50,7 +50,6 @@ const OptionView = (props: any) => {
     return null;
   }
 
-  console.log(height);
   const optionViewHeight = height - props.headerHeight;
 
   return (
@@ -74,7 +73,9 @@ const OptionView = (props: any) => {
           isEditingExistingOutput={isEditingExistingOutput}
           setIsEditingExistingOutput={setIsEditingExistingOutput}
           arcView={props.arcView}
+          arcMap={props.arcMap}
           onSetupOutputComplete={onSetupOutputComplete}
+          setTitle={setTitle}
         ></ConfigureOutputsView>
       )}
       {/* END Configure Outputs */}

@@ -17,7 +17,9 @@ const ConfigureOutputsView = (props: any) => {
         isEditingExistingOutput={props.isEditingExistingOutput}
         setIsEditingExistingOutput={props.setIsEditingExistingOutput}
         arcView={props.arcView}
+        arcMap={props.arcMap}
         onSetupOutputComplete={props.onSetupOutputComplete}
+        setTitle={props.setTitle}
       ></SetupOutputMap>
     );
   }
@@ -34,9 +36,11 @@ const ConfigureOutputsView = (props: any) => {
       newObj[newId] = new OutputMap(editingMapId);
       SetOutputMapDict({ ...outputMapDict, ...newObj });
       props.setIsEditingExistingOutput(false);
+      props.setTitle('Setup Output Map');
     } else if (outputMapId) {
       SetEditingMapId(outputMapId);
       props.setIsEditingExistingOutput(true);
+      props.setTitle('Edit Output Map');
     }
     props.setIsEditingOutput(true);
   };

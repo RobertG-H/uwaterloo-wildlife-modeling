@@ -1,20 +1,28 @@
 import React, { ChangeEvent } from 'react';
-import { Step, Button, Menu, Input, Header, Popup, Icon, Checkbox, Container } from 'semantic-ui-react';
-import { OutputContext } from '../../../../OutputProvider';
+import { Step, Button, Menu, Input, Header, Checkbox, Image, Segment, Modal } from 'semantic-ui-react';
+import { OutputContext, OutputMap } from '../../../../OutputProvider';
 import Sketch from '@arcgis/core/widgets/Sketch';
-import Graphic from '@arcgis/core/Graphic';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer';
-import Legend from '@arcgis/core/widgets/Legend';
+import Graphic from '@arcgis/core/Graphic';
+import Point from '@arcgis/core/geometry/Point';
 import HabitatQualityRow from './HabitatQualityRow';
-import { setConstantValue } from 'typescript';
+import regionImage from '../../../../cycle3-selected-region.png';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+import { v4 as uuidv4 } from 'uuid';
 
 const SetupOutputMap = (props: any) => {
-  const { outputMapDict } = React.useContext(OutputContext);
+  const { outputMapDict, SetOutputMapDict } = React.useContext(OutputContext);
+
   const [currentStep, setCurrentStep] = React.useState(0);
   const [loadedSketch, SetLoadedSketch] = React.useState(false);
   const [disableGenerateMap, setDisableGenerateMap] = React.useState(true);
   const [speciesName, setSpeciesName] = React.useState('');
+  const [outputExtent, setOutputExtent] = React.useState([0, 0, 0, 0]);
+  const [regionSelected, setRegionSelected] = React.useState(false);
+  const [regionPreSelect, setRegionPreSelect] = React.useState<FeatureLayer | null>(null);
+  const [regionPostSelect, setRegionPostSelect] = React.useState<FeatureLayer | null>(null);
   const [outputName, setOutputName] = React.useState('');
+  const [modalOpen, setModalOpen] = React.useState(false);
   const finalStepIndex = 3;
   const graphicsLayer = new GraphicsLayer({});
   const sketchViewRef = React.useRef<HTMLDivElement>(null);
@@ -32,22 +40,49 @@ const SetupOutputMap = (props: any) => {
             point: false,
             polyline: false,
             polygon: false,
-            rectangle: false,
+            rectangle: true,
             circle: false,
           },
           selectionTools: {
-            'rectangle-selection': true,
+            'rectangle-selection': false,
             'lasso-selection': false,
           },
         },
       });
+
+      sketch.on('create', function (event) {
+        if (event && !regionSelected) {
+          const eventInfo = event.toolEventInfo;
+          if (eventInfo && eventInfo.type === 'vertex-add' && event.state === 'active') {
+            onSelectRegionCreate();
+          }
+        }
+      });
     }
   });
+
+  // Cleanup: https://stackoverflow.com/questions/55139386/componentwillunmount-with-react-useeffect-hook
+  //TODO fix not working
+  const val = React.useRef();
+  React.useEffect(() => {
+    val.current = props;
+  }, [props]);
+  React.useEffect(() => {
+    return () => {
+      console.log('cleanup');
+      tryToRemovePostSelect();
+      tryToRemovePreSelect();
+    };
+  }, []);
 
   React.useEffect(() => {
     setSpeciesName(outputMapDict![props.editingMapId].speciesName);
     setOutputName(outputMapDict![props.editingMapId].outputName);
+    setOutputExtent(outputMapDict![props.editingMapId].extent);
     checkDisableGenerateMapButton(outputMapDict![props.editingMapId].outputName);
+    if (outputMapDict![props.editingMapId].extent[0] !== 0) {
+      onSelectRegionCreate();
+    }
   }, []);
   const onCancel = () => {
     props.setIsEditingOutput(false);
@@ -56,12 +91,27 @@ const SetupOutputMap = (props: any) => {
 
   const onBack = () => {
     if (currentStep === 0) return;
+    tryToRemovePreSelect();
     setCurrentStep(currentStep - 1);
     SetLoadedSketch(false);
   };
 
   const onNext = () => {
     if (currentStep === finalStepIndex) return;
+    if (currentStep === 0 && !regionSelected) {
+      //Add the highlight region feature layer
+
+      const featureLayer = new FeatureLayer({
+        url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_PreSelect/FeatureServer',
+      });
+      // url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
+
+      props.arcMap.add(featureLayer);
+      setRegionPreSelect(featureLayer);
+      console.log('Select a region!');
+    } else {
+      tryToRemovePreSelect();
+    }
     setCurrentStep(currentStep + 1);
     SetLoadedSketch(false);
   };
@@ -85,8 +135,44 @@ const SetupOutputMap = (props: any) => {
     }
   };
 
-  const onSelectRegionButton = () => {
+  const tryToRemovePreSelect = () => {
+    if (regionPreSelect) {
+      props.arcMap.remove(regionPreSelect);
+      setRegionPreSelect(null);
+    }
+  };
+
+  const tryToRemovePostSelect = () => {
+    if (regionPostSelect) {
+      props.arcMap.remove(regionPostSelect);
+      setRegionPostSelect(null);
+    }
+  };
+
+  const onSelectRegionCreate = () => {
+    tryToRemovePreSelect();
+    if (regionSelected) return;
+    const featureLayer = new FeatureLayer({
+      url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
+    });
+    props.arcMap.add(featureLayer);
+    setRegionPostSelect(featureLayer);
+    setRegionSelected(true);
+    const newExtent = [11895207.411419, 1282809.161558, 1338609.161558, 11858247.411419];
+    outputMapDict![props.editingMapId].extent = newExtent;
+    setOutputExtent(newExtent);
     return;
+  };
+
+  const onExtentInputChange = (event: ChangeEvent, data: any) => {
+    // deepcopy array
+    const newExtent = outputExtent.slice();
+    newExtent[data.index] = parseInt(data.value);
+    console.log(newExtent);
+    setOutputExtent(newExtent);
+    if (Object.keys(outputMapDict!).length > 0) {
+      outputMapDict![props.editingMapId].extent[data.index] = parseInt(data.value);
+    }
   };
 
   const onOutputNameChange = (event: ChangeEvent, data: any) => {
@@ -109,9 +195,30 @@ const SetupOutputMap = (props: any) => {
     }
   };
 
-  const onGenerateMap = () => {
-    console.log('generating map');
+  const onGenerateNewMap = () => {
     props.onSetupOutputComplete(props.editingMapId, outputName);
+    tryToRemovePostSelect();
+  };
+
+  const onGenerateEditMapModal = () => {
+    setModalOpen(true);
+  };
+
+  const onGenerateEditMap = (overwrite = false) => {
+    if (overwrite) {
+      props.onSetupOutputComplete(props.editingMapId, outputName);
+    } else {
+      const newOutput: { [outputMapId: string]: OutputMap } = {};
+      const newId = uuidv4();
+      newOutput[newId] = JSON.parse(JSON.stringify(outputMapDict![props.editingMapId]));
+      newOutput[newId].outputName = outputName;
+      SetOutputMapDict({
+        ...outputMapDict,
+        ...newOutput,
+      });
+      props.onSetupOutputComplete(newId, outputName);
+    }
+    tryToRemovePostSelect();
   };
 
   const setHabitatQualityValue = (landCover: string, newValue: number) => {
@@ -144,11 +251,11 @@ const SetupOutputMap = (props: any) => {
           .esri-icon-cursor {
             display: none;
           }
-          .esri-sketch__section:first-child{
+          .esri-sketch__section:second-child{
             padding: 0;
             margin: 0;
           }
-          .esri-icon-cursor-marquee{
+          .esri-sketch__button{
             padding: 20px 40px !important;
           }
           .esri-sketch__section{
@@ -213,16 +320,83 @@ const SetupOutputMap = (props: any) => {
           <Header as='h3'>Identify the Study Region</Header>
           <div className='wordwrap' style={{ marginBottom: 14 }}>
             Please identify the study region you wish to analyze by selecting an area on the
-            <div>map using the box tool below.</div>
+            <div>map using the box tool below or by inputting the geographic boundaries of the </div>
+            <div>extent in easting & northing.</div>
           </div>
-          {/* <Button icon='pen square' onClick={onSelectRegionButton}></Button> */}
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <Button style={{ backgroundColor: 'rgb(36,36,36)', padding: 0 }}>
-              <div ref={sketchViewRef} className={'sketchViewRef'}></div>
-            </Button>
-            <div style={{ padding: '10px' }}>Box Select Tool</div>
+          <div style={{ overflowY: 'scroll', maxHeight: '600px' }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <Segment style={{ margin: 'auto' }}>
+                <div style={{ padding: '10px' }}>
+                  <strong>Box Select Tool</strong>
+                </div>
+                <Button style={{ backgroundColor: 'rgb(36,36,36)', padding: 0, marginLeft: 15 }}>
+                  <div ref={sketchViewRef} className={'sketchViewRef'}></div>
+                </Button>
+              </Segment>
+            </div>
+            <Segment>
+              <Header as='h5'>Preview of selected region</Header>
+              <Image
+                src={regionSelected ? regionImage : 'https://react.semantic-ui.com/images/wireframe/image.png'}
+                size='medium'
+                centered
+              ></Image>
+            </Segment>
+            <Segment>
+              <Header as='h5'>Specified Extent</Header>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <span style={{ margin: 'auto' }}>
+                  <span style={{ marginRight: 5 }}>Top: &nbsp; &nbsp; &nbsp; &nbsp; </span>
+                  <Input
+                    type='number'
+                    size='mini'
+                    style={{ maxWidth: 100 }}
+                    onChange={onExtentInputChange}
+                    value={outputExtent[0]}
+                    index={0}
+                  ></Input>
+                </span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <span style={{ marginRight: 'auto' }}>
+                  <span style={{ marginRight: 5 }}>Left: </span>
+                  <Input
+                    type='number'
+                    size='mini'
+                    style={{ maxWidth: 100 }}
+                    onChange={onExtentInputChange}
+                    value={outputExtent[1]}
+                    index={1}
+                  ></Input>
+                </span>
+                <span style={{ marginLeft: 'auto' }}>
+                  <span style={{ marginRight: 5 }}>Right: </span>
+
+                  <Input
+                    type='number'
+                    size='mini'
+                    style={{ maxWidth: 100 }}
+                    onChange={onExtentInputChange}
+                    value={outputExtent[2]}
+                    index={2}
+                  ></Input>
+                </span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <span style={{ margin: 'auto' }}>
+                  <span style={{ marginRight: 5 }}>Bottom: </span>
+                  <Input
+                    type='number'
+                    size='mini'
+                    style={{ maxWidth: 100 }}
+                    onChange={onExtentInputChange}
+                    value={outputExtent[3]}
+                    index={3}
+                  ></Input>
+                </span>
+              </div>
+            </Segment>
           </div>
-          <div style={{ textAlign: 'center' }}></div>
         </div>
       )}
       {/* END Step 2 - Location */}
@@ -276,9 +450,32 @@ const SetupOutputMap = (props: any) => {
           </Header>
           <Input value={outputName} fluid size={'large'} placeholder='Enter a name for the output' onChange={onOutputNameChange} />
           <div style={{ textAlign: 'center', marginTop: 20 }}>
-            <Button size={'big'} onClick={onGenerateMap} disabled={disableGenerateMap}>
-              {props.isEditingExistingOutput ? 'RE-GENERATE MAP' : 'GENERATE MAP'}
-            </Button>
+            {!props.isEditingExistingOutput && (
+              <Button size={'big'} onClick={onGenerateNewMap} disabled={disableGenerateMap}>
+                GENERATE MAP
+              </Button>
+            )}
+            {props.isEditingExistingOutput && (
+              <div>
+                <Button size={'big'} onClick={onGenerateEditMapModal} disabled={disableGenerateMap}>
+                  RE-GENERATE MAP
+                </Button>
+                <Modal closeIcon size={'mini'} open={modalOpen} onClose={() => setModalOpen(false)}>
+                  <Modal.Header>Overwrite or Save As?</Modal.Header>
+                  <Modal.Content>
+                    <p>Would you like to overwrite the output map you are editing, or would you like to save as a new output map?</p>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button positive onClick={() => onGenerateEditMap(true)}>
+                      Overwrite Existing
+                    </Button>
+                    <Button positive onClick={() => onGenerateEditMap(false)}>
+                      Save As New
+                    </Button>
+                  </Modal.Actions>
+                </Modal>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -290,11 +487,17 @@ const SetupOutputMap = (props: any) => {
           {currentStep > 0 && <Button onClick={onBack}> Back</Button>}
         </Menu.Item>
         <Menu.Item position='right' style={{ paddingLeft: 0, paddingRight: 0 }}>
-          {currentStep < finalStepIndex && (
+          {currentStep === 0 && (
             <Button onClick={onNext} disabled={speciesName === ''}>
               Next
             </Button>
           )}
+          {currentStep === 1 && (
+            <Button onClick={onNext} disabled={!regionSelected}>
+              Next
+            </Button>
+          )}
+          {currentStep === 2 && <Button onClick={onNext}>Next</Button>}
         </Menu.Item>
       </Menu>
       {/* END Footer */}

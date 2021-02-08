@@ -4,16 +4,16 @@ import { Route, Redirect } from 'react-router-dom';
 import { AuthContext } from './AuthProvider';
 import PropTypes from 'prop-types';
 import { OutputProvider } from './OutputProvider';
-import { Container } from 'semantic-ui-react';
+import { Loader, Dimmer } from 'semantic-ui-react';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const { authenticated, loadingAuthState } = useContext(AuthContext);
 
   if (loadingAuthState) {
     return (
-      <Container>
-        <h1>Loading...</h1>
-      </Container>
+      <Dimmer active>
+        <Loader active inline></Loader>
+      </Dimmer>
     );
   }
 

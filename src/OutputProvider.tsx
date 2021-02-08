@@ -65,6 +65,7 @@ export class OutputMap {
   public speciesName: string;
   public outputTypes: { [outputType: string]: boolean };
   public tileLayers: { [key: string]: TileLayer };
+  public extent: number[];
   constructor(mapId: string) {
     this.mapId = mapId;
     this.outputName = '';
@@ -76,6 +77,7 @@ export class OutputMap {
       connectivity: false,
     };
     this.tileLayers = {};
+    this.extent = [0, 0, 0, 0];
   }
 }
 
@@ -99,15 +101,15 @@ export const OutputProvider = ({ children }: any) => {
   const [staticArcRes, setStaticArcRes] = React.useState<{ [arcResId: string]: ArcRes }>({
     1: new ArcRes(
       '1',
-      process.env.REACT_APP_ARC_1_COST!,
-      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map/MapServer',
-      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map/MapServer',
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cost_Map_Original/MapServer',
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map_Original/MapServer',
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Road_Mortality_Hotspots_Original/MapServer',
     ),
     2: new ArcRes(
-      '1',
-      process.env.REACT_APP_ARC_1_COST!,
-      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map/MapServer',
-      process.env.REACT_APP_ARC_1_HOTSPOT!,
+      '2',
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cost_Map_Tweaked/MapServer',
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map_Tweaked/MapServer',
+      'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Road_Mortality_Hotspots_Tweaked/MapServer',
     ),
   });
 

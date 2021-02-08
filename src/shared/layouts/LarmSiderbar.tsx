@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox, Grid, Header, Icon, Menu, Segment, Sidebar } from 'semantic-ui-react';
+import { Loader, Dimmer, Menu } from 'semantic-ui-react';
 
 const LarmSidebar = (props: any) => {
   const initialTablList = [false, false, false];
@@ -41,6 +41,14 @@ const LarmSidebar = (props: any) => {
   React.useEffect(() => {
     setTab(props.currentTab);
   }, [props.currentTab]);
+
+  if (props.loading) {
+    return (
+      <Dimmer active>
+        <Loader active inline></Loader>
+      </Dimmer>
+    );
+  }
 
   return (
     <Menu icon='labeled' inverted vertical width='thin' borderless>

@@ -3,15 +3,16 @@ import { useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Login } from '../../Auth/components';
 import { AuthContext } from '../../../AuthProvider';
+import { Loader, Dimmer } from 'semantic-ui-react';
 
 export const AuthRoutes = () => {
   const { loadingAuthState, authenticated } = useContext(AuthContext);
 
   if (loadingAuthState) {
     return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
+      <Dimmer active>
+        <Loader active inline></Loader>
+      </Dimmer>
     );
   }
 

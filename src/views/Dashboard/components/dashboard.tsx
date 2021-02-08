@@ -5,6 +5,7 @@ import Map from '@arcgis/core/Map';
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import ScaleBar from '@arcgis/core/widgets/ScaleBar';
 import Extent from '@arcgis/core/geometry/Extent';
+import * as watchUtils from '@arcgis/core/core/watchUtils';
 import { LarmSidebar, LarmHeader } from '../../../shared/layouts';
 import { OptionView } from '../../../shared/components';
 import { Grid, Menu, Segment } from 'semantic-ui-react';
@@ -15,10 +16,11 @@ import 'firebase/firestore';
 const Dashboard = () => {
   const { outputMapDict, staticArcRes } = React.useContext(OutputContext);
   const arcViewRef = React.useRef<HTMLDivElement>(null);
-  const [arcMap, setArcMap] = React.useState<Map>(new Map());
-  const [arcView, setArcView] = React.useState<MapView>(new MapView());
+  const [arcMap, setArcMap] = React.useState<Map | null>(null);
+  const [arcView, setArcView] = React.useState<MapView | null>(null);
   const [defaultLayers, setDeafultLayers] = React.useState<{ [key: string]: TileLayer }>({});
-  const [currentTab, setCurrentTab] = React.useState(0);
+  const [currentTab, setCurrentTab] = React.useState(-1);
+  const [loading, setLoading] = React.useState(true);
 
   const onSetupOutputComplete = (outputId: string, outputName: string) => {
     if (parseInt(outputName.charAt(0)) === 1) {
@@ -35,6 +37,10 @@ const Dashboard = () => {
   const addNewOutputMap = (outputId: string, arcResId: string) => {
     if (outputMapDict![outputId].arcRes.arcId !== arcResId) {
       outputMapDict![outputId].arcRes = staticArcRes![arcResId];
+      const costs = new TileLayer({
+        url: staticArcRes![arcResId].costMap!,
+      });
+      costs.opacity = 0.8;
       const connect = new TileLayer({
         url: staticArcRes![arcResId].connectMap!,
       });
@@ -43,9 +49,14 @@ const Dashboard = () => {
         url: staticArcRes![arcResId].hotspotMap!,
       });
       hotspots.opacity = 0.8;
-      // TODO add more maps here
-      arcMap.add(connect);
-      arcMap.add(hotspots);
+
+      if (arcMap) {
+        arcMap.add(costs);
+        arcMap.add(connect);
+        arcMap.add(hotspots);
+      }
+
+      outputMapDict![outputId].tileLayers['Habitat Quality'] = costs;
       outputMapDict![outputId].tileLayers['Connectivity'] = connect;
       outputMapDict![outputId].tileLayers['Road Mortality Hotspots'] = hotspots;
       console.log('added new output map');
@@ -59,15 +70,15 @@ const Dashboard = () => {
       });
 
       const extent = new Extent();
-      extent.xmin = -80.5;
-      extent.xmax = -79.5;
+      extent.xmin = -81;
+      extent.xmax = -79;
       extent.ymin = 43.1;
       extent.ymax = 43.9;
 
       const newMapView = new MapView({
         container: arcViewRef.current,
         map: newArcMap,
-        zoom: 14,
+        zoom: 10,
         center: [-80.58, 43.48],
         constraints: {
           minZoom: 10,
@@ -75,6 +86,7 @@ const Dashboard = () => {
           rotationEnabled: false,
           geometry: extent,
         },
+        rotation: -3.2,
       });
 
       const scaleBar = new ScaleBar({
@@ -92,11 +104,22 @@ const Dashboard = () => {
       });
       newArcMap.add(landCover);
 
+      // const featureLayer = new FeatureLayer({
+      //   url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_Selected/FeatureServer',
+      // });
+      // url: 'https://services1.arcgis.com/DwLTn0u9VBSZvUPe/arcgis/rest/services/Region_PreSelect/FeatureServer',
+
+      // newArcMap.add(featureLayer);
+
       setArcMap(newArcMap);
       setArcView(newMapView);
 
       setDeafultLayers({
         'Land Cover': landCover,
+      });
+
+      landCover.when(() => {
+        setLoading(false);
       });
     }
   }, []);
@@ -130,7 +153,7 @@ const Dashboard = () => {
             backgroundColor: 'rgb(90,97,117)',
           }}
         >
-          <LarmSidebar currentTab={currentTab} setCurrentTab={setCurrentTab}></LarmSidebar>
+          <LarmSidebar currentTab={currentTab} setCurrentTab={setCurrentTab} loading={loading}></LarmSidebar>
         </div>
         {/* END Sidebar */}
 
@@ -151,6 +174,7 @@ const Dashboard = () => {
               currentTab={currentTab}
               setCurrentTab={setCurrentTab}
               arcView={arcView}
+              arcMap={arcMap}
               defaultLayers={defaultLayers}
               onSetupOutputComplete={onSetupOutputComplete}
               headerHeight={headerHeight}
