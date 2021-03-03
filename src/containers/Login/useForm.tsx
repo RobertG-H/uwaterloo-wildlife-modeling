@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { GlobalContext } from '../../context/Provider';
+import { GlobalContext } from '../../context/AuthProvider';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../context/actions/login';
 

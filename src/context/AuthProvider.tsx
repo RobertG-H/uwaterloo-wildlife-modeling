@@ -21,19 +21,19 @@ export function createCtx<StateType, ActionType>(reducer: React.Reducer<StateTyp
   return [ctx, Provider] as const;
 }
 
-const [ctx, AuthProvider] = createCtx(auth, authInitialState);
+const [ctx, Provider] = createCtx(auth, authInitialState);
 export const GlobalContext = ctx;
 
 //export const GlobalContext = createContext({});
 
 // TODO update this to authprovider and then move the other contexts to their own setups
-export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   //const [authState, authDispatch] = useReducer(auth, authInitialState);
   // const [arcState, arcDispatch] = useReducer(arc, arcInititialState);
   // const [hotspotsMapsState, hotspotsMapsDispatch] = useReducer(hotspotsMaps, hotspotMapsInitialState);
 
   return (
-    <AuthProvider>{children}</AuthProvider>
+    <Provider>{children}</Provider>
     // <GlobalContext.Provider
     //   value={{
     //     authState,

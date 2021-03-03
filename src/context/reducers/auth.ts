@@ -1,8 +1,7 @@
 import initialState from '../initialstates/authInitialState';
-import { LOGIN_LOADING, LOGIN_SUCCESS, LOGIN_ERROR } from '../../constants/actionTypes';
+import { LOGIN_LOADING, LOGIN_SUCCESS, LOGIN_ERROR, AUTHACTIONTYPES } from '../../constants/actionTypes';
 
-const auth = (state: typeof initialState, action: any) => {
-  //TODO update types for actiontypes
+const auth = (state: typeof initialState, action: AUTHACTIONTYPES) => {
   switch (action.type) {
     case LOGIN_LOADING:
       return {
