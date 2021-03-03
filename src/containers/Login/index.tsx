@@ -1,13 +1,10 @@
 import React from 'react';
-
+import LoginUI from '../../layout/Login';
+import useForm from './useForm';
 // interface Props {}
 
-const LoginContainer = (props: any) => {
-  return (
-    <div>
-      <h1>Login</h1>
-    </div>
-  );
+const LoginContainer = (): JSX.Element => {
+  return <LoginUI form={useForm()} />;
 };
 
 export default LoginContainer;
