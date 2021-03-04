@@ -17,7 +17,7 @@ A University of Waterloo [Engineering Capstone Design Project](https://uwaterloo
 - `assets/` - static data like images
 - `shared/` - For reusable pieces that can appear in multiple places
 - `constants/` - constant values like reducer action types
-- `containers/` - Acts as a view controller. Manages components from layout
+- `containers/` - Acts as a view controller. Manages components from layout. Contains the tests.
 - `context/` - React context using Reducer
 - `layout` - The "dumb" view that provides the html to render the UI
 - `routes` - For React Router

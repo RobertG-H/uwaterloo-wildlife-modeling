@@ -6,7 +6,6 @@ export const login = ({ password, username }: { password: string; username: stri
   dispatch({
     type: LOGIN_LOADING,
   });
-
   firebaseAuth
     .signInWithEmailAndPassword(username, password)
     .then((userCredential: any) => {

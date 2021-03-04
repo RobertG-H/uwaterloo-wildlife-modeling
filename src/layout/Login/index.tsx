@@ -11,7 +11,7 @@ const LoginUI = ({ form: { onChange, form, loginFormValid, error, onSubmit, load
 
           <Segment>
             <Form>
-              {error && <Message content={error} negative />}
+              {error && <Message content={'Error: ' + error} negative />}
               <Form.Field>
                 <Form.Input value={form.username || ''} onChange={onChange} name='username' placeholder='Username' label='Username' />
               </Form.Field>
