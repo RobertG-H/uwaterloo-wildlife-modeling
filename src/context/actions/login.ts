@@ -9,7 +9,6 @@ export const login = ({ password, username }: { password: string; username: stri
   firebaseAuth
     .signInWithEmailAndPassword(username, password)
     .then((userCredential: any) => {
-      console.log(userCredential);
       localStorage.token = userCredential.user.getIdToken();
       dispatch({
         type: LOGIN_SUCCESS,
