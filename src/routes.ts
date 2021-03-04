@@ -1,6 +1,5 @@
-import LoginComponent from '../containers/Login';
-import DashboardComponent from '../containers/Dashboard';
-import { Component } from 'react';
+import { LoginContainer } from './containers/Login';
+import { DashboardContainer } from './containers/Dashboard';
 
 export interface routeTypes {
   path: string;
@@ -12,13 +11,13 @@ export interface routeTypes {
 const routes: routeTypes[] = [
   {
     path: '/auth/login',
-    component: LoginComponent,
+    component: LoginContainer,
     title: 'Login',
     needsAuth: false,
   },
   {
     path: '/',
-    component: DashboardComponent,
+    component: DashboardContainer,
     title: 'Dashboard',
     needsAuth: true,
   },

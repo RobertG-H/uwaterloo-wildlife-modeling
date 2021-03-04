@@ -1,5 +1,5 @@
 import React from 'react';
-import { formTypes } from '../../containers/Login/useForm';
+import { formTypes } from '../containers/Login/useForm';
 import { Form, Button, Grid, Header as SemanticHeader, Segment, Message } from 'semantic-ui-react';
 
 const LoginUI = ({ form: { onChange, form, loginFormValid, error, onSubmit, loading } }: { form: formTypes }) => {

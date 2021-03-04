@@ -39,6 +39,7 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/index.tsx",
+      "!src/routes.ts",
       "!src/reportWebVitals.ts",
       "!src/setupProxy.js",
       "!src/react-app-env.d.ts",

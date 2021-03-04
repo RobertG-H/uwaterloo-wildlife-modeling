@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginContainer from '..';
+import LoginContainer from '../LoginContainer';
 import { AuthProvider } from '../../../context/AuthProvider';
 import { render, fireEvent, cleanup, waitFor } from '@testing-library/react';
 import { auth } from '../../../firebase';
