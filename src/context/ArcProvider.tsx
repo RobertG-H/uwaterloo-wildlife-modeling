@@ -1,13 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 import createCtx from '../utils/createCtx';
 import arc from './reducers/arc';
 import arcInititialState from './initialstates/arcInititialState';
-import axios from 'axios';
 
 import IdentityManager from '@arcgis/core/identity/IdentityManager';
-import MapView from '@arcgis/core/views/MapView';
-import Map from '@arcgis/core/Map';
-import Extent from '@arcgis/core/geometry/Extent';
 
 const [ctx, Provider] = createCtx(arc, arcInititialState);
 export const ArcContext = ctx;
@@ -48,29 +45,6 @@ export const ArcProvider = ({ children }: { children: React.ReactNode }) => {
         IdentityManager.registerToken({
           server: 'https://www.arcgis.com/sharing/rest',
           token: arcToken,
-        });
-
-        // Setup basemap
-
-        const newArcMap = new Map({
-          basemap: 'topo-vector',
-        });
-        const extent = new Extent();
-        extent.xmin = -81;
-        extent.xmax = -79;
-        extent.ymin = 43.1;
-        extent.ymax = 43.9;
-        const newMapView = new MapView({
-          map: newArcMap,
-          zoom: 10,
-          center: [-80.58, 43.48],
-          constraints: {
-            minZoom: 10,
-            maxZoom: 15,
-            rotationEnabled: false,
-            geometry: extent,
-          },
-          rotation: -3.2,
         });
       } else {
         console.error('Error no arc token found. App cannot load ArcGIS resources.');
