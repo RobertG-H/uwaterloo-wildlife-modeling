@@ -47,7 +47,11 @@
       "!src/utils/*"
     ],
     "moduleNameMapper": {
-      "@arcgis/core/identity/IdentityManager": "<rootDir>/src/__mocks__/arcgis_core_mock.js"
+      "@arcgis/core/identity/IdentityManager": "<rootDir>/src/__mocks__/arcgis/core/identity/IdentityManager.js",
+      "@arcgis/core/views/MapView": "<rootDir>/src/__mocks__/arcgis/core/views/MapView.js",
+      "@arcgis/core/Map": "<rootDir>/src/__mocks__/arcgis/core/Map.js",
+      "@arcgis/core/geometry/Extent": "<rootDir>/src/__mocks__/arcgis/core/geometry/Extent.js",
+      "@arcgis/core/layers/TileLayer": "<rootDir>/src/__mocks__/arcgis/core/layers/TileLayer.js"
     }
   },
   "eslintConfig": {
