@@ -1,7 +1,7 @@
 import React from 'react';
-import LoginUI from '../../layout/LoginUI';
 import { ArcContext } from '../../context/ArcProvider';
-import { addMap } from '../../context/actions/arc/addMap';
+import { addMap } from '../../context/actions/arc/';
+import { addMapView } from '../../context/actions/arc/';
 
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
@@ -15,19 +15,21 @@ const ArcMapContainer = (): JSX.Element => {
   const arcViewRef = React.useRef<HTMLDivElement>(null);
 
   const {
-    state: { arcMap, arcMapView },
+    state: { authenticated, arcMap, arcMapView },
     dispatch,
   } = React.useContext(ArcContext);
 
-  // Initial component load
+  // Initial component load on authenticated
   React.useEffect(() => {
-    // Setup basemap
-    addMap(
-      new Map({
-        basemap: 'topo-vector',
-      }),
-    )(dispatch);
-  }, []);
+    if (authenticated) {
+      // Setup basemap
+      addMap(
+        new Map({
+          basemap: 'topo-vector',
+        }),
+      )(dispatch);
+    }
+  }, [authenticated]);
 
   // On state arcMap update
   React.useEffect(() => {
@@ -49,7 +51,7 @@ const ArcMapContainer = (): JSX.Element => {
         },
         rotation: -3.2,
       });
-
+      addMapView(newMapView)(dispatch);
       // const landCover = new TileLayer({
       //   url: 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cost_Map_Original/MapServer',
       // });
