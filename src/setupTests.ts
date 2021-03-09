@@ -5,6 +5,12 @@
 import '@testing-library/jest-dom';
 import firebase from 'firebase/app';
 import { auth } from './firebase';
+import axios from 'axios';
+
+// mock axios
+
+jest.mock('axios');
+export const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 // Mock History
 export const mockHistoryPush = jest.fn();

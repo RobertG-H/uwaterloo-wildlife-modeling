@@ -8,7 +8,7 @@ import App from './App';
 
 afterEach(cleanup);
 
-it('Loading app without credentials tries to push to auth/login, but shows dashboard', async () => {
+it('Loading app without credentials tries to push to auth/login, but will dashboard because test cannot load /auth/login', async () => {
   const { getByText, getByPlaceholderText } = render(<App />);
 
   expect(mockHistoryPush).toHaveBeenCalledWith('/auth/login');

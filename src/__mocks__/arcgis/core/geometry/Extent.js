@@ -1,3 +1,3 @@
-export default {
-  container: null,
-};
+export default function Extent() {
+  this.container = null;
+}

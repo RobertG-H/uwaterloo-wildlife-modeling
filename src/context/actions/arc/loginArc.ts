@@ -19,11 +19,10 @@ const fetchArcToken = async () => {
     };
     // get request
     const resp = await axios.get('https://www.arcgis.com/sharing/rest/oauth2/token/', { params: requestParams });
-
-    if (resp && resp.data.access_token) {
+    if (resp && resp.data && resp.data.access_token) {
       localStorage.arcToken = resp.data.access_token;
     }
-    if (resp && resp.data.expires_in) {
+    if (resp && resp.data && resp.data.expires_in) {
       localStorage.arcTokenTime = resp.data.expires_in;
     }
   }
@@ -41,7 +40,7 @@ async function arcLogin(dispatch: React.Dispatch<any>) {
       type: ARC_LOGIN_SUCCESS,
     });
   } else {
-    console.error('Error no arc token found. App cannot load ArcGIS resources.');
+    console.warn('Error no arc token found. App cannot load ArcGIS resources.');
     dispatch({
       type: ARC_LOGIN_ERROR,
     });

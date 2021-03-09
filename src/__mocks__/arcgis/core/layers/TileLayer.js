@@ -1,3 +1,3 @@
-export default {
-  container: null,
-};
+export default function TileLayer() {
+  this.container = null;
+}
