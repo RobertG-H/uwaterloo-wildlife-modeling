@@ -1,5 +1,6 @@
 import React from 'react';
 import tempIcon from '../../assets/images/Toggle-Layer-24px.svg';
+import { Header } from 'semantic-ui-react';
 import './sidebarStyle.css';
 
 // interface Props {}
@@ -10,7 +11,9 @@ const SidebarItem = (props: any) => {
       <div className='sidebar-item-icon'>
         <img src={tempIcon} height='35' width='35' />
       </div>
-      <div className='sidebar-item-text'>{props.title}</div>
+      <Header as='h5' inverted={true} className='sidebar-item-text'>
+        {props.title}
+      </Header>
     </div>
   );
 };

@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@arcgis/core/assets/esri/themes/dark/main.css';
-import 'semantic-ui-css/semantic.min.css';
+// import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-less/semantic.less';
 import esriConfig from '@arcgis/core/config.js';
 esriConfig.assetsPath = './assets';
 

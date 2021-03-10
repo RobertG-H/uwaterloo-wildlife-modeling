@@ -9,12 +9,17 @@
 }
 
 .option-view-header {
-  background-color: rgb(120, 129, 152);
-  color: rgb(226, 228, 233);
+  background-color: #788198;
+  color: #fff;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.option-view-header span {
+.option-view-header div {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Roboto-Medium';
+  font-size: 16px;
+  margin: 20px 16px 20px 16px;
 }

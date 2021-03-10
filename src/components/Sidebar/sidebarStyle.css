@@ -2,14 +2,14 @@
   border-radius: 0% !important;
 }
 .ui.inverted.menu {
-  background-color: rgb(90, 97, 117) !important;
+  background-color: #5a6175 !important;
 }
 .ui.inverted.icon.menu .item {
-  color: rgb(214, 219, 232) !important;
+  color: #d6dbe8 !important;
 }
 .ui.inverted.icon.menu .item:hover {
-  background-color: rgb(141, 149, 172) !important;
-  color: rgb(73, 80, 101) !important;
+  background-color: #8d95ac !important;
+  color: #363d52 !important;
 }
 
 .ui.icon.menu .item {
@@ -26,7 +26,7 @@ hr {
 .sidebar-acordian {
   z-index: 1;
   margin-top: 48px !important;
-  background-color: rgb(90, 97, 117);
+  background-color: #5a6175;
   padding-top: 20px;
 }
 

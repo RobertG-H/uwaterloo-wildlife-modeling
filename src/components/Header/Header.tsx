@@ -7,7 +7,9 @@ import { Menu, Visibility, Button } from 'semantic-ui-react';
 const Header = (props: any) => {
   return (
     <Menu borderless fixed={'top'} className='fixed-header'>
-      <Menu.Item header>Prototype Build</Menu.Item>
+      <Menu.Item header className='fixed-header-text'>
+        Prototype Build
+      </Menu.Item>
     </Menu>
   );
 };

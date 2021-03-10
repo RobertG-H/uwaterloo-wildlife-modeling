@@ -1,0 +1,18 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@importGoogleFonts : false;
+@fontName          : 'Roboto-Light';
+
+/*-------------------
+    Brand Colors
+--------------------*/
+
+@primaryColor        : @blue;
+@secondaryColor      : @black;
+
+@lightPrimaryColor   : @lightBlue;
+@lightSecondaryColor : @lightBlack;
+
+@textColor           : #73798B;

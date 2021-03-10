@@ -6,11 +6,9 @@ import './optionViewStyle.css';
 const OptionViewHeader = (props: any) => {
   return (
     <div className='option-view-header'>
-      <span>
-        <h1>{props.title}</h1>
-      </span>
-      <span>?</span>
-      <span>X</span>
+      <div>{props.title}</div>
+      <div>?</div>
+      <div>X</div>
     </div>
   );
 };
