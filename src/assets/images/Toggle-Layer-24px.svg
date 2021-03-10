@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon/Toggle-Layer</title>
+    <defs>
+        <path d="M10,0 C4.48,0 0,4.48 0,10 C0,15.52 4.48,20 10,20 C15.52,20 20,15.52 20,10 C20,4.48 15.52,0 10,0 Z M6.62461636,10 L10,12.660721 L13.3809522,10.0038739 L16,11.8259013 L10,16 L4,11.8259013 L6.62461636,10 Z M10,3 L16,7 L10,11 L4,7 L10,3 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Toggle-Layer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(6.000000, 5.000000)"></g>
+        <g id="palette/black" transform="translate(2.000000, 2.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <g id="Group" mask="url(#mask-2)">
+                <g transform="translate(-2.000000, -2.000000)" id="palette/black">
+                    <rect id="Rectangle" fill="#0C0C0C" x="0" y="0" width="24" height="24"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

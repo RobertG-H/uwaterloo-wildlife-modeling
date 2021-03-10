@@ -3,6 +3,8 @@ import { ArcProvider } from '../../context/ArcProvider';
 import { HotspotsMapsProvider } from '../../context/HotspotsMapsProvider';
 import { ArcMapContainer } from './';
 import ArcAuthContainer from '../ArcAuthContainer';
+import SidebarContainer from '../SidebarContainer';
+import { Header } from '../../components/Header';
 
 // interface Props {}
 
@@ -11,7 +13,8 @@ const DashboardContainer = (): JSX.Element => {
     <ArcProvider>
       <HotspotsMapsProvider>
         <ArcAuthContainer>
-          <h1>Dashboard</h1>
+          <Header></Header>
+          <SidebarContainer></SidebarContainer>
           <ArcMapContainer />
         </ArcAuthContainer>
       </HotspotsMapsProvider>

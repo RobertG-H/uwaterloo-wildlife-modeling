@@ -8,12 +8,14 @@ import App from './App';
 
 afterEach(cleanup);
 
+const dashboardHeader = 'Prototype Build';
+
 it('Loading app without credentials tries to push to auth/login, but will dashboard because test cannot load /auth/login', async () => {
   const { getByText, getByPlaceholderText } = render(<App />);
 
   expect(mockHistoryPush).toHaveBeenCalledWith('/auth/login');
 
   await waitFor(() => {
-    expect(getByText(/Dashboard/i).textContent).toBe('Dashboard');
+    expect(getByText(/Pr/i).textContent).toBe(dashboardHeader);
   });
 });

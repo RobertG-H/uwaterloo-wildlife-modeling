@@ -15,7 +15,7 @@ A University of Waterloo [Engineering Capstone Design Project](https://uwaterloo
 ### Folder Structure
 
 - `assets/` - static data like images
-- `shared/` - For reusable pieces that can appear in multiple places
+- `components/` - For standalone views that don't require complex view controller and layout.
 - `constants/` - constant values like reducer action types
 - `containers/` - Acts as a view controller. Manages components from layout. Contains the tests.
 - `context/` - React context using Reducer
