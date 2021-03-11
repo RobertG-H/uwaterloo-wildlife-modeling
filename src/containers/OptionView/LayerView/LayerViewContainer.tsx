@@ -9,7 +9,7 @@ import './layerViewStyle.css';
 
 const LayerViewContainer = (props: any) => {
   const {
-    state: { authenticated, arcMap, arcMapView },
+    state: { authenticated, arcMap, arcMapView, defaultLayers },
     dispatch,
   } = React.useContext(ArcContext);
 
@@ -21,6 +21,12 @@ const LayerViewContainer = (props: any) => {
           startingOpacity={arcMapView?.allLayerViews.getItemAt(0).layer.opacity}
           layer={arcMapView?.allLayerViews.getItemAt(0).layer}
           layer2={arcMapView?.allLayerViews.getItemAt(1).layer}
+        ></LayerItem>
+        <LayerItem
+          title='Land Cover'
+          startingOpacity={defaultLayers[0] ? defaultLayers[0].opacity : 1.0}
+          layer={defaultLayers[0] ? defaultLayers[0] : undefined}
+          layer2={undefined}
         ></LayerItem>
       </LayerAccordian>
     </div>

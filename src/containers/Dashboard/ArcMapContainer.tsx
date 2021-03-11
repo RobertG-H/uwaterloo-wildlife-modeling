@@ -1,7 +1,8 @@
 import React from 'react';
 import { ArcContext } from '../../context/ArcProvider';
-import { addMap } from '../../context/actions/arc/';
-import { addMapView } from '../../context/actions/arc/';
+import { addMap } from '../../context/actions/arc';
+import { addMapView } from '../../context/actions/arc';
+import { addDefaultLayers } from '../../context/actions/arc';
 
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
@@ -15,7 +16,7 @@ const ArcMapContainer = (): JSX.Element => {
   const arcViewRef = React.useRef<HTMLDivElement>(null);
 
   const {
-    state: { authenticated, arcMap, arcMapView },
+    state: { authenticated, arcMap, arcMapView, defaultLayers },
     dispatch,
   } = React.useContext(ArcContext);
 
@@ -52,10 +53,13 @@ const ArcMapContainer = (): JSX.Element => {
         rotation: -3.2,
       });
       addMapView(newMapView)(dispatch);
-      // const landCover = new TileLayer({
-      //   url: 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cost_Map_Original/MapServer',
-      // });
-      // newArcMap.add(landCover);
+      if (defaultLayers.length === 0) {
+        const newTileLayer = new TileLayer({
+          url: 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Southern_Ontario_Land_Cover/MapServer',
+        });
+        arcMap.add(newTileLayer);
+        addDefaultLayers(newTileLayer)(dispatch);
+      }
     }
   }, [arcMap]);
 

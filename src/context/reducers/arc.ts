@@ -6,6 +6,7 @@ import {
   ARC_LOGIN_LOADING,
   ARC_ADD_MAP,
   ARC_ADD_MAPVIEW,
+  ARC_ADD_DEFAULT_LAYERS,
 } from '../../constants/actionTypes';
 
 const arc = (state: typeof initialState, action: AUTHACTIONTYPES) => {
@@ -36,6 +37,11 @@ const arc = (state: typeof initialState, action: AUTHACTIONTYPES) => {
       return {
         ...state,
         arcMapView: action.payload,
+      };
+    case ARC_ADD_DEFAULT_LAYERS:
+      return {
+        ...state,
+        defaultLayers: action.payload,
       };
     default:
       return state;
