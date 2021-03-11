@@ -3,7 +3,7 @@ import React from 'react';
 // interface Props {}
 
 const LayerItem = (props: any) => {
-  return <div></div>;
+  return <div>LayerItem</div>;
 };
 
 export default LayerItem;
