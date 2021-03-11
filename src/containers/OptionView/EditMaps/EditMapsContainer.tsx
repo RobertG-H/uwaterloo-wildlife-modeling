@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface Props {}
+// interface Props {}
 
-const EditMapsContainer = (props: Props) => {
-  return <div></div>;
+const EditMapsContainer = (props: any) => {
+  return <div>EditMapsContainer</div>;
 };
 
 export default EditMapsContainer;

@@ -1,5 +1,5 @@
 import React from 'react';
-import tempIcon from '../../assets/images/Toggle-Layer-24px.svg';
+import tempIcon from '../../assets/icons/light-icons/add-light.png';
 import { Header } from 'semantic-ui-react';
 import './sidebarStyle.css';
 

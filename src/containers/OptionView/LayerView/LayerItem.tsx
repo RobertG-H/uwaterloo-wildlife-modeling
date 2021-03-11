@@ -2,8 +2,8 @@ import React from 'react';
 
 // interface Props {}
 
-const EditMapContainer = (props: any) => {
+const LayerItem = (props: any) => {
   return <div></div>;
 };
 
-export default EditMapContainer;
+export default LayerItem;
