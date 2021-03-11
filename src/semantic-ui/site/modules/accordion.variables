@@ -3,3 +3,4 @@
 *******************************/
 @fontName          : 'Roboto-Medium';
 @titleColor        : #788198; 
+@padding           : 0;

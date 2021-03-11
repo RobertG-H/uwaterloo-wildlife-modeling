@@ -23,7 +23,7 @@ const LayerAccordian = (props: Props) => {
             {props.title} <Icon name='dropdown' />
           </div>
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 0}>LayerAcordian {props.children}</Accordion.Content>
+        <Accordion.Content active={activeIndex === 0}>{props.children}</Accordion.Content>
       </Accordion>
     </div>
   );

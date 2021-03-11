@@ -1,0 +1,29 @@
+.layer-view-container {
+}
+.layer-accordian-title {
+  background-color: #ebedf2;
+  text-align: left;
+}
+
+.layer-item {
+  text-align: left;
+  padding: 12px 10px 10px 14px;
+  font-size: 12px;
+  border: solid #d8d8d8;
+  border-width: 0px 0px 1px 0px;
+}
+
+.layer-item-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Roboto';
+  color: #797979;
+}
+
+.layer-item-opacity-title {
+  color: #a4a4a4;
+  font-size: 10px;
+  font-family: 'Roboto';
+  font-weight: bold;
+}
