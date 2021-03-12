@@ -2,6 +2,7 @@ import React from 'react';
 import StepText from './StepText';
 import StepInput from './StepInput';
 import { HotspotMap } from '../../../context/initialstates/hotspotMapsInitialState';
+import FactorTable from './FactorTable';
 
 interface Props {
   hotspotMap: HotspotMap;
@@ -19,7 +20,9 @@ const LandCoverStep = (props: Props) => {
   return (
     <div className='flex-parent flex-item'>
       <StepText title='Assign habitat suitability values by land cover' content={contentText}></StepText>
-      <StepInput>content</StepInput>
+      <StepInput>
+        <FactorTable title='LAND COVER FACTOR' factorValues={props.hotspotMap.landCoverValues} />
+      </StepInput>
     </div>
   );
 };

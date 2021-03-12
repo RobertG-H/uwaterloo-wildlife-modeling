@@ -2,6 +2,7 @@ import React from 'react';
 import StepText from './StepText';
 import StepInput from './StepInput';
 import { HotspotMap } from '../../../context/initialstates/hotspotMapsInitialState';
+import FactorTable from './FactorTable';
 
 const contentText = (
   <>
@@ -19,7 +20,9 @@ const SlopeStep = (props: Props) => {
   return (
     <div className='flex-parent flex-item'>
       <StepText title='Assign habitat suitability values by slope %' content={contentText}></StepText>
-      <StepInput>content</StepInput>
+      <StepInput>
+        <FactorTable title='PERCENT SLOPE' factorValues={props.hotspotMap.slopeValues} />
+      </StepInput>
     </div>
   );
 };

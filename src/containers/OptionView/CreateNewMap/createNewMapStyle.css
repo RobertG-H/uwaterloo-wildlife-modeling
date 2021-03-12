@@ -30,3 +30,31 @@
 .step-viewer {
   overflow: auto;
 }
+
+.factor-table {
+  border-spacing: 0px 0px;
+  width: 100%;
+}
+
+.factor-table > tr > * {
+  border-width: 0px 0px 1px 0px;
+  border-color: #e8e8e8;
+  border-style: solid;
+}
+
+.factor-table > tr > *:nth-child(1) {
+  text-align: left;
+}
+
+.factor-table-header {
+  font-family: 'Roboto';
+  font-size: 11px;
+  color: #a4a4a4;
+}
+.factor-table-header > th {
+  font-weight: normal !important;
+}
+
+.factor-row {
+  color: #797979;
+}
