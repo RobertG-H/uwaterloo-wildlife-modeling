@@ -11,6 +11,7 @@ import {
   ARC_ADD_LEGEND_VM,
   ARC_ADD_HOTSPOT,
 } from '../../constants/actionTypes';
+import { ModalActions } from 'semantic-ui-react';
 
 const arc = (state: typeof initialState, action: AUTHACTIONTYPES) => {
   switch (action.type) {
@@ -52,7 +53,10 @@ const arc = (state: typeof initialState, action: AUTHACTIONTYPES) => {
         regionSelectLayers: action.payload,
       };
     case ARC_ADD_LEGEND_VM:
-      return state;
+      return {
+        ...state,
+        legendVM: action.payload,
+      };
     case ARC_ADD_HOTSPOT: {
       const key = action.payload.hotspotMap.arcResId;
       if (state.hotspotMapTileLayers[key]) {

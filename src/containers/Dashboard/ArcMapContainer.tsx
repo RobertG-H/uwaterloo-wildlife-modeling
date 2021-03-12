@@ -4,6 +4,7 @@ import { addMap } from '../../context/actions/arc';
 import { addMapView } from '../../context/actions/arc';
 import { addDefaultLayers } from '../../context/actions/arc';
 import { addRegionSelectLayers } from '../../context/actions/arc';
+import { addLegendVm } from '../../context/actions/arc';
 
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
@@ -13,6 +14,7 @@ import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
 
 import { DEFAULT_LAYERS_REF, REGION_SELECT_REF } from '../../constants/staticArcResources';
 import RegionSelect from '../OptionView/CreateNewMap/RegionSelect';
+import LegendViewModel from '@arcgis/core/widgets/Legend/LegendViewModel';
 
 // interface Props {}
 
@@ -58,12 +60,12 @@ const ArcMapContainer = (): JSX.Element => {
       });
       addMapView(newMapView)(dispatch);
       if (defaultLayers.length === 0) {
-        const newTileLayer = new TileLayer({
+        const landCover = new TileLayer({
           url: DEFAULT_LAYERS_REF[0],
         });
-        newTileLayer.visible = false;
-        arcMap.add(newTileLayer);
-        addDefaultLayers(newTileLayer)(dispatch);
+        landCover.visible = false;
+        arcMap.add(landCover);
+        addDefaultLayers(landCover)(dispatch);
       }
       if (regionSelectLayers.length === 0) {
         const regionPreSelect = new FeatureLayer({
@@ -86,6 +88,11 @@ const ArcMapContainer = (): JSX.Element => {
   React.useEffect(() => {
     if (arcMapView) {
       arcMapView.container = arcViewRef.current!;
+
+      // Set LegendVM
+      const newVm = new LegendViewModel();
+      newVm.view = arcMapView;
+      addLegendVm(newVm)(dispatch);
     }
   }, [arcMapView]);
   return (

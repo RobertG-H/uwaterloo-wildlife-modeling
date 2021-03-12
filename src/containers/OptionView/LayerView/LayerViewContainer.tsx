@@ -21,13 +21,17 @@ const LayerViewContainer = (props: any) => {
           startingOpacity={arcMapView?.allLayerViews.getItemAt(0).layer.opacity}
           layer={arcMapView?.allLayerViews.getItemAt(0).layer}
           layer2={arcMapView?.allLayerViews.getItemAt(1).layer}
-        ></LayerItem>
+        >
+          <LandCoverLegend></LandCoverLegend>
+        </LayerItem>
         <LayerItem
           title='Land Cover'
           startingOpacity={defaultLayers[0] ? defaultLayers[0].opacity : 1.0}
           layer={defaultLayers[0] ? defaultLayers[0] : undefined}
           layer2={undefined}
-        ></LayerItem>
+        >
+          {'test'}
+        </LayerItem>
       </LayerAccordian>
     </div>
   );

@@ -11,6 +11,7 @@ interface Props {
   startingOpacity: number | undefined;
   layer: Layer | undefined;
   layer2: Layer | undefined;
+  children: React.ReactNode;
 }
 
 const LayerItem = (props: Props) => {
@@ -51,6 +52,7 @@ const LayerItem = (props: Props) => {
           railStyle={{ backgroundColor: '#e9e9e9', height: 4 }}
         />
       </div>
+      {props.children}
     </div>
   );
 };
