@@ -9,12 +9,14 @@ import 'semantic-ui-less/semantic.less';
 import esriConfig from '@arcgis/core/config.js';
 esriConfig.assetsPath = './assets';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root'),
+// );
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
