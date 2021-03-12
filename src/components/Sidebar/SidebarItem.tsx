@@ -1,15 +1,17 @@
 import React from 'react';
-import tempIcon from '../../assets/icons/light-icons/add-light.png';
 import { Header } from 'semantic-ui-react';
 import './sidebarStyle.css';
 
-// interface Props {}
-
-const SidebarItem = (props: any) => {
+interface Props {
+  iconClass: string;
+  title: string;
+}
+// height='35' width='35'
+const SidebarItem = (props: Props) => {
   return (
     <div>
       <div className='sidebar-item-icon'>
-        <img src={tempIcon} height='35' width='35' />
+        <div className={'icon-35 ' + props.iconClass} />
       </div>
       <Header as='h5' inverted={true} className='sidebar-item-text'>
         {props.title}

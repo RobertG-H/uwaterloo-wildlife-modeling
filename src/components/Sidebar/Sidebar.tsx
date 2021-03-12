@@ -1,6 +1,7 @@
 import React from 'react';
 import './sidebarStyle.css';
 import SidebarItem from './SidebarItem';
+import tempIcon from '../../assets/icons/light-icons/add-light.png';
 import { Loader, Dimmer, Menu } from 'semantic-ui-react';
 
 interface Props {
@@ -14,18 +15,18 @@ const Sidebar = (props: Props) => {
 
   return (
     <Menu className='sidebar-acordian' icon='labeled' inverted vertical width='thin' borderless>
-      <Menu.Item onClick={onItemClick} index={1}>
-        <SidebarItem title='Create New Map'></SidebarItem>
+      <Menu.Item className='sidebar-item' onClick={onItemClick} index={1}>
+        <SidebarItem iconClass={'icon-create-new-map'} title='Create New Map'></SidebarItem>
       </Menu.Item>
-      <Menu.Item onClick={onItemClick} index={2}>
-        <SidebarItem title='Edit Maps'></SidebarItem>
+      <Menu.Item className='sidebar-item' onClick={onItemClick} index={2}>
+        <SidebarItem iconClass={'icon-edit-maps'} title='Edit Maps'></SidebarItem>
       </Menu.Item>
-      <Menu.Item onClick={onItemClick} index={3}>
-        <SidebarItem title='Layer View'></SidebarItem>
+      <Menu.Item className='sidebar-item' onClick={onItemClick} index={3}>
+        <SidebarItem iconClass={'icon-layer-view'} title='Layer View'></SidebarItem>
       </Menu.Item>
       <hr></hr>
-      <Menu.Item onClick={onItemClick} index={4}>
-        <SidebarItem title='Save Project'></SidebarItem>
+      <Menu.Item className='sidebar-item' onClick={onItemClick} index={4}>
+        <SidebarItem iconClass={'icon-save-project'} title='Save Project'></SidebarItem>
       </Menu.Item>
     </Menu>
   );

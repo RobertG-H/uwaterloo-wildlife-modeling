@@ -30,6 +30,9 @@ hr {
   padding-top: 20px;
 }
 
+.sidebar-item {
+}
+
 .sidebar-item-icon {
   display: inline-block;
   vertical-align: middle;
@@ -40,4 +43,30 @@ hr {
   display: inline-block;
   vertical-align: middle;
   margin-left: 8px;
+}
+
+.sidebar-item:hover .sidebar-item-text {
+  color: #363d52 !important;
+}
+
+.icon-35 {
+  width: 35px;
+  height: 35px;
+  background-size: contain;
+}
+
+.icon-create-new-map {
+  background-image: url('../../assets/icons/light-icons/add-light.png');
+}
+
+.sidebar-item:hover .icon-create-new-map {
+  background-image: url('../../assets/icons/dark-icons/add-dark.png');
+}
+
+.icon-edit-maps {
+  background-image: url('../../assets/icons/light-icons/edit-light.png');
+}
+
+.sidebar-item:hover .icon-edit-maps {
+  background-image: url('../../assets/icons/dark-icons/edit-dark.png');
 }
