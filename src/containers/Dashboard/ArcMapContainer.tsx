@@ -3,20 +3,24 @@ import { ArcContext } from '../../context/ArcProvider';
 import { addMap } from '../../context/actions/arc';
 import { addMapView } from '../../context/actions/arc';
 import { addDefaultLayers } from '../../context/actions/arc';
+import { addRegionSelectLayers } from '../../context/actions/arc';
 
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 import Extent from '@arcgis/core/geometry/Extent';
 import TileLayer from '@arcgis/core/layers/TileLayer';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+
+import { DEFAULT_LAYERS_REF, REGION_SELECT_REF } from '../../constants/staticArcResources';
+import RegionSelect from '../OptionView/CreateNewMap/RegionSelect';
 
 // interface Props {}
-// This container doesn't have a layout because it is extremely simple.
 
 const ArcMapContainer = (): JSX.Element => {
   const arcViewRef = React.useRef<HTMLDivElement>(null);
 
   const {
-    state: { authenticated, arcMap, arcMapView, defaultLayers },
+    state: { authenticated, arcMap, arcMapView, defaultLayers, regionSelectLayers },
     dispatch,
   } = React.useContext(ArcContext);
 
@@ -55,10 +59,25 @@ const ArcMapContainer = (): JSX.Element => {
       addMapView(newMapView)(dispatch);
       if (defaultLayers.length === 0) {
         const newTileLayer = new TileLayer({
-          url: 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Southern_Ontario_Land_Cover/MapServer',
+          url: DEFAULT_LAYERS_REF[0],
         });
+        newTileLayer.visible = false;
         arcMap.add(newTileLayer);
         addDefaultLayers(newTileLayer)(dispatch);
+      }
+      if (regionSelectLayers.length === 0) {
+        const regionPreSelect = new FeatureLayer({
+          url: REGION_SELECT_REF[0],
+        });
+        const regionPostSelect = new FeatureLayer({
+          url: REGION_SELECT_REF[1],
+        });
+        regionPreSelect.visible = false;
+        regionPostSelect.visible = false;
+
+        arcMap.add(regionPreSelect);
+        arcMap.add(regionPostSelect);
+        addRegionSelectLayers([regionPreSelect, regionPostSelect])(dispatch);
       }
     }
   }, [arcMap]);

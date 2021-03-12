@@ -1,8 +1,9 @@
 import React from 'react';
+import './createNewMapStyle.css';
 
 interface Props {
   title: string;
-  content: string;
+  content: string | JSX.Element;
 }
 
 const StepText = (props: Props) => {

@@ -6,24 +6,21 @@ import SlopeStep from './SlopeStep';
 import FinalizeStep from './FinalizeStep';
 import StepFooter from './StepFooter';
 
-import { HotspotMap } from '../../../context/initialstates/hotspotMapsInitialState';
+import { CreateEmptyHotspotMap } from '../../../context/initialstates/hotspotMapsInitialState';
+
 import { HotspotsMapsContext } from '../../../context/HotspotsMapsProvider';
 import { ArcContext } from '../../../context/ArcProvider';
 
 import { addHotspotTileLayers } from '../../../context/actions/arc';
 
-import TileLayer from '@arcgis/core/layers/TileLayer';
-
 import './createNewMapStyle.css';
-import hotspotMaps from '../../../context/reducers/hotspotsMaps';
-// import hotspotMaps from '../../../context/reducers/hotspotsMaps';
 
 // interface Props {}
 
 const CreateNewMapContainer = (props: any) => {
   const totalSteps = 4;
   const [currentStep, setCurrentStep] = React.useState(1);
-  const [hotspotMap, setHotspotMap] = React.useState(new HotspotMap('0'));
+  const [hotspotMap, setHotspotMap] = React.useState(CreateEmptyHotspotMap('0'));
 
   // TODO move generate map code into separate function
   const { state: hotspotMapsState, dispatch: hotspotMapsDispatch } = React.useContext(HotspotsMapsContext);
@@ -52,10 +49,12 @@ const CreateNewMapContainer = (props: any) => {
   return (
     <div className='flex-parent flex-item create-new-map-container'>
       <StepViewer currentStep={currentStep} totalSteps={totalSteps}></StepViewer>
-      {currentStep === 1 && <LocationStep />}
-      {currentStep === 2 && <LandCoverStep />}
-      {currentStep === 3 && <SlopeStep />}
-      {currentStep === totalSteps && <FinalizeStep onGenerateHotspotMap={saveHotspotMap} />}
+      {currentStep === 1 && <LocationStep hotspotMap={hotspotMap} setHotspotMap={setHotspotMap} />}
+      {currentStep === 2 && <LandCoverStep hotspotMap={hotspotMap} setHotspotMap={setHotspotMap} />}
+      {currentStep === 3 && <SlopeStep hotspotMap={hotspotMap} setHotspotMap={setHotspotMap} />}
+      {currentStep === totalSteps && (
+        <FinalizeStep hotspotMap={hotspotMap} setHotspotMap={setHotspotMap} onGenerateHotspotMap={saveHotspotMap} />
+      )}
 
       <StepFooter currentStep={currentStep} totalSteps={totalSteps} isNextActive={true} setCurrentStep={setCurrentStep}></StepFooter>
     </div>

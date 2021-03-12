@@ -7,6 +7,7 @@ import {
   ARC_ADD_MAP,
   ARC_ADD_MAPVIEW,
   ARC_ADD_DEFAULT_LAYERS,
+  ARC_ADD_REGION_SELECT_LAYERS,
   ARC_ADD_LEGEND_VM,
   ARC_ADD_HOTSPOT,
 } from '../../constants/actionTypes';
@@ -44,6 +45,11 @@ const arc = (state: typeof initialState, action: AUTHACTIONTYPES) => {
       return {
         ...state,
         defaultLayers: action.payload,
+      };
+    case ARC_ADD_REGION_SELECT_LAYERS:
+      return {
+        ...state,
+        regionSelectLayers: action.payload,
       };
     case ARC_ADD_LEGEND_VM:
       return state;

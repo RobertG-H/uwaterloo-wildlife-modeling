@@ -7,7 +7,7 @@ interface Props {
 
 const StepInput = (props: Props) => {
   return (
-    <div className='overflow-wrapper flex-item'>
+    <div className='overflow-wrapper flex-item step-input'>
       <div className='overflow-inner'>{props.children}</div>
     </div>
   );

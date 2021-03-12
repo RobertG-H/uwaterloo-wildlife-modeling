@@ -2,6 +2,24 @@
   padding: 16px;
 }
 
+.step-text-title {
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  color: #788198;
+  text-align: left;
+  margin-top: 24px;
+}
+
+.step-text-content {
+  text-align: left;
+  margin-top: 12px;
+}
+
+.step-input {
+  margin-top: 24px;
+}
+
 .step-footer {
   margin-top: auto;
   display: flex;

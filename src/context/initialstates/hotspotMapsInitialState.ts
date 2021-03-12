@@ -31,28 +31,32 @@ const initLandCoverValeus = () => {
   };
 };
 
-export class HotspotMap {
-  public hotspotMapId: string;
-  public outputName: string;
-  public arcResId: string;
-  public landCoverValues: { [landCover: string]: number };
-  public slopeValues: { [landCover: string]: number };
-  public speciesName: string;
-  public outputTypes: { [outputType: string]: boolean };
-  public extent: number[];
-  constructor(hotspotMapId: string) {
-    this.hotspotMapId = hotspotMapId;
-    this.outputName = '';
-    this.arcResId = '';
-    this.landCoverValues = initLandCoverValeus();
-    this.slopeValues = initSlopeValues();
-    this.speciesName = '';
-    this.outputTypes = {
+export function CreateEmptyHotspotMap(hotspotMapId: string) {
+  const newHotspotMap: HotspotMap = {
+    hotspotMapId: hotspotMapId,
+    outputName: '',
+    arcResId: '',
+    landCoverValues: initLandCoverValeus(),
+    slopeValues: initSlopeValues(),
+    speciesName: '',
+    outputTypes: {
       hotspots: false,
       connectivity: false,
-    };
-    this.extent = [0, 0, 0, 0];
-  }
+    },
+    extent: [0, 0, 0, 0],
+  };
+  return newHotspotMap as HotspotMap;
+}
+
+export interface HotspotMap {
+  hotspotMapId: string;
+  outputName: string;
+  arcResId: string;
+  landCoverValues: { [landCover: string]: number };
+  slopeValues: { [landCover: string]: number };
+  speciesName: string;
+  outputTypes: { [outputType: string]: boolean };
+  extent: number[];
 }
 
 interface hotspotMapsState {
