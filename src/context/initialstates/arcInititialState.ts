@@ -10,7 +10,7 @@ interface arcState {
   arcMapView: MapView | null;
   legendVM: LegendViewModel | null;
   defaultLayers: TileLayer[];
-  hotspotMaps: { [hotspotMapId: string]: TileLayer };
+  hotspotMapTileLayers: { [arcResId: string]: TileLayer[] };
 }
 
 export default {
@@ -20,5 +20,5 @@ export default {
   arcMapView: null,
   legendVM: null,
   defaultLayers: [],
-  hotspotMaps: {},
+  hotspotMapTileLayers: {},
 } as arcState;

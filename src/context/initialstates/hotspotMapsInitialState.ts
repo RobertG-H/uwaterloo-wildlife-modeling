@@ -32,7 +32,7 @@ const initLandCoverValeus = () => {
 };
 
 export class HotspotMap {
-  public mapId: string;
+  public hotspotMapId: string;
   public outputName: string;
   public arcResId: string;
   public landCoverValues: { [landCover: string]: number };
@@ -40,8 +40,8 @@ export class HotspotMap {
   public speciesName: string;
   public outputTypes: { [outputType: string]: boolean };
   public extent: number[];
-  constructor(mapId: string) {
-    this.mapId = mapId;
+  constructor(hotspotMapId: string) {
+    this.hotspotMapId = hotspotMapId;
     this.outputName = '';
     this.arcResId = '';
     this.landCoverValues = initLandCoverValeus();
