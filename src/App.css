@@ -62,6 +62,24 @@ input[type='number']::-webkit-outer-spin-button {
   color: #242425 !important;
 } */
 
+/* Esri overrides */
+.esri-icon-cursor {
+  display: none !important;
+}
+.esri-sketch__section:second-child {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.esri-sketch__button {
+  padding: 20px 40px !important;
+}
+.esri-sketch__section {
+  padding: 0 !important;
+}
+.esri-sketch__tool-section {
+  border-width: 0 !important;
+}
+
 /* General Purpose */
 
 .hover-pointer:hover {

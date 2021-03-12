@@ -7,6 +7,7 @@ import { HotspotMap } from '../../../context/initialstates/hotspotMapsInitialSta
 import './createNewMapStyle.css';
 
 import { ArcContext } from '../../../context/ArcProvider';
+import hotspotMaps from '../../../context/reducers/hotspotsMaps';
 
 const contentText =
   'Please identify the study region you wish to analyze by selecting an area on the map using the box tool or by inputting the geographic boundaries of the extent in easting & northing.';
@@ -40,7 +41,7 @@ const LocationStep = (props: Props) => {
       <StepText title='Identify the study region' content={contentText}></StepText>
       <StepInput>
         <RegionSelect></RegionSelect>
-        <ExtentSelect></ExtentSelect>
+        <ExtentSelect onInput={onExtent} initExtent={props.hotspotMap.extent}></ExtentSelect>
       </StepInput>
     </div>
   );
