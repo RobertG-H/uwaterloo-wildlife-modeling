@@ -7,17 +7,28 @@ import { HotspotMap } from '../../../context/initialstates/hotspotMapsInitialSta
 const contentText = <>Which of the following output map types you would like to generate?</>;
 
 interface Props {
-  onGenerateHotspotMap(): void;
+  onGenerateHotspotMap(arcResId: string): void;
   hotspotMap: HotspotMap;
   setHotspotMap: React.Dispatch<React.SetStateAction<HotspotMap>>;
 }
 
 const FinalizeStep = (props: Props) => {
+  const setName = (newName: string) => {
+    props.setHotspotMap({
+      ...props.hotspotMap,
+      outputName: newName,
+    });
+  };
+
   return (
     <div className='flex-parent flex-item'>
       <StepText title='Choose Output Maps' content={contentText}></StepText>
       <StepInput>
-        <OutputMapFinalize onGenerateHotspotMap={props.onGenerateHotspotMap}></OutputMapFinalize>
+        <OutputMapFinalize
+          initName={props.hotspotMap.outputName}
+          onNameInput={setName}
+          onGenerateHotspotMap={props.onGenerateHotspotMap}
+        ></OutputMapFinalize>
       </StepInput>
     </div>
   );

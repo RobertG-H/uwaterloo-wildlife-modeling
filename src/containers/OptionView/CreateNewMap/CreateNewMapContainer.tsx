@@ -12,6 +12,7 @@ import { HotspotsMapsContext } from '../../../context/HotspotsMapsProvider';
 import { ArcContext } from '../../../context/ArcProvider';
 
 import { addHotspotTileLayers } from '../../../context/actions/arc';
+import { v4 as uuidv4 } from 'uuid';
 
 import './createNewMapStyle.css';
 
@@ -20,7 +21,7 @@ import './createNewMapStyle.css';
 const CreateNewMapContainer = (props: any) => {
   const totalSteps = 4;
   const [currentStep, setCurrentStep] = React.useState(1);
-  const [hotspotMap, setHotspotMap] = React.useState(CreateEmptyHotspotMap('0'));
+  const [hotspotMap, setHotspotMap] = React.useState(CreateEmptyHotspotMap(uuidv4()));
 
   // TODO move generate map code into separate function
   const { state: hotspotMapsState, dispatch: hotspotMapsDispatch } = React.useContext(HotspotsMapsContext);
@@ -36,12 +37,11 @@ const CreateNewMapContainer = (props: any) => {
       console.log('Not adding more tile layers for existing arcresId');
       return;
     }
-
     addHotspotTileLayers(arcMap, hotspotMap)(arcDispatch);
   };
 
-  const saveHotspotMap = () => {
-    hotspotMap.arcResId = '1';
+  const saveHotspotMap = (arcResId: string) => {
+    hotspotMap.arcResId = arcResId;
     tryAddTileLayers();
     return;
   };
