@@ -1,0 +1,14 @@
+.create-new-map-container {
+  padding: 16px;
+}
+
+.step-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step-viewer {
+  overflow: auto;
+}

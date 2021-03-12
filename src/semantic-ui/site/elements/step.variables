@@ -1,3 +1,11 @@
 /*******************************
     User Variable Overrides
 *******************************/
+@iconSize: 1.25em;
+@titleFontSize: 12px;
+@horizontalPadding: 2em;
+@verticalPadding: 1em;
+@iconDistance: 0.5em;
+@activeColor: #788198;
+@activeBackground: #ebedf2;
+@activeIconColor: #788198;

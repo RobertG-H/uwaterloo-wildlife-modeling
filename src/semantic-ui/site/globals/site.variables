@@ -9,7 +9,7 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : @blue;
+@primaryColor        : #a2b1d9;
 @secondaryColor      : @black;
 
 @lightPrimaryColor   : @lightBlue;
