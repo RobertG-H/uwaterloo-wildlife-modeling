@@ -4,6 +4,7 @@ import { Accordion, Icon } from 'semantic-ui-react';
 interface Props {
   children: React.ReactNode;
   title: string;
+  inverted: boolean;
 }
 
 const LayerAccordian = (props: Props) => {
@@ -17,8 +18,13 @@ const LayerAccordian = (props: Props) => {
 
   return (
     <div className='layer-accordian'>
-      <Accordion>
-        <Accordion.Title className='layer-accordian-title' active={activeIndex === 0} index={0} onClick={handleClick}>
+      <Accordion inverted={props.inverted}>
+        <Accordion.Title
+          className={props.inverted ? 'layer-accordian-title-inverted' : 'layer-accordian-title'}
+          active={activeIndex === 0}
+          index={0}
+          onClick={handleClick}
+        >
           <div>
             {props.title} <Icon name='dropdown' />
           </div>

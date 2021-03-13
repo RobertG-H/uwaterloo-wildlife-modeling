@@ -13,6 +13,7 @@ interface Props {
   layer: Layer | undefined;
   layer2: Layer | undefined;
   children: React.ReactNode;
+  activeLayerInfoTitle: string;
 }
 
 const LayerItem = (props: Props) => {
@@ -34,6 +35,10 @@ const LayerItem = (props: Props) => {
   const handleSlider = (sliderProps: any) => {
     setLayerOpacity(sliderProps / 100);
   };
+
+  const childrenWithExtraProp = React.Children.map(props.children, child =>
+    React.cloneElement(child as React.ReactElement<any>, { visible: visible, activeLayerInfoTitle: props.activeLayerInfoTitle }),
+  );
 
   return (
     <div className='layer-item'>
@@ -60,7 +65,7 @@ const LayerItem = (props: Props) => {
           railStyle={{ backgroundColor: '#e9e9e9', height: 4 }}
         />
       </div>
-      {props.children}
+      {childrenWithExtraProp}
     </div>
   );
 };

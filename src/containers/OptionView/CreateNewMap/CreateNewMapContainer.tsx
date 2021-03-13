@@ -12,9 +12,11 @@ import { HotspotsMapsContext } from '../../../context/HotspotsMapsProvider';
 import { ArcContext } from '../../../context/ArcProvider';
 
 import { addHotspotTileLayers } from '../../../context/actions/arc';
+import { hotspotAdd } from '../../../context/actions/hotspotmaps';
 import { v4 as uuidv4 } from 'uuid';
 
 import './createNewMapStyle.css';
+import hotspotMaps from '../../../context/reducers/hotspotsMaps';
 
 // interface Props {}
 
@@ -23,7 +25,6 @@ const CreateNewMapContainer = (props: any) => {
   const [currentStep, setCurrentStep] = React.useState(1);
   const [hotspotMap, setHotspotMap] = React.useState(CreateEmptyHotspotMap(uuidv4()));
 
-  // TODO move generate map code into separate function
   const { state: hotspotMapsState, dispatch: hotspotMapsDispatch } = React.useContext(HotspotsMapsContext);
 
   const {
@@ -38,6 +39,7 @@ const CreateNewMapContainer = (props: any) => {
       return;
     }
     addHotspotTileLayers(arcMap, hotspotMap)(arcDispatch);
+    hotspotAdd(hotspotMap)(hotspotMapsDispatch);
   };
 
   const saveHotspotMap = (arcResId: string) => {

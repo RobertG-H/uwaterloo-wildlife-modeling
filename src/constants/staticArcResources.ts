@@ -15,3 +15,7 @@ export const REGION_SELECT_REF = [
 export const DEFAULT_LAYERS_REF = [
   'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Southern_Ontario_Land_Cover/MapServer',
 ];
+
+export const CONNECTIVITY_LEGEND_CONVERT = ['Connectivity Map Original', 'Connectivity Map Tweaked'];
+export const ROAD_MORTALITY_LEGEND_CONVERT = ['Road Mortality Hotspots Original', 'Road Mortality Hotspots Tweaked'];
+export const DEFAULT_LAYERS_LEGEND_CONVERT = ['Southern Ontario Land Cover', 'none'];
