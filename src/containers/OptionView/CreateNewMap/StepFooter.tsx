@@ -24,10 +24,18 @@ const StepFooter = (props: Props) => {
     props.setCurrentStep(props.currentStep - 1);
   };
 
+  const doShowBack = () => {
+    return props.currentStep !== 1;
+  };
+
+  const doShowNext = () => {
+    return props.currentStep !== props.totalSteps;
+  };
+
   return (
     <div className='step-footer'>
-      <Button onClick={onBack}>Back</Button>
-      <Button onClick={onNext}>Next</Button>
+      <div>{doShowBack() && <Button onClick={onBack}>Back</Button>}</div>
+      <div>{doShowNext() && <Button onClick={onNext}>Next</Button>}</div>
     </div>
   );
 };
