@@ -12,14 +12,18 @@
   background-color: #788198;
   color: #fff;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
 
-.option-view-header div {
+.option-view-header > div {
   display: inline-block;
   white-space: nowrap;
   font-family: 'Roboto-Medium';
   font-size: 16px;
   margin: 20px 16px 20px 16px;
+}
+
+.option-view-header-help-icon {
+  margin-right: 12px;
 }

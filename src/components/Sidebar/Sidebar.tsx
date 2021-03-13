@@ -5,7 +5,7 @@ import tempIcon from '../../assets/icons/light-icons/add-light.png';
 import { Loader, Dimmer, Menu } from 'semantic-ui-react';
 
 interface Props {
-  setTab: React.Dispatch<React.SetStateAction<number>>;
+  setTab(newTab: number): void;
 }
 
 const Sidebar = (props: Props) => {
