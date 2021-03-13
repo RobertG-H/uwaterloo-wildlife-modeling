@@ -31,6 +31,7 @@ const LandCoverLegend = (props: any) => {
 
       if (activeLayerInfo?.getItemAt(0)) {
         sleep(500).then(() => {
+          if (!activeLayerInfo.getItemAt(0).legendElements[0]) return;
           const legendItems = activeLayerInfo.getItemAt(0).legendElements[0].infos;
           const newRows: JSX.Element[] = [];
           if (rows.length < 2) {

@@ -5,9 +5,12 @@ import { ArcContext } from '../../../context/ArcProvider';
 import { Button, Segment, Header, Image } from 'semantic-ui-react';
 import regionImage from '../../../assets/images/cycle3-selected-region.png';
 
-// interface Props {}
+interface Props {
+  onRegionSelected(): void;
+  regionSelected: boolean;
+}
 
-const RegionSelect = (props: any) => {
+const RegionSelect = (props: Props) => {
   const [arcSketch, setArcSketch] = React.useState<Sketch | null>(null);
   const graphicsLayer = new GraphicsLayer({});
   const sketchViewRef = React.useRef<HTMLDivElement>(null);
@@ -39,19 +42,35 @@ const RegionSelect = (props: any) => {
       });
 
       setArcSketch(sketch);
+    }
+  }, [sketchViewRef]);
 
-      sketch.on('create', function (event: any) {
+  React.useEffect(() => {
+    if (arcSketch) {
+      arcSketch.on('create', function (event: any) {
         if (event.state === 'complete' && event.graphic) {
           const minDimension = 60000;
-          console.log(event.graphic.geometry.extent.width);
+          // console.log(event.graphic.geometry.extent.width);
           if (event.graphic.geometry.extent.width > minDimension && event.graphic.geometry.extent.height > minDimension) {
-            console.log('CORRECT!');
-            //       onSelectRegionCreate();
+            onRegionSelected();
           }
         }
       });
     }
-  }, [arcSketch, sketchViewRef]);
+
+    return () => {
+      if (arcSketch) {
+        arcSketch.cancel();
+      }
+    };
+  }, [arcSketch]);
+
+  const onRegionSelected = () => {
+    if (arcSketch) {
+      arcSketch.cancel();
+    }
+    props.onRegionSelected();
+  };
 
   return (
     <div>
@@ -65,7 +84,11 @@ const RegionSelect = (props: any) => {
       </Segment>
       <Segment>
         <Header as='h5'>Preview of selected region</Header>
-        <Image src={arcSketch ? regionImage : 'https://react.semantic-ui.com/images/wireframe/image.png'} size='medium' centered></Image>
+        <Image
+          src={props.regionSelected ? regionImage : 'https://react.semantic-ui.com/images/wireframe/image.png'}
+          size='medium'
+          centered
+        ></Image>
       </Segment>
     </div>
   );

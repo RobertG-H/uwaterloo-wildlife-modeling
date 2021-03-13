@@ -35,7 +35,9 @@ const SidebarContainer = (props: any) => {
   };
 
   const tryToChangeTab = (targetTab: number) => {
+    if (tab === targetTab) return;
     setTargetTab(targetTab);
+
     if (tab === tabForConfirm) {
       setConfirmIsOpen(true);
     } else {
@@ -43,12 +45,16 @@ const SidebarContainer = (props: any) => {
     }
   };
 
+  const onCreateNewMapComplete = () => {
+    setTab(-1);
+  };
+
   const getOptionView = () => {
     switch (tab) {
       case 1:
         return (
           <OptionView headerTitle='Output Map Setup' onClose={tryCloseOptionView}>
-            <CreateNewMapContainer />
+            <CreateNewMapContainer onCreateNewMapComplete={onCreateNewMapComplete} />
           </OptionView>
         );
       case 2:

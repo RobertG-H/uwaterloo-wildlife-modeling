@@ -18,10 +18,10 @@ const OutputMapFinalize = (props: Props) => {
   };
 
   // TODO add this
-  const checkDisableGenerateMapButton = (name: string) => {
-    // if (name.length === 0) setDisableGenerateMap(true);
-    // if (name.charAt(0) === '1' || name.charAt(0) === '2') setDisableGenerateMap(false);
-    // else setDisableGenerateMap(true);
+  const checkDisableGenerateMapButton = () => {
+    if (name.length === 0) return true;
+    if (name.charAt(0) === '1' || name.charAt(0) === '2') return false;
+    else return true;
   };
 
   const onGenerateClick = () => {
@@ -39,7 +39,9 @@ const OutputMapFinalize = (props: Props) => {
       <Checkbox label='Connectivity Map' defaultChecked={true} />
       <h3>Output Name</h3>
       <Input value={name} fluid size={'large'} placeholder='Enter a name for the output' onChange={onOutputNameChange}></Input>
-      <Button onClick={onGenerateClick}>GENERATE</Button>
+      <Button onClick={onGenerateClick} disabled={checkDisableGenerateMapButton()}>
+        GENERATE
+      </Button>
     </div>
   );
 };

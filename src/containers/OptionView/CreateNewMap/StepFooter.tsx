@@ -35,7 +35,13 @@ const StepFooter = (props: Props) => {
   return (
     <div className='step-footer'>
       <div>{doShowBack() && <Button onClick={onBack}>Back</Button>}</div>
-      <div>{doShowNext() && <Button onClick={onNext}>Next</Button>}</div>
+      <div>
+        {doShowNext() && (
+          <Button onClick={onNext} disabled={!props.isNextActive}>
+            Next
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

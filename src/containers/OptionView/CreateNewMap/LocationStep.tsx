@@ -15,12 +15,21 @@ const contentText =
 interface Props {
   hotspotMap: HotspotMap;
   setHotspotMap: React.Dispatch<React.SetStateAction<HotspotMap>>;
+  stepCompleted: boolean;
+  onStepCompleted(stepIndex: number): void;
+  stepIndex: number;
 }
 
 const LocationStep = (props: Props) => {
-  const {
-    state: { regionSelectLayers },
-  } = React.useContext(ArcContext);
+  const [regionSelected, setRegionSelected] = React.useState(props.stepCompleted);
+
+  const onStepCompleted = () => {
+    if (regionSelected) return;
+    setRegionSelected(true);
+    const newExtent = [11895207.411419, 1282809.161558, 1338609.161558, 11858247.411419];
+    onExtent(newExtent);
+    props.onStepCompleted(props.stepIndex);
+  };
 
   const onExtent = (newExtent: number[]) => {
     props.setHotspotMap({
@@ -29,18 +38,11 @@ const LocationStep = (props: Props) => {
     });
   };
 
-  React.useEffect(() => {
-    regionSelectLayers[0].visible = true;
-    return () => {
-      regionSelectLayers[0].visible = false;
-    };
-  }, [regionSelectLayers]);
-
   return (
     <div className='flex-parent flex-item'>
       <StepText title='Identify the study region' content={contentText}></StepText>
       <StepInput>
-        <RegionSelect></RegionSelect>
+        <RegionSelect onRegionSelected={onStepCompleted} regionSelected={regionSelected}></RegionSelect>
         <ExtentSelect onInput={onExtent} initExtent={props.hotspotMap.extent}></ExtentSelect>
       </StepInput>
     </div>

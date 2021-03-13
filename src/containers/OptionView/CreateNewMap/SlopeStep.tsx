@@ -14,9 +14,16 @@ const contentText = (
 interface Props {
   hotspotMap: HotspotMap;
   setHotspotMap: React.Dispatch<React.SetStateAction<HotspotMap>>;
+  stepCompleted: boolean;
+  onStepCompleted(stepIndex: number): void;
+  stepIndex: number;
 }
 
 const SlopeStep = (props: Props) => {
+  React.useEffect(() => {
+    props.onStepCompleted(props.stepIndex);
+  }, []);
+
   return (
     <div className='flex-parent flex-item'>
       <StepText title='Assign habitat suitability values by slope %' content={contentText}></StepText>

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ExtentSelect = (props: Props) => {
-  const [extent, setExtent] = React.useState(props.initExtent);
+  const [extent, setExtent] = React.useState([0, 0, 0, 0]);
 
   const onExtentInputChange = (event: any, data: any) => {
     const newExtent = extent.slice();
@@ -16,6 +16,10 @@ const ExtentSelect = (props: Props) => {
     props.onInput(newExtent);
     return;
   };
+
+  React.useEffect(() => {
+    setExtent(props.initExtent);
+  }, [props.initExtent]);
 
   return (
     <Segment>
