@@ -27,7 +27,7 @@ const SidebarContainer = (props: any) => {
 
   const tryCloseOptionView = () => {
     setTargetTab(-1);
-    if (tab === tabForConfirm) {
+    if (showConfirm()) {
       setConfirmIsOpen(true);
     } else {
       setTab(-1);
@@ -38,11 +38,16 @@ const SidebarContainer = (props: any) => {
     if (tab === targetTab) return;
     setTargetTab(targetTab);
 
-    if (tab === tabForConfirm) {
+    if (showConfirm()) {
       setConfirmIsOpen(true);
     } else {
       setTab(targetTab);
     }
+  };
+
+  const showConfirm = () => {
+    if (tab === tabForConfirm) return true;
+    return false;
   };
 
   const onCreateNewMapComplete = () => {
@@ -73,14 +78,20 @@ const SidebarContainer = (props: any) => {
             <LayerViewContainer />
           </OptionView>
         );
-      default:
+      case -1:
         return;
+      default:
+        return (
+          <OptionView headerTitle='Under Construction' onClose={tryCloseOptionView}>
+            <h5>Oops! Looks like this section is not complete yet...</h5>
+          </OptionView>
+        );
     }
   };
 
   return (
     <div className='sidebar-container'>
-      <Sidebar setTab={tryToChangeTab} />
+      <Sidebar setTab={tryToChangeTab} currentTab={tab} />
       {getOptionView()}
       <Confirm
         open={confirmIsOpen}

@@ -5,6 +5,7 @@ import { Dropdown } from 'semantic-ui-react';
 
 interface Props {
   title: string;
+  onEdit(): void;
 }
 
 const EditMapItem = (props: Props) => {
@@ -20,7 +21,7 @@ const EditMapItem = (props: Props) => {
   };
 
   const onEdit = () => {
-    // props.StartEditingOutput(false, props.outputMapId);
+    props.onEdit();
   };
 
   return (

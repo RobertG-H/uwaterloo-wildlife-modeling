@@ -5,17 +5,32 @@ import './sidebarStyle.css';
 interface Props {
   iconClass: string;
   title: string;
+  active: boolean;
 }
-// height='35' width='35'
 const SidebarItem = (props: Props) => {
+  console.log(props.active);
   return (
     <div>
-      <div className='sidebar-item-icon'>
-        <div className={'icon-35 ' + props.iconClass} />
-      </div>
-      <Header as='h5' inverted={true} className='sidebar-item-text'>
-        {props.title}
-      </Header>
+      {props.active && (
+        <>
+          <div className='sidebar-item-icon'>
+            <div className={'icon-35 ' + props.iconClass + '-active'} />
+          </div>
+          <Header as='h5' inverted={true} className='sidebar-item-text-active'>
+            {props.title}
+          </Header>
+        </>
+      )}
+      {!props.active && (
+        <>
+          <div className='sidebar-item-icon'>
+            <div className={'icon-35 ' + props.iconClass} />
+          </div>
+          <Header as='h5' inverted={true} className='sidebar-item-text'>
+            {props.title}
+          </Header>
+        </>
+      )}
     </div>
   );
 };
