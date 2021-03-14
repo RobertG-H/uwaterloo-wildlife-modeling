@@ -3,8 +3,8 @@
 *******************************/
 @iconSize: 1.25em;
 @titleFontSize: 12px;
-@horizontalPadding: 2em;
-@verticalPadding: 1em;
+@horizontalPadding: 1.5em;
+@verticalPadding: 0.75em;
 @iconDistance: 0.5em;
 @activeColor: #788198;
 @activeBackground: #ebedf2;

@@ -87,7 +87,11 @@ const RegionSelect = (props: Props) => {
         </div>
       </div>
       <div className='region-select-image-container'>
-        {!props.regionSelected && <div className='region-select-image-placeholder'>Preview of selected region</div>}
+        {!props.regionSelected && (
+          <div className='region-select-image-placeholder'>
+            <div>Preview of selected region</div>
+          </div>
+        )}
         {props.regionSelected && <Image src={regionImage} size='medium' centered></Image>}
       </div>
     </div>

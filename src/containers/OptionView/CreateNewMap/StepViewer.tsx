@@ -16,33 +16,31 @@ const StepViewer = (props: Props) => {
   };
 
   return (
-    <div>
-      <Step.Group ordered size='mini' className='step-viewer'>
-        <Step active={isStepActive(1)} disabled={isStepDisabled(1)}>
-          <Step.Content>
-            <Step.Title>Location</Step.Title>
-          </Step.Content>
-        </Step>
+    <Step.Group ordered size='mini' className='step-viewer'>
+      <Step className='step-item' active={isStepActive(1)} disabled={isStepDisabled(1)}>
+        <Step.Content>
+          <Step.Title>Location</Step.Title>
+        </Step.Content>
+      </Step>
 
-        <Step active={isStepActive(2)} disabled={isStepDisabled(2)}>
-          <Step.Content>
-            <Step.Title>Land Cover</Step.Title>
-          </Step.Content>
-        </Step>
+      <Step className='step-item' active={isStepActive(2)} disabled={isStepDisabled(2)}>
+        <Step.Content>
+          <Step.Title>Land Cover</Step.Title>
+        </Step.Content>
+      </Step>
 
-        <Step active={isStepActive(3)} disabled={isStepDisabled(3)}>
-          <Step.Content>
-            <Step.Title>Slope</Step.Title>
-          </Step.Content>
-        </Step>
+      <Step className='step-item' active={isStepActive(3)} disabled={isStepDisabled(3)}>
+        <Step.Content>
+          <Step.Title>Slope</Step.Title>
+        </Step.Content>
+      </Step>
 
-        <Step active={isStepActive(props.totalSteps)} disabled={isStepDisabled(props.totalSteps)}>
-          <Step.Content>
-            <Step.Title>Finalize</Step.Title>
-          </Step.Content>
-        </Step>
-      </Step.Group>
-    </div>
+      <Step className='step-item' active={isStepActive(props.totalSteps)} disabled={isStepDisabled(props.totalSteps)}>
+        <Step.Content>
+          <Step.Title>Finalize</Step.Title>
+        </Step.Content>
+      </Step>
+    </Step.Group>
   );
 };
 
