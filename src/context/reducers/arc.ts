@@ -10,6 +10,7 @@ import {
   ARC_ADD_REGION_SELECT_LAYERS,
   ARC_ADD_LEGEND_VM,
   ARC_ADD_HOTSPOT,
+  ARC_DONE_LOADING,
 } from '../../constants/actionTypes';
 import { ModalActions } from 'semantic-ui-react';
 
@@ -24,7 +25,6 @@ const arc = (state: typeof initialState, action: AUTHACTIONTYPES) => {
       return {
         ...state,
         authenticated: true,
-        loading: false,
       };
     case ARC_LOGIN_ERROR:
       return {
@@ -56,6 +56,11 @@ const arc = (state: typeof initialState, action: AUTHACTIONTYPES) => {
       return {
         ...state,
         legendVM: action.payload,
+      };
+    case ARC_DONE_LOADING:
+      return {
+        ...state,
+        loading: false,
       };
     case ARC_ADD_HOTSPOT: {
       const key = action.payload.hotspotMap.arcResId;

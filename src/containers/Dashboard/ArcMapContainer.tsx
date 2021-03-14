@@ -1,11 +1,6 @@
 import React from 'react';
 import { ArcContext } from '../../context/ArcProvider';
-import { addMap } from '../../context/actions/arc';
-import { addMapView } from '../../context/actions/arc';
-import { addDefaultLayers } from '../../context/actions/arc';
-import { addRegionSelectLayers } from '../../context/actions/arc';
-import { addLegendVm } from '../../context/actions/arc';
-
+import { addMap, addMapView, addDefaultLayers, addRegionSelectLayers, addLegendVm, doneLoading } from '../../context/actions/arc';
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
 import TileLayer from '@arcgis/core/layers/TileLayer';
@@ -75,7 +70,15 @@ const ArcMapContainer = (): JSX.Element => {
           url: DEFAULT_LAYERS_REF[0],
         });
         landCover.visible = false;
+
+        // callback for to set doneload on complete load of landcover
+        landCover.on('layerview-create', function (event) {
+          // The LayerView for the layer that emitted this event
+
+          doneLoading()(dispatch);
+        });
         arcMap.add(landCover);
+
         const slope = new TileLayer({
           url: DEFAULT_LAYERS_REF[1],
         });

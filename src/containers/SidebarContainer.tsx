@@ -5,7 +5,8 @@ import { OptionView } from './OptionView';
 import { LayerViewContainer } from './OptionView/LayerView';
 import { CreateNewMapContainer } from './OptionView/CreateNewMap';
 import { EditMapsContainer } from './OptionView/EditMaps';
-import { Confirm } from 'semantic-ui-react';
+import { Confirm, Dimmer, Loader } from 'semantic-ui-react';
+import { ArcContext } from '../context/ArcProvider';
 
 // interface Props {}
 
@@ -13,6 +14,10 @@ const SidebarContainer = (props: any) => {
   const [tab, setTab] = React.useState(-1);
   const [targetTab, setTargetTab] = React.useState(-1);
   const [confirmIsOpen, setConfirmIsOpen] = React.useState(false);
+
+  const {
+    state: { loading },
+  } = React.useContext(ArcContext);
 
   const tabForConfirm = 1;
 
@@ -91,7 +96,13 @@ const SidebarContainer = (props: any) => {
 
   return (
     <div className='sidebar-container'>
-      <Sidebar setTab={tryToChangeTab} currentTab={tab} />
+      {loading && (
+        <Dimmer active>
+          <Loader />
+        </Dimmer>
+      )}
+      {!loading && <Sidebar setTab={tryToChangeTab} currentTab={tab} />}
+
       {getOptionView()}
       <Confirm
         header='Exit Map Setup?'
