@@ -71,8 +71,21 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0 !important;
 }
 .esri-sketch__button {
-  padding: 0px 0px !important;
+  padding: 0px 90px !important;
+  border: 0px !important;
 }
+
+.esri-sketch__button:hover,
+.esri-sketch__button.esri-sketch__button--selected {
+  background-color: #d7d5fa !important;
+  border: 0px !important;
+}
+
+.esri-icon-checkbox-unchecked {
+  background-color: #a7a3f4 !important;
+  border: 0px !important;
+}
+
 .esri-sketch__section {
   padding: 0 !important;
   margin: 0 !important;
@@ -81,7 +94,16 @@ input[type='number']::-webkit-outer-spin-button {
   border-width: 0 !important;
 }
 .esri-icon-checkbox-unchecked:before {
-  content: 'TESTING' !important;
+  content: 'Select Region on Map' !important;
+  font-family: 'Roboto';
+  color: #fff !important;
+  white-space: nowrap;
+}
+
+.sketchViewRef {
+  background-color: #a7a3f4 !important;
+  border: 1px solid #a7a3f4 !important;
+  border-radius: 5px;
 }
 
 /* General Purpose */

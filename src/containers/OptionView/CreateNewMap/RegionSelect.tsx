@@ -77,13 +77,11 @@ const RegionSelect = (props: Props) => {
   return (
     <div>
       <div className='region-select-tool'>
-        <div className='region-select-tool-container'>
-          <div style={{ padding: '10px' }}>
+        <div className='region-select-tool-containernull'>
+          {/* <div style={{ padding: '10px' }}>
             <strong>Box Select Tool</strong>
-          </div>
-          <Button className='region-select-tool-button'>
-            <div ref={sketchViewRef} className={'sketchViewRef'}></div>
-          </Button>
+          </div> */}
+          <div ref={sketchViewRef} className={'sketchViewRef'}></div>
         </div>
       </div>
       <div className='region-select-image-container'>

@@ -60,12 +60,6 @@
   align-items: center;
 }
 
-.region-select-tool-button {
-  background-color: rgb(36, 36, 36) !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
 .region-select-image-container {
   padding: 12px;
   display: flex;
