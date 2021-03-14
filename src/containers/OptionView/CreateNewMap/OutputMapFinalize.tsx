@@ -17,7 +17,6 @@ const OutputMapFinalize = (props: Props) => {
     props.onNameInput(data.value);
   };
 
-  // TODO add this
   const checkDisableGenerateMapButton = () => {
     if (name.length === 0) return true;
     if (name.charAt(0) === '1' || name.charAt(0) === '2') return false;
@@ -35,12 +34,12 @@ const OutputMapFinalize = (props: Props) => {
 
   return (
     <div className='output-map-finalize flex-parent'>
+      <h3>Output Name</h3>
+      <Input value={name} fluid size={'large'} placeholder='Enter a name for the output' onChange={onOutputNameChange}></Input>
       <div className='output-map-finalize-checkbox-container'>
         <Checkbox label='Road Mortality Hotspot Map' defaultChecked={true} />
         <Checkbox label='Connectivity Map' defaultChecked={true} />
       </div>
-      <h3>Output Name</h3>
-      <Input value={name} fluid size={'large'} placeholder='Enter a name for the output' onChange={onOutputNameChange}></Input>
       <Button className='output-map-finalize-button' secondary onClick={onGenerateClick} disabled={checkDisableGenerateMapButton()}>
         GENERATE
       </Button>

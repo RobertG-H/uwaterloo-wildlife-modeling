@@ -22,7 +22,7 @@ const FinalizeStep = (props: Props) => {
 
   return (
     <div className='flex-parent flex-item'>
-      <StepText title='Choose Output Maps' content={contentText}></StepText>
+      <StepText title='Finalize Output Maps' content={contentText}></StepText>
       <StepInput>
         <OutputMapFinalize
           initName={props.hotspotMap.outputName}

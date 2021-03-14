@@ -21,7 +21,8 @@ const EditMapsContainer = (props: Props) => {
   } = React.useContext(HotspotsMapsContext);
 
   const onEditMap = (hotspotMapId: string) => {
-    setEditingMap(hotspotMaps[hotspotMapId]);
+    const newHotSpotMap = JSON.parse(JSON.stringify(hotspotMaps[hotspotMapId])) as HotspotMap;
+    setEditingMap(newHotSpotMap);
     setIsEditing(true);
   };
 
@@ -44,7 +45,7 @@ const EditMapsContainer = (props: Props) => {
   };
 
   return (
-    <div className='edit-maps-container flex-parent'>
+    <div className='edit-maps-container flex-parent flex-item'>
       {isEditing && <EditMapContainer hotspotMap={editingMap} />}
       {!isEditing && (
         <>
