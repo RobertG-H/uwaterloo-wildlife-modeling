@@ -49,6 +49,10 @@ const SidebarContainer = (props: any) => {
     setTab(-1);
   };
 
+  const onCreateNewMapStart = () => {
+    setTab(1);
+  };
+
   const getOptionView = () => {
     switch (tab) {
       case 1:
@@ -60,7 +64,7 @@ const SidebarContainer = (props: any) => {
       case 2:
         return (
           <OptionView headerTitle='Edit Maps' onClose={tryCloseOptionView}>
-            <EditMapsContainer />
+            <EditMapsContainer onCreateNewMap={onCreateNewMapStart} />
           </OptionView>
         );
       case 3:

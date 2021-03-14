@@ -1,7 +1,7 @@
 import React from 'react';
 import './optionViewStyle.css';
 import helpIcon from '../../assets/icons/light-icons/help-light.png';
-import xIcon from '../../assets/icons/light-icons/save-light.png';
+import xIcon from '../../assets/icons/general-icons/close.png';
 
 interface Props {
   title: string;

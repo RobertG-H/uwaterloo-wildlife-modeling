@@ -1,0 +1,14 @@
+.edit-maps-container {
+  text-align: left;
+}
+
+.edit-map-item {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-width: 0px 0px 1px 0px;
+  border-color: #ececec;
+  border-style: solid;
+  padding: 13px 16px;
+}
