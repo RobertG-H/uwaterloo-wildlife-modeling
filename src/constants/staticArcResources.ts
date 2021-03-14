@@ -1,10 +1,14 @@
 export const CONNECTIVITY_REF = [
-  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map_Original/MapServer',
-  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map_Tweaked/MapServer',
+  // 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map_Original/MapServer',
+  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cycle_4_Connectivity_Map_Original/MapServer',
+  // 'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Connectivity_Map_Tweaked/MapServer',
+  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cycle_4_Connectivity_Map_Tweaked/MapServer',
 ];
 export const ROAD_MORTALITY_REF = [
-  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Road_Mortality_Hotspots_Original/MapServer',
-  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Road_Mortality_Hotspots_Tweaked/MapServer',
+  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cycle_4_Road_Mortality_Hotspots_Original/MapServer',
+  //'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Road_Mortality_Hotspots_Original/MapServer',
+  //'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Road_Mortality_Hotspots_Tweaked/MapServer',
+  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cycle_4_Road_Mortality_Hotspots_Tweaked/MapServer',
 ];
 
 export const REGION_SELECT_REF = [
@@ -13,9 +17,11 @@ export const REGION_SELECT_REF = [
 ];
 
 export const DEFAULT_LAYERS_REF = [
-  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Southern_Ontario_Land_Cover/MapServer',
+  //'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Southern_Ontario_Land_Cover/MapServer',
+  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Cycle_4_Land_Cover/MapServer',
+  'https://tiles.arcgis.com/tiles/DwLTn0u9VBSZvUPe/arcgis/rest/services/Percent_Slope/MapServer',
 ];
 
-export const CONNECTIVITY_LEGEND_CONVERT = ['Connectivity Map Original', 'Connectivity Map Tweaked'];
-export const ROAD_MORTALITY_LEGEND_CONVERT = ['Road Mortality Hotspots Original', 'Road Mortality Hotspots Tweaked'];
-export const DEFAULT_LAYERS_LEGEND_CONVERT = ['Southern Ontario Land Cover', 'none'];
+export const CONNECTIVITY_LEGEND_CONVERT = ['Cycle 4 Connectivity Map Original', 'Cycle 4 Connectivity Map Tweaked'];
+export const ROAD_MORTALITY_LEGEND_CONVERT = ['Cycle 4 Road Mortality Hotspots Original', 'Cycle 4 Road Mortality Hotspots Tweaked'];
+export const DEFAULT_LAYERS_LEGEND_CONVERT = ['Cycle 4 Land Cover', 'Percent Slope'];

@@ -41,11 +41,11 @@ const LayerItem = (props: Props) => {
   );
 
   return (
-    <div className='layer-item'>
+    <div className='layer-item flex-parent'>
       <div className='layer-item-title'>
         <div>{props.title}</div>
-        {visible && <img className='hover-pointer' src={visibleIconLight} width='16' height='16' onClick={onVisibleClick}></img>}
-        {!visible && <img className='hover-pointer' src={visibleIconDark} width='16' height='16' onClick={onVisibleClick}></img>}
+        {visible && <img className='hover-pointer' src={visibleIconLight} width='20' height='20' onClick={onVisibleClick}></img>}
+        {!visible && <img className='hover-pointer' src={visibleIconDark} width='20' height='20' onClick={onVisibleClick}></img>}
       </div>
       <div className='layer-item-opacity-title'>OPACITY</div>
       <div className='layer-item-slider'>

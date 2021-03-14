@@ -40,7 +40,7 @@ const LandCoverLegend = (props: any) => {
               newRows.push(
                 <div key={item.label} className='land-cover-legend-row'>
                   <img src={item.src} />
-                  <div>{item.label}</div>
+                  <div style={{ marginLeft: 5 }}>{item.label}</div>
                 </div>,
               );
             });

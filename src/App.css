@@ -80,6 +80,9 @@ input[type='number']::-webkit-outer-spin-button {
 .esri-sketch__tool-section {
   border-width: 0 !important;
 }
+.esri-icon-checkbox-unchecked:before {
+  content: 'TESTING' !important;
+}
 
 /* General Purpose */
 

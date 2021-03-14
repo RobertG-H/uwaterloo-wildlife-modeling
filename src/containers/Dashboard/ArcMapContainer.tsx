@@ -76,7 +76,12 @@ const ArcMapContainer = (): JSX.Element => {
         });
         landCover.visible = false;
         arcMap.add(landCover);
-        addDefaultLayers(landCover)(dispatch);
+        const slope = new TileLayer({
+          url: DEFAULT_LAYERS_REF[1],
+        });
+        slope.visible = false;
+        arcMap.add(slope);
+        addDefaultLayers([landCover, slope])(dispatch);
       }
       if (regionSelectLayers.length === 0) {
         const regionPreSelect = new FeatureLayer({

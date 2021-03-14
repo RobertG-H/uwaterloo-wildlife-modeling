@@ -15,8 +15,8 @@
 
 .ui.icon.menu .item {
   text-align: left !important;
-  padding-top: 4px !important;
-  padding-bottom: 4px !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
 
 hr {
@@ -48,8 +48,8 @@ hr {
 }
 
 .icon-35 {
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   background-size: contain;
 }
 

@@ -2,8 +2,8 @@ import React from 'react';
 import ActiveLayerInfo from '@arcgis/core/widgets/Legend/support/ActiveLayerInfo';
 import Collection from '@arcgis/core/core/Collection';
 import { ArcContext } from '../../../context/ArcProvider';
-import LayerAccordian from './LayerAccordian';
 import { Popup } from 'semantic-ui-react';
+import './layerViewStyle.css';
 
 import infoIcon from '../../../assets/icons/general-icons/Info.png';
 
@@ -48,7 +48,15 @@ const LayerLegend = (props: any) => {
                 <div className='tile-layer-legend-text'>LOW</div>
                 <img src={legendItems![0].src} className='tile-layer-legend-image' />
                 <div className='tile-layer-legend-text'>HIGH</div>
-                <Popup trigger={<img src={infoIcon} width={17} height={16} />} content='conent' position='right center' />
+                {props.popupContent && (
+                  <div className='tile-layer-legend-popup'>
+                    <Popup
+                      trigger={<img src={infoIcon} width={16} height={16} />}
+                      content={props.popupContent ? props.popupContent : 'Under Construction'}
+                      position='right center'
+                    />
+                  </div>
+                )}
               </div>
             );
 
@@ -74,13 +82,7 @@ const LayerLegend = (props: any) => {
     tryToLoadLegend();
   }, []);
 
-  return (
-    <div>
-      <LayerAccordian title='View Legend' inverted={false}>
-        {item.element}
-      </LayerAccordian>
-    </div>
-  );
+  return <div className='tile-layer-legend-row-parent'>{item.element}</div>;
 };
 
 export default LayerLegend;

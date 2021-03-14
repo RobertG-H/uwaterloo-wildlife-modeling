@@ -40,7 +40,11 @@ const LayerViewContainer = (props: any) => {
             layer2={undefined}
             activeLayerInfoTitle={CONNECTIVITY_LEGEND_CONVERT[+hotspotMaps[key].arcResId]}
           >
-            <LayerLegend></LayerLegend>
+            <LayerLegend
+              popupContent={
+                'The focal species has difficulty moving through areas marked “low” and move most easily in areas marked “high”.'
+              }
+            ></LayerLegend>
           </LayerItem>
           <LayerItem
             title='Road Mortality Map'
@@ -49,7 +53,11 @@ const LayerViewContainer = (props: any) => {
             layer2={undefined}
             activeLayerInfoTitle={ROAD_MORTALITY_LEGEND_CONVERT[+hotspotMaps[key].arcResId]}
           >
-            <LayerLegend></LayerLegend>
+            <LayerLegend
+              popupContent={
+                '“Low” areas on roads have a small number of predicted wildlife collisions, while “high” areas have a large number.'
+              }
+            ></LayerLegend>
           </LayerItem>
         </LayerAccordian>,
       );
@@ -58,8 +66,8 @@ const LayerViewContainer = (props: any) => {
   };
 
   return (
-    <div className='overflow-wrapper flex-item'>
-      <div className='overflow-inner'>
+    <div className='overflow-wrapper flex-item layer-view-static-width'>
+      <div className='overflow-inner flex-parent'>
         <LayerAccordian title='Default Layers' inverted={true}>
           <LayerItem
             title='Base Map'
@@ -80,6 +88,15 @@ const LayerViewContainer = (props: any) => {
             activeLayerInfoTitle={DEFAULT_LAYERS_LEGEND_CONVERT[0]}
           >
             <LandCoverLegend></LandCoverLegend>
+          </LayerItem>
+          <LayerItem
+            title='Slope'
+            startingOpacity={defaultLayers[1] ? defaultLayers[1].opacity : 1.0}
+            layer={defaultLayers[1] ? defaultLayers[1] : undefined}
+            layer2={undefined}
+            activeLayerInfoTitle={DEFAULT_LAYERS_LEGEND_CONVERT[1]}
+          >
+            <LayerLegend popupContent={null}></LayerLegend>
           </LayerItem>
         </LayerAccordian>
         {generateRows()}

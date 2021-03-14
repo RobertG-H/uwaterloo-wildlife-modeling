@@ -1,3 +1,8 @@
+.layer-accordian,
+.layer-view-static-width {
+  min-width: 220px;
+}
+
 .layer-accordian-title,
 .layer-accordian-title-inverted {
   text-align: left;
@@ -14,10 +19,11 @@
 
 .layer-item {
   text-align: left;
-  padding: 12px 10px 10px 14px;
+  padding: 12px 20px 10px 14px;
   font-size: 12px;
   border: solid #d8d8d8;
   border-width: 0px 0px 1px 0px;
+  min-width: 200px;
 }
 
 .layer-item-title {
@@ -57,12 +63,18 @@
   display: flex;
   justify-content: left;
   align-items: center;
+  margin-bottom: 8px;
+}
+
+.tile-layer-legend-row-parent {
+  min-width: 200px;
 }
 
 .tile-layer-legend-row {
   display: flex;
   justify-content: left;
   align-items: center;
+  margin: -30px 0px;
 }
 
 .tile-layer-legend-image {
@@ -77,4 +89,11 @@
   font-size: 9px;
   font-family: 'Roboto';
   font-weight: bold;
+}
+
+.tile-layer-legend-popup {
+  margin: 10px 10px !important;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
