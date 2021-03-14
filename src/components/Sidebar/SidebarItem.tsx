@@ -8,7 +8,6 @@ interface Props {
   active: boolean;
 }
 const SidebarItem = (props: Props) => {
-  console.log(props.active);
   return (
     <div>
       {props.active && (

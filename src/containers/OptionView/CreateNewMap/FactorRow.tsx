@@ -16,7 +16,7 @@ const FactorRow = (props: Props) => {
     props.onUpdate(props.title, data.value);
   };
   return (
-    <tr className='factor-row'>
+    <tr className='factor-row' key={props.title}>
       <td>{props.title}</td>
       <td>{props.region}%</td>
       <td>

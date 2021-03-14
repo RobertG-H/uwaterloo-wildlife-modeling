@@ -8,7 +8,7 @@
   font-weight: bold;
   color: #788198;
   text-align: left;
-  margin-top: 24px;
+  margin-top: 10px;
 }
 
 .step-text-content {
@@ -22,6 +22,9 @@
 
 .step-footer {
   margin-top: auto;
+  padding-top: 18px;
+  border: solid #ececec;
+  border-width: 1px 0px 0px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -111,4 +114,17 @@
 
 .output-map-finalize {
   text-align: left;
+}
+
+.output-map-finalize-checkbox-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.output-map-finalize-checkbox-container > div {
+  padding-top: 10px;
+}
+
+.output-map-finalize-button {
+  margin: 20px auto !important;
 }

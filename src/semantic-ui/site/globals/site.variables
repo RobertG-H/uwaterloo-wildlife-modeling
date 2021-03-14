@@ -10,7 +10,7 @@
 --------------------*/
 
 @primaryColor        : #a2b1d9;
-@secondaryColor      : @black;
+@secondaryColor      : #a7a3f4;
 
 @lightPrimaryColor   : @lightBlue;
 @lightSecondaryColor : @lightBlack;

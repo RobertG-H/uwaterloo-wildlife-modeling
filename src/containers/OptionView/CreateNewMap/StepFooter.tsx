@@ -1,6 +1,6 @@
 import React from 'react';
 import './createNewMapStyle.css';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 interface Props {
   totalSteps: number;
@@ -34,11 +34,19 @@ const StepFooter = (props: Props) => {
 
   return (
     <div className='step-footer'>
-      <div>{doShowBack() && <Button onClick={onBack}>Back</Button>}</div>
+      <div>
+        {doShowBack() && (
+          <Button onClick={onBack}>
+            <Icon name='arrow left' />
+            Back
+          </Button>
+        )}
+      </div>
       <div>
         {doShowNext() && (
-          <Button onClick={onNext} disabled={!props.isNextActive}>
+          <Button secondary onClick={onNext} disabled={!props.isNextActive}>
             Next
+            <Icon name='arrow right' />
           </Button>
         )}
       </div>
