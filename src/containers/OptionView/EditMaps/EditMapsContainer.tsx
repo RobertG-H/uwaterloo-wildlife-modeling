@@ -1,7 +1,7 @@
 import React from 'react';
 import EditMapItem from './EditMapItem';
 import EditMapContainer from './EditMapContainer';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 import { HotspotsMapsContext } from '../../../context/HotspotsMapsProvider';
 import { HotspotMap } from '../../../context/initialstates/hotspotMapsInitialState';
 
@@ -44,12 +44,16 @@ const EditMapsContainer = (props: Props) => {
   };
 
   return (
-    <div className='edit-maps-container'>
+    <div className='edit-maps-container flex-parent'>
       {isEditing && <EditMapContainer hotspotMap={editingMap} />}
       {!isEditing && (
         <>
           {generateRows()}
-          <Button onClick={onCreateNewMap}> Create New Map</Button>
+          <div className='edit-maps-button'>
+            <Button secondary onClick={onCreateNewMap}>
+              Create New Map
+            </Button>
+          </div>
         </>
       )}
     </div>

@@ -2,15 +2,23 @@
   text-align: left;
 }
 
+.edit-maps-button {
+  margin: 10px auto 0px auto;
+}
+
 .edit-map-item {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-width: 0px 0px 1px 0px;
-  border-color: #ececec;
+  border-color: #ebedf2;
   border-style: solid;
   padding: 13px 16px;
+}
+
+.edit-map-item:hover {
+  background-color: #f2f2f2;
 }
 
 .edit-map-container {
