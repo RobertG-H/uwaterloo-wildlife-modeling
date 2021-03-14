@@ -10,10 +10,14 @@ import { ArcContext } from '../context/ArcProvider';
 
 // interface Props {}
 
+const introMessage =
+  'Wildlife Hotspots is a GIS-based tool that displays road mortality hotspots and regional connectivity heatmaps based on the habitat quality of a landscape. This tool is meant to help identify and visualize critical locations for the development of wildlife crossings. Wildlife Hotspots is meant to be used in conjunction with other research methods, such as site-level ground surveys, local road mortality data, and other modeling techniques available. Do not solely rely on this tool for the modeling of connectivity and road mortality hotspots.';
+
 const SidebarContainer = (props: any) => {
   const [tab, setTab] = React.useState(-1);
   const [targetTab, setTargetTab] = React.useState(-1);
   const [confirmIsOpen, setConfirmIsOpen] = React.useState(false);
+  const [introIsOpen, setIntroIsOpen] = React.useState(true);
 
   const {
     state: { loading },
@@ -28,6 +32,10 @@ const SidebarContainer = (props: any) => {
   const handleConfirm = () => {
     setConfirmIsOpen(false);
     setTab(targetTab);
+  };
+
+  const handleIntro = () => {
+    setIntroIsOpen(false);
   };
 
   const tryCloseOptionView = () => {
@@ -113,6 +121,15 @@ const SidebarContainer = (props: any) => {
         onCancel={handleCancel}
         onConfirm={handleConfirm}
         size='mini'
+      />
+      <Confirm
+        header='Welcome To Wildlife Hotspots'
+        content={introMessage}
+        open={introIsOpen}
+        cancelButton=''
+        confirmButton='I Understand'
+        onConfirm={handleIntro}
+        size='small'
       />
     </div>
   );

@@ -17,10 +17,17 @@ const FactorRow = (props: Props) => {
   };
   return (
     <tr className='factor-row' key={props.title}>
-      <td>{props.title}</td>
-      <td>{props.region}%</td>
-      <td>
-        <Input type='number' size='mini' style={{ maxWidth: 50 }} onChange={onInputChange} value={value}></Input>
+      <td key={props.title + 'title'}>{props.title}</td>
+      <td key={props.title + 'region'}>{props.region}%</td>
+      <td key={props.title + 'input'}>
+        <Input
+          key={props.title + 'inputelement'}
+          type='number'
+          size='mini'
+          style={{ maxWidth: 50 }}
+          onChange={onInputChange}
+          value={value}
+        ></Input>
       </td>
     </tr>
   );

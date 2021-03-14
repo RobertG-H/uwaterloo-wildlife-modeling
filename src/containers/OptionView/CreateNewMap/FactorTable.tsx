@@ -27,12 +27,14 @@ const FactorTable = (props: Props) => {
 
   return (
     <table className='factor-table'>
-      <tr className='factor-table-header'>
-        <th>{props.title}</th>
-        <th>% OF REGION</th>
-        <th>VALUE</th>
-      </tr>
-      {generateRows()}
+      <tbody>
+        <tr className='factor-table-header'>
+          <th>{props.title}</th>
+          <th>% OF REGION</th>
+          <th>VALUE</th>
+        </tr>
+        {generateRows()}
+      </tbody>
     </table>
   );
 };

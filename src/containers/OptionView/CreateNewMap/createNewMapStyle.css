@@ -89,13 +89,13 @@
   width: 100%;
 }
 
-.factor-table > tr > * {
+.factor-table > tbody > tr > * {
   border-width: 0px 0px 1px 0px;
   border-color: #e8e8e8;
   border-style: solid;
 }
 
-.factor-table > tr > *:nth-child(1) {
+.factor-table > tbody > tr > *:nth-child(1) {
   text-align: left;
 }
 
