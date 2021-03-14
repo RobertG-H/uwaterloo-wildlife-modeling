@@ -69,7 +69,7 @@ const ArcMapContainer = (): JSX.Element => {
         const landCover = new TileLayer({
           url: DEFAULT_LAYERS_REF[0],
         });
-        landCover.visible = false;
+        landCover.opacity = 0;
 
         // callback for to set doneload on complete load of landcover
         landCover.on('layerview-create', function (event) {
@@ -82,7 +82,8 @@ const ArcMapContainer = (): JSX.Element => {
         const slope = new TileLayer({
           url: DEFAULT_LAYERS_REF[1],
         });
-        slope.visible = false;
+        slope.opacity = 0;
+
         arcMap.add(slope);
         addDefaultLayers([landCover, slope])(dispatch);
       }

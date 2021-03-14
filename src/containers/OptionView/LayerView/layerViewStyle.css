@@ -3,10 +3,14 @@
   min-width: 220px;
 }
 
-.layer-accordian-title,
 .layer-accordian-title-inverted {
   text-align: left;
   padding: 12px 14px !important;
+}
+
+.layer-accordian-title {
+  text-align: left;
+  padding: 0px 14px !important;
 }
 
 .layer-accordian-title {

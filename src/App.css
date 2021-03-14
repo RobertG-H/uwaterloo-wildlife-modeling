@@ -106,6 +106,10 @@ input[type='number']::-webkit-outer-spin-button {
   border-radius: 5px;
 }
 
+.rc-slider-disabled {
+  background-color: transparent !important;
+}
+
 /* General Purpose */
 
 .hover-pointer:hover {

@@ -17,12 +17,17 @@ interface Props {
 }
 
 const LayerItem = (props: Props) => {
-  const [opacity, setOpacity] = React.useState(props.startingOpacity);
-  const [visible, setVisible] = React.useState(props.layer ? props.layer.visible : true);
+  const [opacity, setOpacity] = React.useState(props.layer?.opacity === 0 ? 1 : props.startingOpacity);
+  const [visible, setVisible] = React.useState(props.layer ? props.layer.opacity !== 0 : true);
 
   const onVisibleClick = () => {
-    if (props.layer) props.layer.visible = !visible;
-    if (props.layer2) props.layer2.visible = !visible;
+    if (visible) {
+      if (props.layer) props.layer.opacity = 0;
+      if (props.layer2) props.layer2.opacity = 0;
+    } else {
+      if (props.layer) props.layer.opacity = opacity!;
+      if (props.layer2) props.layer2.opacity = opacity!;
+    }
     setVisible(!visible);
   };
 
@@ -40,6 +45,39 @@ const LayerItem = (props: Props) => {
     React.cloneElement(child as React.ReactElement<any>, { visible: visible, activeLayerInfoTitle: props.activeLayerInfoTitle }),
   );
 
+  const getSliderTrackStyle = () => {
+    if (visible) {
+      return { backgroundColor: '#a2b1d9', height: 4 };
+    } else {
+      return {};
+    }
+  };
+
+  const getSliderHandleStyle = () => {
+    if (visible) {
+      return {
+        borderColor: '#a2b1d9',
+        height: 16,
+        width: 16,
+        marginTop: -6,
+        backgroundColor: '#ffffff',
+      };
+    } else {
+      return {
+        borderColor: '#a2b1d9',
+        backgroundColor: '#ddd',
+      };
+    }
+  };
+
+  const getSliderRailStyle = () => {
+    if (visible) {
+      return { backgroundColor: '#e9e9e9', height: 4 };
+    } else {
+      return {};
+    }
+  };
+
   return (
     <div className='layer-item flex-parent'>
       <div className='layer-item-title'>
@@ -54,15 +92,10 @@ const LayerItem = (props: Props) => {
           min={0}
           max={100}
           onChange={handleSlider}
-          trackStyle={{ backgroundColor: '#a2b1d9', height: 4 }}
-          handleStyle={{
-            borderColor: '#a2b1d9',
-            height: 16,
-            width: 16,
-            marginTop: -6,
-            backgroundColor: '#ffffff',
-          }}
-          railStyle={{ backgroundColor: '#e9e9e9', height: 4 }}
+          trackStyle={getSliderTrackStyle()}
+          handleStyle={getSliderHandleStyle()}
+          railStyle={getSliderRailStyle()}
+          disabled={visible === false}
         />
         <div className='layer-item-slider-text'>{opacity ? (opacity * 100).toFixed(0) : 0}%</div>
       </div>
