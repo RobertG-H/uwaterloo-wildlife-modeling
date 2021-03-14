@@ -1,11 +1,15 @@
+.layer-accordian-title,
+.layer-accordian-title-inverted {
+  text-align: left;
+  padding: 12px 14px !important;
+}
+
 .layer-accordian-title {
   background-color: #ffffff;
-  text-align: left;
 }
 
 .layer-accordian-title-inverted {
   background-color: #ebedf2;
-  text-align: left;
 }
 
 .layer-item {
@@ -29,6 +33,24 @@
   font-size: 10px;
   font-family: 'Roboto';
   font-weight: bold;
+}
+
+.layer-item-slider {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.layer-item-slider-text {
+  margin-left: 15px;
+  padding: 2px 5px;
+  background-color: #ebeaea;
+  border-radius: 5px;
+  color: #000;
+  font-family: 'Roboto';
+  min-width: 40px;
+  text-align: right;
 }
 
 .land-cover-legend-row {

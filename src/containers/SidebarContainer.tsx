@@ -94,11 +94,14 @@ const SidebarContainer = (props: any) => {
       <Sidebar setTab={tryToChangeTab} currentTab={tab} />
       {getOptionView()}
       <Confirm
+        header='Exit Map Setup?'
+        content='All progress will be lost upon exiting this setup process.'
         open={confirmIsOpen}
-        cancelButton='Never mind'
-        confirmButton="Let's do it"
+        cancelButton='Cancel'
+        confirmButton='Exit'
         onCancel={handleCancel}
         onConfirm={handleConfirm}
+        size='mini'
       />
     </div>
   );

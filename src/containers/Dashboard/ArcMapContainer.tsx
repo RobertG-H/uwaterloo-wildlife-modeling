@@ -8,9 +8,10 @@ import { addLegendVm } from '../../context/actions/arc';
 
 import MapView from '@arcgis/core/views/MapView';
 import Map from '@arcgis/core/Map';
-import Extent from '@arcgis/core/geometry/Extent';
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+import ScaleBar from '@arcgis/core/widgets/ScaleBar';
+import Extent from '@arcgis/core/geometry/Extent';
 
 import { DEFAULT_LAYERS_REF, REGION_SELECT_REF } from '../../constants/staticArcResources';
 import RegionSelect from '../OptionView/CreateNewMap/RegionSelect';
@@ -58,6 +59,16 @@ const ArcMapContainer = (): JSX.Element => {
         },
         rotation: -3.2,
       });
+      const scaleBar = new ScaleBar({
+        view: newMapView,
+        unit: 'metric',
+        style: 'ruler',
+      });
+      newMapView.ui.move(['zoom'], 'bottom-right');
+      newMapView.ui.add(scaleBar, {
+        position: 'bottom-right',
+      });
+
       addMapView(newMapView)(dispatch);
       if (defaultLayers.length === 0) {
         const landCover = new TileLayer({
