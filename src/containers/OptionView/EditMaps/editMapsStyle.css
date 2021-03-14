@@ -12,3 +12,25 @@
   border-style: solid;
   padding: 13px 16px;
 }
+
+.edit-map-container {
+}
+
+.edit-map-title {
+  color: #788198;
+  background-color: #ebedf2;
+  padding: 12px 14px;
+  font-family: 'Roboto';
+  font-weight: bold !important;
+}
+
+.edit-map-region-select {
+  margin: 16px;
+}
+
+.edit-map-region-select-title {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 9px;
+}

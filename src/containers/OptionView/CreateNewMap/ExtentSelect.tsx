@@ -24,13 +24,13 @@ const ExtentSelect = (props: Props) => {
   return (
     <Segment>
       <Header as='h5'>Specified Extent</Header>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', paddingTop: 10 }}>
         <span style={{ margin: 'auto' }}>
           <span style={{ marginRight: 5 }}>Top: &nbsp; &nbsp; &nbsp; &nbsp; </span>
           <Input type='number' size='mini' style={{ maxWidth: 100 }} onChange={onExtentInputChange} value={extent[0]} index={0}></Input>
         </span>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', paddingTop: 10 }}>
         <span style={{ marginRight: 'auto' }}>
           <span style={{ marginRight: 5 }}>Left: </span>
           <Input type='number' size='mini' style={{ maxWidth: 100 }} onChange={onExtentInputChange} value={extent[1]} index={1}></Input>
@@ -41,7 +41,7 @@ const ExtentSelect = (props: Props) => {
           <Input type='number' size='mini' style={{ maxWidth: 100 }} onChange={onExtentInputChange} value={extent[2]} index={2}></Input>
         </span>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', paddingTop: 10 }}>
         <span style={{ margin: 'auto' }}>
           <span style={{ marginRight: 5 }}>Bottom: </span>
           <Input type='number' size='mini' style={{ maxWidth: 100 }} onChange={onExtentInputChange} value={extent[3]} index={3}></Input>

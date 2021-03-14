@@ -31,6 +31,42 @@
   overflow: auto;
 }
 
+.region-select-tool {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.region-select-tool-container {
+  border: 2px solid #73798b;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.region-select-tool-button {
+  background-color: rgb(36, 36, 36) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.region-select-image-container {
+  padding: 12px;
+}
+
+.region-select-image-placeholder {
+  width: 300px;
+  height: 283px;
+  border: 2px dotted #73798b;
+  vertical-align: middle;
+  display: table-cell;
+  font-family: 'Roboto';
+}
+
 .factor-table {
   border-spacing: 0px 0px;
   width: 100%;

@@ -22,12 +22,16 @@ const Sidebar = (props: Props) => {
       <Menu.Item className='sidebar-item' onClick={onItemClick} index={2} active={props.currentTab === 2}>
         <SidebarItem iconClass={'icon-edit-maps'} title='Edit Maps' active={props.currentTab === 2}></SidebarItem>
       </Menu.Item>
-      <Menu.Item className='sidebar-item' onClick={onItemClick} index={3} active={props.currentTab === 3}>
-        <SidebarItem iconClass={'icon-layer-view'} title='Layer View' active={props.currentTab === 3}></SidebarItem>
+      <Menu.Item className='sidebar-item' onClick={onItemClick} index={3} active={props.currentTab === 3 || props.currentTab === 4}>
+        <SidebarItem
+          iconClass={'icon-layer-view'}
+          title='Layer View'
+          active={props.currentTab === 3 || props.currentTab === 4}
+        ></SidebarItem>
       </Menu.Item>
       <hr></hr>
-      <Menu.Item className='sidebar-item' onClick={onItemClick} index={4} active={props.currentTab === 4}>
-        <SidebarItem iconClass={'icon-save-project'} title='Save Project' active={props.currentTab === 4}></SidebarItem>
+      <Menu.Item className='sidebar-item' onClick={onItemClick} index={9} active={props.currentTab === 9}>
+        <SidebarItem iconClass={'icon-save-project'} title='Save Project' active={props.currentTab === 9}></SidebarItem>
       </Menu.Item>
       <Menu.Item className='sidebar-item' onClick={onItemClick} index={5} active={props.currentTab === 5}>
         <SidebarItem iconClass={'icon-edit-project'} title='Edit Project' active={props.currentTab === 5}></SidebarItem>
