@@ -1,32 +1,32 @@
 const initSlopeValues = () => {
   return {
-    '0 - 20': [0, 0],
-    '21 - 40': [0, 0],
-    '> 41': [0, 0],
+    '0 - 20': [95.15, 0],
+    '21 - 40': [3.5, 0],
+    '> 41': [1.34, 0],
   };
 };
 
 const initLandCoverValeus = () => {
   return {
-    Beach: [0, 0],
-    'Sand Dune Systems': [0, 0],
-    Cliff: [0, 0],
-    Alvar: [0, 0],
-    Tallgrass: [0, 0],
-    'Coniferous Forest': [0, 0],
-    'Mixed Forest': [0, 0],
-    'Deciduous Forest': [0, 0],
-    Wetland: [0, 0],
-    'Open Water': [0, 0],
-    Agriculture: [0, 0],
-    'Built-Up Area': [0, 0],
-    Undifferentiated: [0, 0],
-    'Highway / Expressway': [0, 0],
-    'Arterial Road': [0, 0],
-    'Collector Road': [0, 0],
-    'Resource / Rec Road': [0, 0],
-    'Service Road': [0, 0],
-    'Alleyway / Laneway': [0, 0],
+    Beach: [0.018, 0],
+    'Sand Dune Systems': [0.013, 0],
+    Cliff: [0.011, 0],
+    Alvar: [0.007, 0],
+    Tallgrass: [0.02, 0],
+    'Coniferous Forest': [0.983, 0],
+    'Mixed Forest': [1.726, 0],
+    'Deciduous Forest': [4.336, 0],
+    Wetland: [7.92, 0],
+    'Open Water': [29.81, 0],
+    Agriculture: [30.75, 0],
+    'Built-Up Area': [4.662, 0],
+    Undifferentiated: [17.03, 0],
+    'Highway / Expressway': [0.07, 0],
+    'Arterial Road': [0.063, 0],
+    'Collector Road': [2.363, 0],
+    'Resource / Rec Road': [0.212, 0],
+    'Service Road': [0.002, 0],
+    'Alleyway / Laneway': [0.012, 0],
   };
 };
 
