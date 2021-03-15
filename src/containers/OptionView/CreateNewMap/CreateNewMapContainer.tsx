@@ -38,7 +38,7 @@ const CreateNewMapContainer = (props: Props) => {
   const { state: hotspotMapsState, dispatch: hotspotMapsDispatch } = React.useContext(HotspotsMapsContext);
 
   const {
-    state: { arcMap, hotspotMapTileLayers, regionSelectLayers },
+    state: { arcMap, hotspotMapTileLayers, regionSelectLayers, defaultLayers },
     dispatch: arcDispatch,
   } = React.useContext(ArcContext);
 
@@ -91,6 +91,44 @@ const CreateNewMapContainer = (props: Props) => {
       regionSelectLayers[1].visible = false;
     };
   }, [regionSelectLayers]);
+
+  const onEnterLocationStep = () => {
+    defaultLayers.forEach(tileLayer => {
+      tileLayer.opacity = 0;
+    });
+  };
+
+  const onEnterLandCoverStep = () => {
+    defaultLayers.forEach(tileLayer => {
+      tileLayer.opacity = 0;
+    });
+    defaultLayers[0].opacity = 1;
+  };
+
+  const onEnterSlopeStop = () => {
+    defaultLayers.forEach(tileLayer => {
+      tileLayer.opacity = 0;
+    });
+    defaultLayers[1].opacity = 1;
+  };
+
+  React.useEffect(() => {
+    if (currentStep === 1) {
+      onEnterLocationStep();
+    } else if (currentStep === 2) {
+      onEnterLandCoverStep();
+    } else if (currentStep === 3) {
+      onEnterSlopeStop();
+    }
+  }, [currentStep]);
+
+  React.useEffect(() => {
+    for (const arcResId in hotspotMapTileLayers) {
+      hotspotMapTileLayers[arcResId].forEach(tileLayer => {
+        tileLayer.opacity = 0;
+      });
+    }
+  }, []);
 
   return (
     <div className='flex-parent flex-item create-new-map-container'>
