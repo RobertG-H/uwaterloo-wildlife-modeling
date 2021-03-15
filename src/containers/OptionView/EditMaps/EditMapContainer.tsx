@@ -63,7 +63,11 @@ const EditMapContainer = (props: Props) => {
         <div className='edit-map-land-cover'>
           <div className='edit-map-title'>Habitat Suitability Values by Land Cover</div>
           <div className='flex-parent flex-item'>
-            <FactorTable title='LAND COVER FACTOR' factorValues={props.hotspotMap ? props.hotspotMap.landCoverValues : {}} />
+            <FactorTable
+              title='LAND COVER FACTOR'
+              factorValues={props.hotspotMap ? props.hotspotMap.landCoverValues : {}}
+              showImage={true}
+            />
           </div>
         </div>
         <div className='edit-map-region-footer'>

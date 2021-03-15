@@ -28,7 +28,7 @@ const SlopeStep = (props: Props) => {
     <div className='flex-parent flex-item'>
       <StepText title='Assign habitat suitability values by slope %' content={contentText}></StepText>
       <StepInput>
-        <FactorTable title='PERCENT SLOPE' factorValues={props.hotspotMap.slopeValues} />
+        <FactorTable title='PERCENT SLOPE' factorValues={props.hotspotMap.slopeValues} showImage={false} />
       </StepInput>
     </div>
   );

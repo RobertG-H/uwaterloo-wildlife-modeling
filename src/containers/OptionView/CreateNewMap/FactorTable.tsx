@@ -1,25 +1,32 @@
 import React from 'react';
 import FactorRow from './FactorRow';
 import './createNewMapStyle.css';
+import { LAND_COVER_LEGEND_COLORS } from '../../../constants/staticArcResources';
 
 import { factory } from 'typescript';
 
 interface Props {
   title: string;
   factorValues: { [key: string]: number[] };
+  showImage: boolean;
 }
 
 const FactorTable = (props: Props) => {
   const generateRows = () => {
     const rows: JSX.Element[] = [];
     Object.keys(props.factorValues).forEach(key => {
+      let legendSrc = 'empty';
+      if (props.showImage) {
+        legendSrc = LAND_COVER_LEGEND_COLORS[key];
+      }
       rows.push(
         <FactorRow
           title={key}
           region={props.factorValues[key][0]}
           initValue={props.factorValues[key][1]}
           onUpdate={setFactorValue}
-          legendSrc='empty'
+          legendSrc={legendSrc}
+          showImage={props.showImage}
         />,
       );
     });

@@ -27,7 +27,7 @@ const LandCoverStep = (props: Props) => {
     <div className='flex-parent flex-item'>
       <StepText title='Assign habitat suitability values by land cover' content={contentText}></StepText>
       <StepInput>
-        <FactorTable title='LAND COVER FACTOR' factorValues={props.hotspotMap.landCoverValues} />
+        <FactorTable title='LAND COVER FACTOR' factorValues={props.hotspotMap.landCoverValues} showImage={true} />
       </StepInput>
     </div>
   );

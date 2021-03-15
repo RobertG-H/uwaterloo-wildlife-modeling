@@ -7,6 +7,7 @@ interface Props {
   initValue: number;
   onUpdate(key: string, newValue: number): void;
   legendSrc: string;
+  showImage: boolean;
 }
 
 const FactorRow = (props: Props) => {
@@ -19,8 +20,10 @@ const FactorRow = (props: Props) => {
   return (
     <tr className='factor-row' key={props.title}>
       <td key={props.title + 'title'}>
-        <img src='https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png' height={20} width={20} />
-        {props.title}
+        <div style={{ display: 'flex', alignContent: 'center' }}>
+          {props.showImage && <img src={props.legendSrc} height={20} width={20} style={{ margin: '0px 5px 0px 0px' }} />}
+          {props.title}
+        </div>
       </td>
       <td key={props.title + 'region'}>{props.region}%</td>
       <td key={props.title + 'input'}>
