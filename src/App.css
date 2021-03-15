@@ -2,41 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .wordwrap {
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -61,7 +26,7 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.esri-legend__layer-caption {
+/* .esri-legend__layer-caption {
   display: none !important;
 }
 
@@ -95,4 +60,83 @@ input[type='number']::-webkit-outer-spin-button {
 
 .ui.steps .step.active .title {
   color: #242425 !important;
+} */
+
+/* Esri overrides */
+.esri-icon-cursor {
+  display: none !important;
+}
+.esri-sketch__section:second-child {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.esri-sketch__button {
+  padding: 0px 90px !important;
+  border: 0px !important;
+}
+
+.esri-sketch__button:hover,
+.esri-sketch__button.esri-sketch__button--selected {
+  background-color: #d7d5fa !important;
+  border: 0px !important;
+}
+
+.esri-icon-checkbox-unchecked {
+  background-color: #a7a3f4 !important;
+  border: 0px !important;
+}
+
+.esri-sketch__section {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.esri-sketch__tool-section {
+  border-width: 0 !important;
+}
+.esri-icon-checkbox-unchecked:before {
+  content: 'Select Region on Map' !important;
+  font-family: 'Roboto';
+  color: #fff !important;
+  white-space: nowrap;
+}
+
+.sketchViewRef {
+  background-color: #a7a3f4 !important;
+  border: 1px solid #a7a3f4 !important;
+  border-radius: 5px;
+}
+
+.rc-slider-disabled {
+  background-color: transparent !important;
+}
+
+/* General Purpose */
+
+.hover-pointer:hover {
+  cursor: pointer;
+}
+
+.overflow-wrapper {
+  position: relative;
+  overflow: auto;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+.flex-parent {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: flex-start;
+}
+
+.overflow-inner {
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

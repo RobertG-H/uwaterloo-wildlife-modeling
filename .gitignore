@@ -12,6 +12,7 @@
 # production
 /build
 /public/assets/esri
+/src/assets/esri
 
 # misc
 .DS_Store

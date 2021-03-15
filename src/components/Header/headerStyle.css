@@ -1,0 +1,10 @@
+.fixed-header {
+  background-color: '#fff';
+  box-shadow: 'none';
+  height: 48px;
+}
+
+.fixed-header-text {
+  font-weight: normal !important;
+  font-size: 21px;
+}

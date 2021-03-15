@@ -1,0 +1,7 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+@fontName          : 'Roboto-Medium';
+@titleColor        : #a7a3f4;
+@invertedTitleColor: #788198; 
+@padding           : 0;

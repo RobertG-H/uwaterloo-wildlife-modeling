@@ -1,0 +1,131 @@
+.ui.menu {
+  border-radius: 0% !important;
+}
+.ui.inverted.menu {
+  background-color: #5a6175 !important;
+}
+.ui.inverted.icon.menu .item {
+  color: #d6dbe8 !important;
+}
+.ui.inverted.icon.menu .item:hover,
+.ui.inverted.icon.menu .item.active {
+  background-color: #8d95ac !important;
+  color: #363d52 !important;
+}
+
+.ui.icon.menu .item {
+  text-align: left !important;
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+hr {
+  border-top: 0px;
+  border-color: #747b8e;
+}
+
+.sidebar-acordian {
+  z-index: 1;
+  margin-top: 48px !important;
+  background-color: #5a6175;
+  padding-top: 20px;
+}
+
+.sidebar-item {
+}
+
+.sidebar-item-icon {
+  display: inline-block;
+  vertical-align: middle;
+  align-content: center;
+}
+
+.sidebar-item-text,
+.sidebar-item-text-active {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px !important;
+}
+
+.icon-35 {
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+}
+
+.sidebar-item:hover .sidebar-item-text,
+.sidebar-item-text-active {
+  color: #363d52 !important;
+}
+
+.icon-create-new-map {
+  background-image: url('../../assets/icons/light-icons/add-light.png');
+}
+
+.sidebar-item:hover .icon-create-new-map,
+.icon-create-new-map-active {
+  background-image: url('../../assets/icons/dark-icons/add-dark.png');
+}
+
+.icon-edit-maps {
+  background-image: url('../../assets/icons/light-icons/edit-light.png');
+}
+
+.sidebar-item:hover .icon-edit-maps,
+.icon-edit-maps-active {
+  background-image: url('../../assets/icons/dark-icons/edit-dark.png');
+}
+
+.icon-layer-view {
+  background-image: url('../../assets/icons/light-icons/Toggle-Layer.png');
+}
+
+.sidebar-item:hover .icon-layer-view,
+.icon-layer-view-active {
+  background-image: url('../../assets/icons/dark-icons/Toggle-Layer.png');
+}
+
+.icon-save-project {
+  background-image: url('../../assets/icons/light-icons/save-light.png');
+}
+
+.sidebar-item:hover .icon-save-project,
+.icon-save-project-active {
+  background-image: url('../../assets/icons/dark-icons/save-dark.png');
+}
+
+.icon-edit-project {
+  background-image: url('../../assets/icons/light-icons/edit-light.png');
+}
+
+.sidebar-item:hover .icon-edit-project,
+.icon-edit-project-active {
+  background-image: url('../../assets/icons/dark-icons/edit-dark.png');
+}
+
+.icon-open-project {
+  background-image: url('../../assets/icons/light-icons/open-light.png');
+}
+
+.sidebar-item:hover .icon-open-project,
+.icon-open-project-active {
+  background-image: url('../../assets/icons/dark-icons/open-dark.png');
+}
+
+.icon-settings {
+  background-image: url('../../assets/icons/light-icons/settings-light.png');
+}
+
+.sidebar-item:hover .icon-settings,
+.icon-settings-active {
+  background-image: url('../../assets/icons/dark-icons/settings-dark.png');
+}
+
+.icon-help {
+  background-image: url('../../assets/icons/light-icons/help-light.png');
+}
+
+.sidebar-item:hover .icon-help,
+.icon-help-active {
+  background-image: url('../../assets/icons/dark-icons/help.png');
+}

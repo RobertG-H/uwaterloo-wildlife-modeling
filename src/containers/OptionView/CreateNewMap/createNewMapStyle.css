@@ -1,0 +1,125 @@
+.create-new-map-container {
+  padding: 16px;
+}
+
+.step-text-title {
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  color: #788198;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.step-text-content {
+  text-align: left;
+  margin-top: 12px;
+}
+
+.step-input {
+  margin-top: 24px;
+}
+
+.step-footer {
+  margin-top: auto;
+  padding-top: 18px;
+  border: solid #ececec;
+  border-width: 1px 0px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step-viewer {
+  min-width: 100%;
+}
+
+.step-item {
+  flex: 1 1 auto !important;
+  flex-wrap: nowrap !important;
+}
+
+.ui.steps .step .title {
+  white-space: nowrap !important;
+}
+
+.region-select-tool {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.region-select-tool-container {
+  border: 2px solid #73798b;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.region-select-image-container {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.region-select-image-placeholder {
+  width: 300px;
+  height: 283px;
+  border: 2px dotted #73798b;
+  vertical-align: middle;
+  display: table-cell;
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.factor-table {
+  border-spacing: 0px 0px;
+  width: 100%;
+}
+
+.factor-table > tbody > tr > * {
+  border-width: 0px 0px 1px 0px;
+  border-color: #e8e8e8;
+  border-style: solid;
+}
+
+.factor-table > tbody > tr > *:nth-child(1) {
+  text-align: left;
+}
+
+.factor-table-header {
+  font-family: 'Roboto';
+  font-size: 11px;
+  color: #717171;
+}
+.factor-table-header > th {
+  font-weight: normal !important;
+}
+
+.factor-row > td {
+  color: #797979;
+  padding: 6px 0px;
+}
+
+.output-map-finalize {
+  text-align: left;
+}
+
+.output-map-finalize-checkbox-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.output-map-finalize-checkbox-container > div {
+  padding-top: 10px;
+}
+
+.output-map-finalize-button {
+  margin: 20px auto !important;
+}
