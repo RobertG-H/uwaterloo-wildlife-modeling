@@ -6,6 +6,7 @@ interface Props {
   region: number;
   initValue: number;
   onUpdate(key: string, newValue: number): void;
+  legendSrc: string;
 }
 
 const FactorRow = (props: Props) => {
@@ -17,7 +18,10 @@ const FactorRow = (props: Props) => {
   };
   return (
     <tr className='factor-row' key={props.title}>
-      <td key={props.title + 'title'}>{props.title}</td>
+      <td key={props.title + 'title'}>
+        <img src='https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png' height={20} width={20} />
+        {props.title}
+      </td>
       <td key={props.title + 'region'}>{props.region}%</td>
       <td key={props.title + 'input'}>
         <Input

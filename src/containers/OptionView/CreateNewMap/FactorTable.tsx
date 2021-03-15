@@ -1,6 +1,7 @@
 import React from 'react';
 import FactorRow from './FactorRow';
 import './createNewMapStyle.css';
+
 import { factory } from 'typescript';
 
 interface Props {
@@ -13,7 +14,13 @@ const FactorTable = (props: Props) => {
     const rows: JSX.Element[] = [];
     Object.keys(props.factorValues).forEach(key => {
       rows.push(
-        <FactorRow title={key} region={props.factorValues[key][0]} initValue={props.factorValues[key][1]} onUpdate={setFactorValue} />,
+        <FactorRow
+          title={key}
+          region={props.factorValues[key][0]}
+          initValue={props.factorValues[key][1]}
+          onUpdate={setFactorValue}
+          legendSrc='empty'
+        />,
       );
     });
     return rows;
