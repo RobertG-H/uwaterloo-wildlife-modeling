@@ -133,19 +133,19 @@ const SidebarContainer = (props: any) => {
         onConfirm={handleIntro}
         size='small'
       /> */}
-      <Modal open={introIsOpen} size='small'>
+      <Modal open={introIsOpen} size='tiny'>
         <Modal.Header>Welcome To Wildlife Hotspots</Modal.Header>
         <Modal.Content>
           <div className='modal-description'>
             <p>
-              Wildlife Hotspots is a GIS-based tool that displays <b>road mortality hotspots</b> and <b>regional connectivity heatmaps</b>
+              Wildlife Hotspots is a GIS-based tool that displays <b>road mortality hotspots</b> and <b>regional connectivity heatmaps </b>
               based on the habitat quality of a landscape. This tool is meant to help identify and visualize critical locations for the
               development of wildlife crossings.
             </p>
             <p>
               Wildlife Hotspots is meant to be used in conjunction with other research methods, such as site-level ground surveys, local
               road mortality data, and other modeling techniques available.
-              <b className='modal-red'>Do not solely rely on this tool for the modeling of connectivity and road mortality hotspots.</b>
+              <b className='modal-red'> Do not solely rely on this tool for the modeling of connectivity and road mortality hotspots.</b>
             </p>
           </div>
         </Modal.Content>

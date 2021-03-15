@@ -96,14 +96,15 @@
 .factor-table-header {
   font-family: 'Roboto';
   font-size: 11px;
-  color: #a4a4a4;
+  color: #717171;
 }
 .factor-table-header > th {
   font-weight: normal !important;
 }
 
-.factor-row {
+.factor-row > td {
   color: #797979;
+  padding: 6px 0px;
 }
 
 .output-map-finalize {

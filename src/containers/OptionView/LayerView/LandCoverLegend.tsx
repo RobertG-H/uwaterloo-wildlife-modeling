@@ -85,7 +85,7 @@ const LandCoverLegend = (props: any) => {
 
   return (
     <div style={{ margin: '0px -14px' }}>
-      <LayerAccordian title='View Legend' inverted={false}>
+      <LayerAccordian title='View Legend' inverted={false} startsOpen={false}>
         <div style={{ margin: '0px 14px' }}>{rows}</div>
       </LayerAccordian>
     </div>

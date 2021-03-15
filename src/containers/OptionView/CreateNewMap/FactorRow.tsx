@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input } from 'semantic-ui-react';
+import './createNewMapStyle.css';
 
 interface Props {
   title: string;

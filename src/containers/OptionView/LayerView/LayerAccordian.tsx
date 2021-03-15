@@ -5,10 +5,11 @@ interface Props {
   children: React.ReactNode;
   title: string;
   inverted: boolean;
+  startsOpen: boolean;
 }
 
 const LayerAccordian = (props: Props) => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = React.useState(props.startsOpen ? 0 : -1);
 
   const handleClick = (event: any, data: any) => {
     const index = data!.index;

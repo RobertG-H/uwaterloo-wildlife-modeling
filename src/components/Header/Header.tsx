@@ -8,7 +8,7 @@ const Header = (props: any) => {
   return (
     <Menu borderless fixed={'top'} className='fixed-header'>
       <Menu.Item header className='fixed-header-text'>
-        Prototype Build
+        Wildlife Hotspots: Prototype Build
       </Menu.Item>
     </Menu>
   );

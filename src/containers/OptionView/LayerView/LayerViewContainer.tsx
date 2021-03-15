@@ -32,7 +32,7 @@ const LayerViewContainer = (props: any) => {
       const roadkill: TileLayer = hotspotMapTileLayers[hotspotMaps[key].arcResId][1];
 
       rows.push(
-        <LayerAccordian title={hotspotMaps[key].outputName} inverted={true}>
+        <LayerAccordian title={hotspotMaps[key].outputName} inverted={true} startsOpen={true}>
           <LayerItem
             title='Connectivity Map'
             startingOpacity={connect.opacity}
@@ -68,7 +68,7 @@ const LayerViewContainer = (props: any) => {
   return (
     <div className='overflow-wrapper flex-item layer-view-static-width'>
       <div className='overflow-inner flex-parent'>
-        <LayerAccordian title='Default Layers' inverted={true}>
+        <LayerAccordian title='Default Layers' inverted={true} startsOpen={true}>
           <LayerItem
             title='Base Map'
             startingOpacity={arcMapView?.allLayerViews.getItemAt(0).layer.opacity}
