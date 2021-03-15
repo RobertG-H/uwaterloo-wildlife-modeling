@@ -49,11 +49,15 @@
 }
 
 .edit-map-region-footer {
-  margin-top: auto;
+  margin: auto 16px 16px 16px;
   padding-top: 18px;
   border: solid #ececec;
   border-width: 1px 0px 0px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.edit-map-slope {
+  margin-top: 12px;
 }

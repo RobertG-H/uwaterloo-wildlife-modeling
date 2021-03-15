@@ -4,15 +4,19 @@ import EditMapContainer from './EditMapContainer';
 import { Button, Icon } from 'semantic-ui-react';
 import { HotspotsMapsContext } from '../../../context/HotspotsMapsProvider';
 import { HotspotMap } from '../../../context/initialstates/hotspotMapsInitialState';
+import { v4 as uuidv4 } from 'uuid';
 
 import './editMapsStyle.css';
 
 interface Props {
   onCreateNewMap(): void;
+  onCreateNewMapComplete(): void;
+  quitWhileEditing(): void;
+  isEditing: boolean;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const EditMapsContainer = (props: Props) => {
-  const [isEditing, setIsEditing] = React.useState(false);
   const [editingMap, setEditingMap] = React.useState<HotspotMap | null>(null);
 
   const {
@@ -22,8 +26,9 @@ const EditMapsContainer = (props: Props) => {
 
   const onEditMap = (hotspotMapId: string) => {
     const newHotSpotMap = JSON.parse(JSON.stringify(hotspotMaps[hotspotMapId])) as HotspotMap;
+    newHotSpotMap.hotspotMapId = uuidv4();
     setEditingMap(newHotSpotMap);
-    setIsEditing(true);
+    props.setIsEditing(true);
   };
 
   const onCreateNewMap = () => {
@@ -44,10 +49,24 @@ const EditMapsContainer = (props: Props) => {
     return rows;
   };
 
+  const onCreateNewMapComplete = () => {
+    props.setIsEditing(false);
+    props.onCreateNewMapComplete();
+  };
+
   return (
     <div className='edit-maps-container flex-parent flex-item'>
-      {isEditing && <EditMapContainer hotspotMap={editingMap} />}
-      {!isEditing && (
+      {props.isEditing && (
+        <EditMapContainer
+          hotspotMap={editingMap}
+          setHotspotMap={setEditingMap}
+          onCreateNewMapComplete={onCreateNewMapComplete}
+          quitWhileEditing={() => {
+            props.quitWhileEditing();
+          }}
+        />
+      )}
+      {!props.isEditing && (
         <>
           {generateRows()}
           <div className='edit-maps-button'>

@@ -16,6 +16,7 @@ import { hotspotAdd } from '../../../context/actions/hotspotmaps';
 import { v4 as uuidv4 } from 'uuid';
 
 import './createNewMapStyle.css';
+import hotspotMaps from '../../../context/reducers/hotspotsMaps';
 
 interface Props {
   onCreateNewMapComplete(): void;

@@ -7,6 +7,7 @@ import { CONNECTIVITY_REF, ROAD_MORTALITY_REF } from '../../../constants/staticA
 
 export default (arcMap: Map | null, newHotspotMap: HotspotMap) => (dispatch: React.Dispatch<any>) => {
   if (arcMap) {
+    console.log(newHotspotMap.arcResId);
     // Add the tile layers
     const connect = new TileLayer({
       url: CONNECTIVITY_REF[+newHotspotMap.arcResId],

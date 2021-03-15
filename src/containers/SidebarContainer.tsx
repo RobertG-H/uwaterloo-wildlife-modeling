@@ -10,12 +10,8 @@ import { ArcContext } from '../context/ArcProvider';
 
 // interface Props {}
 
-const introMessage =
-  'Wildlife Hotspots is a GIS-based tool' +
-  <b> test</b> +
-  'that displays road mortality hotspots and regional connectivity heatmaps based on the habitat quality of a landscape. This tool is meant to help identify and visualize critical locations for the development of wildlife crossings. Wildlife Hotspots is meant to be used in conjunction with other research methods, such as site-level ground surveys, local road mortality data, and other modeling techniques available. Do not solely rely on this tool for the modeling of connectivity and road mortality hotspots.';
-
 const SidebarContainer = (props: any) => {
+  const [isEditing, setIsEditing] = React.useState(false);
   const [tab, setTab] = React.useState(-1);
   const [targetTab, setTargetTab] = React.useState(-1);
   const [confirmIsOpen, setConfirmIsOpen] = React.useState(false);
@@ -33,6 +29,7 @@ const SidebarContainer = (props: any) => {
 
   const handleConfirm = () => {
     setConfirmIsOpen(false);
+    setIsEditing(false);
     setTab(targetTab);
   };
 
@@ -52,8 +49,7 @@ const SidebarContainer = (props: any) => {
   const tryToChangeTab = (targetTab: number) => {
     if (tab === targetTab) return;
     setTargetTab(targetTab);
-
-    if (showConfirm()) {
+    if (isEditing || showConfirm()) {
       setConfirmIsOpen(true);
     } else {
       setTab(targetTab);
@@ -66,6 +62,7 @@ const SidebarContainer = (props: any) => {
   };
 
   const onCreateNewMapComplete = () => {
+    setIsEditing(false);
     setTab(-1);
   };
 
@@ -84,7 +81,15 @@ const SidebarContainer = (props: any) => {
       case 2:
         return (
           <OptionView headerTitle='Edit Maps' onClose={tryCloseOptionView}>
-            <EditMapsContainer onCreateNewMap={onCreateNewMapStart} />
+            <EditMapsContainer
+              onCreateNewMap={onCreateNewMapStart}
+              onCreateNewMapComplete={onCreateNewMapComplete}
+              quitWhileEditing={() => {
+                tryToChangeTab(-1);
+              }}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
           </OptionView>
         );
       case 3:
