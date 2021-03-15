@@ -4,3 +4,7 @@
   height: 100vh;
   z-index: 1;
 }
+
+.modal-red {
+  color: #e14c3c;
+}

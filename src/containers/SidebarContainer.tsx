@@ -5,13 +5,15 @@ import { OptionView } from './OptionView';
 import { LayerViewContainer } from './OptionView/LayerView';
 import { CreateNewMapContainer } from './OptionView/CreateNewMap';
 import { EditMapsContainer } from './OptionView/EditMaps';
-import { Confirm, Dimmer, Loader } from 'semantic-ui-react';
+import { Confirm, Dimmer, Loader, Modal, Button } from 'semantic-ui-react';
 import { ArcContext } from '../context/ArcProvider';
 
 // interface Props {}
 
 const introMessage =
-  'Wildlife Hotspots is a GIS-based tool that displays road mortality hotspots and regional connectivity heatmaps based on the habitat quality of a landscape. This tool is meant to help identify and visualize critical locations for the development of wildlife crossings. Wildlife Hotspots is meant to be used in conjunction with other research methods, such as site-level ground surveys, local road mortality data, and other modeling techniques available. Do not solely rely on this tool for the modeling of connectivity and road mortality hotspots.';
+  'Wildlife Hotspots is a GIS-based tool' +
+  <b> test</b> +
+  'that displays road mortality hotspots and regional connectivity heatmaps based on the habitat quality of a landscape. This tool is meant to help identify and visualize critical locations for the development of wildlife crossings. Wildlife Hotspots is meant to be used in conjunction with other research methods, such as site-level ground surveys, local road mortality data, and other modeling techniques available. Do not solely rely on this tool for the modeling of connectivity and road mortality hotspots.';
 
 const SidebarContainer = (props: any) => {
   const [tab, setTab] = React.useState(-1);
@@ -122,7 +124,7 @@ const SidebarContainer = (props: any) => {
         onConfirm={handleConfirm}
         size='mini'
       />
-      <Confirm
+      {/* <Confirm
         header='Welcome To Wildlife Hotspots'
         content={introMessage}
         open={introIsOpen}
@@ -130,7 +132,29 @@ const SidebarContainer = (props: any) => {
         confirmButton='I Understand'
         onConfirm={handleIntro}
         size='small'
-      />
+      /> */}
+      <Modal open={introIsOpen} size='small'>
+        <Modal.Header>Welcome To Wildlife Hotspots</Modal.Header>
+        <Modal.Content>
+          <div className='modal-description'>
+            <p>
+              Wildlife Hotspots is a GIS-based tool that displays <b>road mortality hotspots</b> and <b>regional connectivity heatmaps</b>
+              based on the habitat quality of a landscape. This tool is meant to help identify and visualize critical locations for the
+              development of wildlife crossings.
+            </p>
+            <p>
+              Wildlife Hotspots is meant to be used in conjunction with other research methods, such as site-level ground surveys, local
+              road mortality data, and other modeling techniques available.
+              <b className='modal-red'>Do not solely rely on this tool for the modeling of connectivity and road mortality hotspots.</b>
+            </p>
+          </div>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button secondary onClick={handleIntro}>
+            I Understand
+          </Button>
+        </Modal.Actions>
+      </Modal>
     </div>
   );
 };
