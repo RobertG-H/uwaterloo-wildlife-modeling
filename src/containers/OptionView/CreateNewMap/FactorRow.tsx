@@ -15,8 +15,11 @@ const FactorRow = (props: Props) => {
   const [value, setValue] = React.useState(props.initValue);
 
   const onInputChange = (event: any, data: any) => {
-    setValue(data.value);
-    props.onUpdate(props.title, data.value);
+    event.preventDefault();
+    if (+data.value || +data.value === 0) {
+      setValue(data.value);
+      props.onUpdate(props.title, data.value);
+    }
   };
   return (
     <tr className='factor-row' key={props.title}>
@@ -28,14 +31,7 @@ const FactorRow = (props: Props) => {
       </td>
       <td key={props.title + 'region'}>{props.region}%</td>
       <td key={props.title + 'input'}>
-        <Input
-          key={props.title + 'inputelement'}
-          type='number'
-          size='mini'
-          style={{ maxWidth: 50 }}
-          onChange={onInputChange}
-          value={value}
-        ></Input>
+        <Input key={props.title + 'inputelement'} size='mini' style={{ maxWidth: 50 }} onChange={onInputChange} value={value}></Input>
       </td>
     </tr>
   );

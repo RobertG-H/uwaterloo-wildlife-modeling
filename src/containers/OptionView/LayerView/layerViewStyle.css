@@ -15,6 +15,7 @@
 
 .layer-accordian-title {
   background-color: #ffffff;
+  color: #a7a3f4 !important;
 }
 
 .layer-accordian-title-inverted {
@@ -101,4 +102,19 @@
   display: flex;
   justify-content: left;
   align-items: center;
+}
+
+.hidden-text {
+  color: #40475b;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.hidden-text > div {
+  margin-right: 5px;
+}
+
+.hidden-icon {
+  /* margin-top: 5px; */
 }

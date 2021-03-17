@@ -1,3 +1,5 @@
 /*******************************
     User Variable Overrides
 *******************************/
+@placeholderColor: #a4a4a4;
+@placeholderFocusColor: #797979;

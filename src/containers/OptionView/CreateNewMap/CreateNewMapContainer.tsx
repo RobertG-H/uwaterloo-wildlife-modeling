@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import './createNewMapStyle.css';
 import hotspotMaps from '../../../context/reducers/hotspotsMaps';
+import { getFinalSlopeValues, getFinalLandCoverValeus } from '../../../context/initialstates/hotspotMapsInitialState';
 
 interface Props {
   onCreateNewMapComplete(): void;
@@ -45,6 +46,8 @@ const CreateNewMapContainer = (props: Props) => {
   // To be called when everything complete.
   const saveHotspotMap = (arcResId: string) => {
     hotspotMap.arcResId = arcResId;
+    hotspotMap.landCoverValues = getFinalLandCoverValeus();
+    hotspotMap.slopeValues = getFinalSlopeValues();
     tryAddTileLayers();
     props.onCreateNewMapComplete();
   };
@@ -112,6 +115,12 @@ const CreateNewMapContainer = (props: Props) => {
     defaultLayers[1].opacity = 1;
   };
 
+  const onEnterFinalStep = () => {
+    defaultLayers.forEach(tileLayer => {
+      tileLayer.opacity = 0;
+    });
+  };
+
   React.useEffect(() => {
     if (currentStep === 1) {
       onEnterLocationStep();
@@ -119,6 +128,8 @@ const CreateNewMapContainer = (props: Props) => {
       onEnterLandCoverStep();
     } else if (currentStep === 3) {
       onEnterSlopeStop();
+    } else if (currentStep === 4) {
+      onEnterFinalStep();
     }
   }, [currentStep]);
 

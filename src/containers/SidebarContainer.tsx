@@ -38,12 +38,7 @@ const SidebarContainer = (props: any) => {
   };
 
   const tryCloseOptionView = () => {
-    setTargetTab(-1);
-    if (showConfirm()) {
-      setConfirmIsOpen(true);
-    } else {
-      setTab(-1);
-    }
+    tryToChangeTab(-1);
   };
 
   const tryToChangeTab = (targetTab: number) => {
@@ -63,7 +58,7 @@ const SidebarContainer = (props: any) => {
 
   const onCreateNewMapComplete = () => {
     setIsEditing(false);
-    setTab(-1);
+    setTab(3);
   };
 
   const onCreateNewMapStart = () => {

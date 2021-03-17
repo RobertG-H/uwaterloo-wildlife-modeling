@@ -64,7 +64,7 @@ const LayerItem = (props: Props) => {
       };
     } else {
       return {
-        borderColor: '#a2b1d9',
+        borderColor: '#a4a4a4',
         backgroundColor: '#ddd',
       };
     }
@@ -83,7 +83,12 @@ const LayerItem = (props: Props) => {
       <div className='layer-item-title'>
         <div>{props.title}</div>
         {visible && <img className='hover-pointer' src={visibleIconLight} width='20' height='20' onClick={onVisibleClick}></img>}
-        {!visible && <img className='hover-pointer' src={visibleIconDark} width='20' height='20' onClick={onVisibleClick}></img>}
+        {!visible && (
+          <div className='hidden-text'>
+            <div>Hidden</div>
+            <img className='hover-pointer hidden-icon' src={visibleIconDark} width='20' height='20' onClick={onVisibleClick}></img>
+          </div>
+        )}
       </div>
       <div className='layer-item-opacity-title'>OPACITY</div>
       <div className='layer-item-slider'>

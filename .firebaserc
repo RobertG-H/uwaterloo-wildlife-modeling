@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "uwaterloo-wildlife-modeling"
+    "default": "uwaterloo-wildlife-modeling",
+    "prod": "uwaterloo-wildlife-modeling",
+    "dev": "devuwaterloo-wildlife-modeling"
   }
 }

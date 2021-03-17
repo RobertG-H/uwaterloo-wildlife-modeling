@@ -62,7 +62,6 @@ const EditMapContainer = (props: Props) => {
   const saveHotspotMap = (arcResId: string) => {
     props.hotspotMap!.arcResId = arcResId;
     props.hotspotMap!.outputName = name!;
-
     tryAddTileLayers(arcResId);
     props.onCreateNewMapComplete();
   };
@@ -131,12 +130,17 @@ const EditMapContainer = (props: Props) => {
           <Button onClick={onCancelClick}>Cancel</Button>
         </div>
         <div>
-          <Button secondary onClick={onSaveClick} disabled={checkDisableSaveButton()}>
-            Save
+          <Button secondary disabled={checkDisableSaveButton()}>
+            Overwrite
+          </Button>
+        </div>
+        <div>
+          <Button secondary onClick={onSaveAsNewModal} disabled={checkDisableSaveButton()}>
+            Save As New
           </Button>
         </div>
       </div>
-      <Modal open={modalIsOpen} size='small'>
+      {/* <Modal open={modalIsOpen} size='small'>
         <Modal.Header>Overwrite or Save as New?</Modal.Header>
         <Modal.Content>
           <div className='modal-description'>
@@ -150,7 +154,7 @@ const EditMapContainer = (props: Props) => {
             SAVE AS NEW
           </Button>
         </Modal.Actions>
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

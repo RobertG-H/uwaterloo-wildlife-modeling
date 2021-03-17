@@ -30,6 +30,38 @@ const initLandCoverValeus = () => {
   };
 };
 
+export const getFinalSlopeValues = () => {
+  return {
+    '0 - 20': [95.15, 100],
+    '21 - 40': [3.5, 50],
+    '> 41': [1.34, 5],
+  };
+};
+
+export const getFinalLandCoverValeus = () => {
+  return {
+    Beach: [0.018, 5],
+    'Sand Dune Systems': [0.013, 5],
+    Cliff: [0.011, 5],
+    Alvar: [0.007, 10],
+    Tallgrass: [0.02, 50],
+    'Coniferous Forest': [0.983, 100],
+    'Mixed Forest': [1.726, 100],
+    'Deciduous Forest': [4.336, 100],
+    Wetland: [7.92, 100],
+    'Open Water': [29.81, 5],
+    Agriculture: [30.75, 20],
+    'Built-Up Area': [4.662, 5],
+    Undifferentiated: [17.03, 5],
+    'Highway / Expressway': [0.07, 1],
+    'Arterial Road': [0.063, 1],
+    'Collector Road': [2.363, 5],
+    'Resource / Rec Road': [0.212, 5],
+    'Service Road': [0.002, 20],
+    'Alleyway / Laneway': [0.012, 5],
+  };
+};
+
 export function CreateEmptyHotspotMap(hotspotMapId: string) {
   const newHotspotMap: HotspotMap = {
     hotspotMapId: hotspotMapId,
